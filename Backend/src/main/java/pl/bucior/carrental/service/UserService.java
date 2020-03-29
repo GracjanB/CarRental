@@ -2,18 +2,12 @@ package pl.bucior.carrental.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCrypt;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.stereotype.Service;
 import pl.bucior.carrental.model.jpa.Role;
 import pl.bucior.carrental.model.jpa.User;
 import pl.bucior.carrental.model.request.UserCreateRequest;
 import pl.bucior.carrental.repository.UserRepository;
-import pl.bucior.carrental.util.PasswordHashUtil;
-
-import javax.xml.bind.DatatypeConverter;
-import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
 
 @Service
 @RequiredArgsConstructor
