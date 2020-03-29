@@ -1,8 +1,10 @@
 package pl.bucior.carrental.model.jpa;
 
 import lombok.*;
+import pl.bucior.carrental.model.enums.Role;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Getter
@@ -11,7 +13,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "users", schema = "carrental")
-public class User {
+public class User extends AbstractBaseEntity implements Serializable {
 
     @Id
     @SequenceGenerator(name = "user_id_seq", sequenceName = "user_id_seq", allocationSize = 1)
@@ -30,4 +32,23 @@ public class User {
     @Column(name = "role", nullable = false)
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    @Column(name = "first_name", nullable = false)
+    private String firstName;
+
+    @Column(name = "last_name", nullable = false)
+    private String lastName;
+
+    @Column(name = "pesel", unique = true, nullable = false)
+    private String pesel;
+
+    @Column(name = "id_card_number", unique = true, nullable = false)
+    private String idCardNumber;
+
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "address_id", referencedColumnName = "id")
+    private Address address;
+
+    @Column(name = "address_id", nullable = false, insertable = false, updatable = false)
+    private Long addressId;
 }

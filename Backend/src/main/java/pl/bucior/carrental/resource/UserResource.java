@@ -1,16 +1,17 @@
 package pl.bucior.carrental.resource;
 
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import pl.bucior.carrental.configuration.auth.Manager;
+import pl.bucior.carrental.configuration.auth.TechnicalEmployee;
+import pl.bucior.carrental.configuration.auth.User;
 import pl.bucior.carrental.model.request.UserCreateRequest;
+import pl.bucior.carrental.model.response.UserRoleResponse;
 import pl.bucior.carrental.service.UserService;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.security.Principal;
 
@@ -22,7 +23,7 @@ public class UserResource {
 
 
     @RequestMapping(value = "/sign-in", method = RequestMethod.POST)
-//    @ApiOperation(value = "Sign in ", notes = "Sign in to this service. ")
+    @ApiOperation(value = "Sign in ", notes = "Sign in to this service. ")
     public ResponseEntity<Void> signIn(
             @RequestBody @Valid UserCreateRequest request
     ) {
@@ -45,19 +46,12 @@ public class UserResource {
 //                .body(userService.deleteToken(request));
 //    }
 //
-//    /**
-//     * <p>
-//     *     Metoda tworząca endpoint do sprawdzenia czy użytkownik jest adminem
-//     * </p>
-//     * @param principal Informacje o użytkowniku pobierane automatycznie
-//     * @return prawda jeśli jest adminem oraz kod 200
-//     */
-//    @RequestMapping(value = "/isadmin", method = RequestMethod.POST)
-//    @ApiOperation(value = "Get role ", notes = "Get role to this service. ")
-//    public ResponseEntity<Boolean> getRole(Principal principal) {
-//        return ResponseEntity
-//                .status(HttpStatus.OK)
-//                .body(userService.isAdmin(principal));
-//
-//    }
+@GetMapping(value = "/checkRole")
+@ApiOperation(value = "Check role ", notes = "Get role to this service. ")
+public ResponseEntity<UserRoleResponse> getRole(Principal principal) {
+    return ResponseEntity
+            .status(HttpStatus.OK)
+            .body(userService.checkRole(principal));
+
+}
 }

@@ -3,3 +3,5 @@ spring:
     url: jdbc:postgresql://localhost:5432/carrental
     username: carrental
     password: Zaq12345@!
+  profiles:
+    active: dev

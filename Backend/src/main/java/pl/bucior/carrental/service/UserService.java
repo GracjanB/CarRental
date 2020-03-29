@@ -1,20 +1,30 @@
 package pl.bucior.carrental.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.stereotype.Service;
-import pl.bucior.carrental.model.jpa.Role;
+import pl.bucior.carrental.configuration.ErrorCode;
+import pl.bucior.carrental.configuration.WsizException;
+import pl.bucior.carrental.model.enums.Role;
+import pl.bucior.carrental.model.jpa.Address;
 import pl.bucior.carrental.model.jpa.User;
 import pl.bucior.carrental.model.request.UserCreateRequest;
+import pl.bucior.carrental.model.response.UserRoleResponse;
+import pl.bucior.carrental.repository.AddressRepository;
 import pl.bucior.carrental.repository.UserRepository;
 
+import javax.transaction.Transactional;
+import java.security.Principal;
+
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class UserService {
 
     private final UserRepository userRepository;
-    private final DefaultTokenServices defaultTokenServices;
+    private final AddressRepository addressRepository;
 
     public void create(UserCreateRequest request) {
 
@@ -22,14 +32,27 @@ public class UserService {
         String encryptedPassword = BCrypt.hashpw(request.getPassword(), salt);
 
         if (userRepository.findByEmail(request.getEmail()).isPresent()) {
-            throw new IllegalArgumentException("These email is busy");
+            throw new WsizException(String.format("User with email: %s exists.", request.getEmail()), HttpStatus.CONFLICT, ErrorCode.EMAIL_ALREADY_EXISTS);
         }
+        Address address = addressRepository.save(Address.builder()
+                .city(request.getCity())
+                .country(request.getCountry())
+                .flatNo(request.getFlatNo())
+                .houseNo(request.getHouseNo())
+                .postalCode(request.getPostalCode())
+                .street(request.getStreet())
+                .build());
 
         User user = User.builder()
                 .email(request.getEmail())
                 .password(encryptedPassword)
                 .role(Role.MANAGER)
                 .salt(salt)
+                .address(address)
+                .firstName(request.getFirstName())
+                .lastName(request.getLastName())
+                .idCardNumber(request.getIdCardNumber())
+                .pesel(request.getPesel())
                 .build();
         userRepository.save(user);
     }
@@ -52,19 +75,11 @@ public class UserService {
 //        return defaultTokenServices.revokeToken(authorization);
 //    }
 //
-//    /**
-//     * <p>
-//     *     Metoda sprawdzająca czy użytkownik jest adminem
-//     * </p>
-//     * @param principal Informacje o użytkowniku wywołującym metode
-//     * @return True jesli jest adminem
-//     */
-//    public boolean isAdmin(Principal principal){
-//        if(userRepository.findByLogin(principal.getName()).getRole()== User.Role.A)
-//        return true;
-//        else
-//            return false;
-//    }
+public UserRoleResponse checkRole(Principal principal) {
+    UserRoleResponse response = new UserRoleResponse();
+    response.setRole(userRepository.findByEmail(principal.getName()).orElseThrow(() -> new WsizException(HttpStatus.NOT_FOUND, ErrorCode.USER_NOT_FOUND)).getRole());
+    return response;
+}
 
 
 }
