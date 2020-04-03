@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
-import pl.bucior.carrental.configuration.WsizException;
-import pl.bucior.carrental.configuration.WsizExceptionEntity;
+import pl.bucior.carrental.configuration.exception.WsizException;
+import pl.bucior.carrental.configuration.exception.WsizExceptionEntity;
 
 import java.io.Serializable;
 import java.util.Date;

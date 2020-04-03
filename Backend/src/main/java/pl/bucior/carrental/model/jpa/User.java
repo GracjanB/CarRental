@@ -45,10 +45,13 @@ public class User extends AbstractBaseEntity implements Serializable {
     @Column(name = "id_card_number", unique = true, nullable = false)
     private String idCardNumber;
 
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE}, optional = false)
     @JoinColumn(name = "address_id", referencedColumnName = "id")
     private Address address;
 
     @Column(name = "address_id", nullable = false, insertable = false, updatable = false)
     private Long addressId;
+
+    @Column(name = "is_active", nullable = false)
+    private Boolean isActive = false;
 }

@@ -18,7 +18,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         final User user = userRepository.findByEmail(s)
-                .orElseThrow(() -> new UsernameNotFoundException(String.format("Email: %s not found", s)));
+                .orElseThrow(() -> new UsernameNotFoundException(String.format("User with email: %s not found", s)));
 
         SimpleGrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + user.getRole().name());
         return org.springframework.security.core.userdetails.User
@@ -28,7 +28,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 .password(user.getPassword())
                 .accountExpired(false)
                 .accountLocked(false)
-                .disabled(false)
+                .disabled(!user.getIsActive())
                 .build();
     }
 }

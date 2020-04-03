@@ -1,4 +1,4 @@
-package pl.bucior.carrental.configuration;
+package pl.bucior.carrental.configuration.exception;
 
 import org.springframework.http.HttpStatus;
 

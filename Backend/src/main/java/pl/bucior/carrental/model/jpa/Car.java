@@ -47,5 +47,10 @@ public class Car extends AbstractBaseEntity implements Serializable {
 
 //    private Long parentAgencyId;
 
-//    private Long currentAgencyId;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn(name = "current_agency_id", referencedColumnName = "id")
+    private Agency currentAgency;
+
+    @Column(name = "current_agency_id", insertable = false, updatable = false)
+    private Long currentAgencyId;
 }

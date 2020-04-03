@@ -1,0 +1,9 @@
+{
+  "properties": [
+    {
+      "name": "app.registration.url",
+      "type": "java.lang.String",
+      "description": "Description for app.registration.url."
+    }
+  ]
+}
