@@ -8,9 +8,7 @@ build:
   image: maven:3-jdk-11
   stage: build
   script:
-    - echo ls
-    - cd carrental
-    - echo ls
+    - ls
     - "mvn clean install"
   artifacts:
     paths:
