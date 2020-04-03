@@ -1,5 +1,5 @@
 spring:
   datasource:
-    url: jdbc:postgres://ruwlfmqrxokodk:a31216198c6382796d3c32f9de63f2dd82632f6d5a43eeee7fea9e3d10360722@ec2-54-157-78-113.compute-1.amazonaws.com:5432/d5566v6jq399b8
+    url: jdbc:postgresql://ruwlfmqrxokodk:a31216198c6382796d3c32f9de63f2dd82632f6d5a43eeee7fea9e3d10360722@ec2-54-157-78-113.compute-1.amazonaws.com:5432/d5566v6jq399b8
     username: ruwlfmqrxokodk
     password: a31216198c6382796d3c32f9de63f2dd82632f6d5a43eeee7fea9e3d10360722
