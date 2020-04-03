@@ -1,0 +1,29 @@
+image: java:11
+
+stages:
+  - build
+  - deploy
+
+build:
+  image: maven:3-jdk-11
+  stage: build
+  script: "mvn clean install"
+  artifacts:
+    paths:
+      - target/carrental-0.0.1-SNAPSHOT.jar
+
+staging:
+  stage: deploy
+  image: ruby:2.3
+  script:
+    - apt-get update -qy
+    - apt-get install -y ruby-dev
+    - gem install dpl
+    - dpl --provider=heroku --app=vel-ci-api-dev --api-key=$HEROKU_API_KEY
+  environment:
+    name: dev
+    url: https://carrental-dev.herokuapp.com/
+  only:
+    - dev-backend
+  tags:
+    - docker
