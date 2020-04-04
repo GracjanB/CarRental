@@ -2,10 +2,6 @@ stages:
   - build
   - deploy
 
-cache:
-  paths:
-    - .m2/repository
-
 build:
   image: maven:3-jdk-11
   stage: build
