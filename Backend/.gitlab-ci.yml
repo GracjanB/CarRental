@@ -14,12 +14,14 @@ build:
       - Procfile
 
 staging:
+  image: ruby:2.3
   stage: deploy
   script:
-    - ls
-    - git remote add heroku https://heroku:$HEROKU_API_KEY@git.heroku.com/carrental-dev.git
-    - git push -f heroku HEAD:refs/heads/master
-    - echo "Deployed to Staging Server https://carrental-dev.herokuapp.com/"
+  - apt-get update -qy
+  - apt-get install -y ruby-dev
+  - gem install dpl
+  - dpl --provider=heroku --app=carrental-dev --api-key=$HEROKU_API_KEY
+  - echo "Deployed to Staging Server https://carrental-dev.herokuapp.com/"
   environment:
     name: staging
   only:
