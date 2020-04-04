@@ -6,7 +6,7 @@ spring:
     platform: postgres
     driver-class-name: org.postgresql.Driver
   mail:
-    host: localhost
+    host: smtp.mailgun.org
     port: 25
-    username: test
-    password: test
+    username: spring@sandbox7b3fcaeca32941abb9a857fa4ae4dd37.mailgun.org
+    password: b00c935288af3f205bae73631fefb421-46ac6b00-357cbf6d
