@@ -1,8 +1,4 @@
 spring:
-  datasource:
-    url: jdbc:postgresql://localhost:5432/carrental
-    username: carrental
-    password: Zaq12345@!
   mail:
     host: localhost
     port: 25
@@ -10,7 +6,3 @@ spring:
     password: test
   profiles:
     active: dev
-
-app:
-  registration:
-    url: localhost:8080
