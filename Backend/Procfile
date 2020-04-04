@@ -1,1 +1,1 @@
-web: java 11 -jar Backend/target/carrental-0.0.1-SNAPSHOT.jar
+web: java 11.0.6 -jar carrental-0.0.1-SNAPSHOT.jar

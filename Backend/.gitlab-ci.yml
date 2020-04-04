@@ -10,9 +10,7 @@ build:
   image: maven:3-jdk-11
   stage: build
   script:
-    - cd Backend
-    - "mvn clean install"
-    - cd ..
+    - "mvn clean install -f Backend/pom.xml -DoutputDirectory=/"
 
   artifacts:
     paths:
