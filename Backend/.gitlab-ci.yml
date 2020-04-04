@@ -6,13 +6,11 @@ build:
   image: maven:3-jdk-11
   stage: build
   script:
-    - "mvn clean install -f Backend/pom.xml -DoutputDirectory=/"
+    - "mvn clean install -DskipTests=true -f Backend/pom.xml"
 
   artifacts:
     paths:
       - Backend/target/carrental-0.0.1-SNAPSHOT.jar
-      - Procfil
-      - Backend/pom.xml
 
 staging:
   image: ruby:2.3
