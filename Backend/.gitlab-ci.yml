@@ -13,6 +13,9 @@ build:
     - cd Backend
     - "mvn clean install"
     - cd ..
+    - cp Backend/target/carrental-0.0.1-SNAPSHOT.jar /
+    - cp Backend/Procfile /
+    - ls
 
   artifacts:
     paths:
@@ -23,7 +26,6 @@ staging:
   stage: deploy
   script:
     - ls
-    - cp Backend/Procfile /
     - git remote add heroku https://heroku:$HEROKU_API_KEY@git.heroku.com/carrental-dev.git
     - git push -f heroku HEAD:refs/heads/master
     - echo "Deployed to Staging Server https://carrental-dev.herokuapp.com/"
