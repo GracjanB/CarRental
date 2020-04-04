@@ -13,14 +13,11 @@ build:
     - cd Backend
     - "mvn clean install"
     - cd ..
-    - cp Backend/target/carrental-0.0.1-SNAPSHOT.jar /
-    - cp Backend/Procfile /
-    - ls
 
   artifacts:
     paths:
       - Backend/target/carrental-0.0.1-SNAPSHOT.jar
-      - Backend/Procfile
+      - Procfile
 
 staging:
   stage: deploy
