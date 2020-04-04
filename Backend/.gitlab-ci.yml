@@ -21,7 +21,7 @@ staging:
   stage: deploy
   script:
     - git remote add heroku https://heroku:$HEROKU_API_KEY@git.heroku.com/carrental-dev.git
-    - git push heroku master
+    - git push -f heroku HEAD:refs/heads/master
     - echo "Deployed to Staging Server https://carrental-dev.herokuapp.com/"
   environment:
     name: staging
