@@ -27,5 +27,3 @@ staging:
     name: staging
   only:
     - dev-backend
-  tags:
-    - docker
