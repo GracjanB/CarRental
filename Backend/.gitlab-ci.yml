@@ -12,6 +12,7 @@ build:
   script:
     - cd Backend
     - "mvn clean install"
+    - cd ..
 
   artifacts:
     paths:
