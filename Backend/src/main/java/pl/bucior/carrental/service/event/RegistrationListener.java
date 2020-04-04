@@ -44,7 +44,7 @@ public class RegistrationListener implements ApplicationListener<OnRegistrationC
         SimpleMailMessage email = new SimpleMailMessage();
         email.setTo(recipientAddress);
         email.setSubject(subject);
-        email.setText(message + "\r\n" + "http://localhost:8080" + confirmationUrl);
+        email.setText(message + "\r\n" + "URL +" + confirmationUrl);
         try {
             javaMailSender.send(email);
             accountVerificationTokenService.changeStatus(token);
