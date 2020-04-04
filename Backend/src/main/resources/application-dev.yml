@@ -7,6 +7,6 @@ spring:
     driver-class-name: org.postgresql.Driver
   mail:
     host: smtp.mailgun.org
-    port: 25
-    username: spring@sandbox7b3fcaeca32941abb9a857fa4ae4dd37.mailgun.org
-    password: b00c935288af3f205bae73631fefb421-46ac6b00-357cbf6d
+    port: 587
+    username: postmaster@sandbox7b3fcaeca32941abb9a857fa4ae4dd37.mailgun.org
+    password: d792faab87bcf3147b3908cc7ef34139-46ac6b00-ca08462d
