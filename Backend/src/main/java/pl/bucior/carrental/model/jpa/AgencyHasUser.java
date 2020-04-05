@@ -4,6 +4,7 @@ package pl.bucior.carrental.model.jpa;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.ZonedDateTime;
 
 @Entity
@@ -13,7 +14,7 @@ import java.time.ZonedDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "agency_has_user", schema = "carrental")
-public class AgencyHasUser extends AbstractBaseEntity {
+public class AgencyHasUser extends AbstractBaseEntity implements Serializable {
 
     @Id
     @SequenceGenerator(name = "agency_has_user_id_seq", sequenceName = "agency_has_user_id_seq", allocationSize = 1)

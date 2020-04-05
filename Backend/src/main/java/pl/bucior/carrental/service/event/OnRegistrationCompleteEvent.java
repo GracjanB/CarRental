@@ -10,7 +10,7 @@ import java.util.Locale;
 @Setter
 public class OnRegistrationCompleteEvent extends ApplicationEvent {
 
-    private final Locale locale = Locale.getDefault();
+    private final Locale locale = Locale.forLanguageTag("pl-PL");
 
     public OnRegistrationCompleteEvent(Object source) {
         super(source);

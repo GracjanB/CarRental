@@ -3,6 +3,7 @@ package pl.bucior.carrental.model.jpa;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Getter
@@ -11,7 +12,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "agency", schema = "carrental")
-public class Agency extends AbstractBaseEntity {
+public class Agency extends AbstractBaseEntity implements Serializable {
 
     @Id
     @SequenceGenerator(name = "agency_id_seq", sequenceName = "agency_id_seq", allocationSize = 1)

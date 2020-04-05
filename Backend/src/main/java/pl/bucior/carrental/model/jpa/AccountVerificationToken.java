@@ -3,6 +3,7 @@ package pl.bucior.carrental.model.jpa;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.ZonedDateTime;
 
 @Entity
@@ -12,7 +13,7 @@ import java.time.ZonedDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "account_verification_token", schema = "carrental")
-public class AccountVerificationToken extends AbstractBaseEntity {
+public class AccountVerificationToken extends AbstractBaseEntity implements Serializable {
 
     private static final int EXPIRATION = 60 * 24;
 
