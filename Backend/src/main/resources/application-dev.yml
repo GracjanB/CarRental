@@ -11,7 +11,11 @@ spring:
     username: carrental.wsiz@gmail.com
     password: Carrental.wsiz1
     properties:
-      smtp:
-        auth: true
-      starttls:
-        enable: true
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+          socketFactory:
+            class: javax.net.ssl.SSLSocketFactory
+            port: 465

@@ -6,7 +6,10 @@ import pl.bucior.carrental.model.jpa.AccountVerificationToken;
 import pl.bucior.carrental.model.jpa.User;
 import pl.bucior.carrental.repository.AccountVerificationTokenRepository;
 
+import javax.transaction.Transactional;
+
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class AccountVerificationTokenService {
 

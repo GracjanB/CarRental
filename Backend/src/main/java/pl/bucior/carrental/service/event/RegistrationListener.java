@@ -37,19 +37,19 @@ public class RegistrationListener implements ApplicationListener<OnRegistrationC
         accountVerificationTokenService.createVerificationToken(user, token);
 
         String recipientAddress = user.getEmail();
-        String subject = "Registration Confirmation";
+        String subject = "Potwierdź swój email w CarRentalWsiz";
         String confirmationUrl = "/user/registrationConfirm?token=" + token;
         String message = messages.getMessage("register", null, event.getLocale());
 
         SimpleMailMessage email = new SimpleMailMessage();
         email.setTo(recipientAddress);
         email.setSubject(subject);
-        email.setText(message + "\r\n" + "URL +" + confirmationUrl);
+        email.setText(message + "\r\n" + "https://carrental-dev.herokuapp.com" + confirmationUrl);
         try {
             javaMailSender.send(email);
             accountVerificationTokenService.changeStatus(token);
         } catch (Exception e) {
-            log.error("Error while send mail for user with id=" + user.getId());
+            log.error("Error while send mail for user with id=" + user.getId() + ", exception= " + e);
         }
     }
 }
