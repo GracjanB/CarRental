@@ -34,7 +34,7 @@ public class Rent extends AbstractBaseEntity implements Serializable {
     private Car car;
 
     @Column(name = "car_vin", insertable = false, updatable = false)
-    private Long carVin;
+    private String carVin;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "agency_id", referencedColumnName = "id")

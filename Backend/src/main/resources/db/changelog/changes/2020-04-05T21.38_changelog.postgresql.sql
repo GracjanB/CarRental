@@ -15,7 +15,7 @@ CREATE TABLE rent
     optlock_version  BIGINT,
     agency_id        BIGINT,
     calculated_price numeric(19, 2),
-    car_vin          BIGINT,
+    car_vin          varchar(255),
     deposit          numeric(19, 2),
     employee_id      BIGINT,
     end_mileage      INTEGER,
