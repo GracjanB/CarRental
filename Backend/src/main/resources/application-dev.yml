@@ -10,3 +10,8 @@ spring:
     port: 587
     username: carrental.wsiz@gmail.com
     password: Carrental.wsiz1
+    properties:
+      smtp:
+        auth: true
+      starttls:
+        enable: true
