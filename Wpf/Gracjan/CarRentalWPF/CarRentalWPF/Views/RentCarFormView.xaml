@@ -1,0 +1,134 @@
+﻿<UserControl x:Class="CarRentalWPF.Views.RentCarFormView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CarRentalWPF.Views"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="550" d:DesignWidth="1080" Background="White">
+    <Grid Margin="2 2 2 2">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Column 0 -->
+        <materialDesign:Card Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10 0 10 0">
+            <Grid Width="300" Height="500">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Row 0 - Car Title (Mark, Model, Type) -->
+                <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Text="Skoda Octavia Sedan" Margin="10 10 0 0" FontSize="24" FontWeight="SemiBold" FontFamily="Champagne &amp; Limousines" />
+
+                <!-- Row 1 - Car image -->
+                <Image Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Width="155" HorizontalAlignment="Left" Margin="10 5 0 0" Source="unnamed.png"  />
+
+                <!-- Row 2 - Text (Podstawowe informacje) -->
+                <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Text="Podstawowe informacje" FontSize="18" Margin="10 10 0 0" FontFamily="Champagne &amp; Limousines" />
+
+                <!-- Row 3 - (Silnik)-->
+                <TextBlock Grid.Row="3" Grid.Column="0" Text="Silnik:" Margin="30 10 0 0" FontSize="14" FontFamily="Champagne &amp; Limousines" />
+                <TextBlock Grid.Row="3" Grid.Column="1" Text="2.0" Margin="20 10 0 0" FontSize="14" FontFamily="Champagne &amp; Limousines" />
+
+                <!-- Row 4 - (Moc) -->
+                <TextBlock Grid.Row="4" Grid.Column="0" Text="Moc:" Margin="30 10 0 0" FontSize="14" FontFamily="Champagne &amp; Limousines" />
+                <TextBlock Grid.Row="4" Grid.Column="1" Text="155 KM" Margin="20 10 0 0" FontSize="14" FontFamily="Champagne &amp; Limousines" />
+
+                <!-- Row 5 - (Rodzaj paliwa) -->
+                <TextBlock Grid.Row="5" Grid.Column="0" Text="Rodzaj paliwa:" Margin="30 10 0 0" FontSize="14" FontFamily="Champagne &amp; Limousines" />
+                <TextBlock Grid.Row="5" Grid.Column="1" Text="Benzyna" Margin="20 10 0 0" FontSize="14" FontFamily="Champagne &amp; Limousines" />
+
+                <!-- Row 6 - (Przebieg) -->
+                <TextBlock Grid.Row="6" Grid.Column="0" Text="Przebieg:" Margin="30 10 0 0" FontSize="14" FontFamily="Champagne &amp; Limousines" />
+                <TextBlock Grid.Row="6" Grid.Column="1" Text="134625 km" Margin="20 10 0 0" FontSize="14" FontFamily="Champagne &amp; Limousines" />
+
+                <!-- Row 7 - (Rok produkcji) -->
+                <TextBlock Grid.Row="7" Grid.Column="0" Text="Rok produkcji:" Margin="30 10 0 0" FontSize="14" FontFamily="Champagne &amp; Limousines" />
+                <TextBlock Grid.Row="7" Grid.Column="1" Text="2014" Margin="20 10 0 0" FontSize="14" FontFamily="Champagne &amp; Limousines" />
+
+                <!-- Row 8 - (Generacja) -->
+                <TextBlock Grid.Row="8" Grid.Column="0" Text="Generacja:" Margin="30 10 0 0" FontSize="14" FontFamily="Champagne &amp; Limousines" />
+                <TextBlock Grid.Row="8" Grid.Column="1" Text="III (2013-)" Margin="20 10 0 0" FontSize="14" FontFamily="Champagne &amp; Limousines" />
+
+                <!-- Row 9 - (Kolor) -->
+                <TextBlock Grid.Row="9" Grid.Column="0" Text="Kolor:" Margin="30 10 0 0" FontSize="14" FontFamily="Champagne &amp; Limousines" />
+                <TextBlock Grid.Row="9" Grid.Column="1" Text="Czerwony" Margin="20 10 0 0" FontSize="14" FontFamily="Champagne &amp; Limousines" />
+            </Grid>
+        </materialDesign:Card>
+
+        <!-- Column 1 -->
+        <Grid Grid.Column="1" x:Name="RentFormGrid" Margin="0 5 5 5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Row 0 (Title) -->
+            <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6" Text="Formularz wypożyczenia" Margin="10 10 0 0" FontSize="24" FontWeight="SemiBold" FontFamily="Champagne &amp; Limousines" />
+
+            <!-- Row 1 -->
+            <Separator Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="6" Width="800"/>
+
+            <!-- Row 2 (Imię) -->
+            <TextBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Imię" Width="200" 
+                     Margin="10 10 0 0 " HorizontalAlignment="Left"/>
+
+            <!-- Row 3 (Imię) -->
+            <TextBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Nazwisko" Width="200"
+                     Margin="10 20 0 0 " HorizontalAlignment="Left"/>
+
+            <!-- Row 4 (Imię) -->
+            <TextBox Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Adres" Width="200"
+                     Margin="10 20 0 0 " HorizontalAlignment="Left"/>
+
+            <!-- Row 5 (Imię) -->
+            <TextBox Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Miasto" Width="200"
+                     Margin="10 20 0 0 " HorizontalAlignment="Left"/>
+
+            <!-- Row 6 (Imię) -->
+            <TextBox Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="3" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Kod pocztowy" Width="200"
+                     Margin="10 20 0 0 " HorizontalAlignment="Left"/>
+
+            <!-- Row 6 (Imię) -->
+            <TextBlock Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="3" Text="Data urodzenia" Width="200" Margin="10 20 0 0" HorizontalAlignment="Left"/>
+            <ComboBox Grid.Row="8" Grid.Column="0" Width="30" HorizontalAlignment="Left" Margin="10 5 0 0" ItemsSource="{Binding Days}"/>
+            <ComboBox Grid.Row="8" Grid.Column="0" Width="90" HorizontalAlignment="Left" Margin="50 5 0 0" ItemsSource="{Binding Months}"/>
+            <ComboBox Grid.Row="8" Grid.Column="0" Width="50" HorizontalAlignment="Left" Margin="160 5 0 0" ItemsSource="{Binding Years}"/>
+
+
+        </Grid>
+    </Grid>
+</UserControl>
