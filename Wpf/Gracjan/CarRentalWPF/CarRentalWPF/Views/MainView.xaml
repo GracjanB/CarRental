@@ -63,11 +63,11 @@
                 <!-- Popup Menu -->
                 <materialDesign:PopupBox Margin="10" Foreground="White" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False">
                     <StackPanel Width="150">
-                        <Button Content="Konto"/>
+                        <Button Content="Rejestracja" cal:Message.Attach="[Event Click] = [Action RegisterButtonPopupBoxClick]"/>
                         <Button Content="Ustawienia"/>
                         <Button Content="Pomoc"/>
                         <Separator/>
-                        <Button Content="Wyloguj"/>
+                        <Button Content="Zaloguj" cal:Message.Attach="[Event Click] = [Action LoginButtonPopupBoxClick]"/>
                         <Button Content="Wyjdź"/>
                     </StackPanel>
                 </materialDesign:PopupBox>
@@ -95,7 +95,7 @@
                 <Image Height="140" Source="Assets\651.jpg" />
                 <ListView Foreground="#FF313131" FontFamily="Champagne &amp; Limousines">
                     <ListViewItem Height="45" Padding="0" 
-                                  cal:Message.Attach="[Event MouseLeftButtonDown] = [Action MainView_MouseLeftButtonDown]">
+                                  cal:Message.Attach="[Event PreviewMouseLeftButtonDown] = [Action MainView_MouseLeftButtonDown]">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Width="20" Height="20" Margin="5" Kind="Home" VerticalAlignment="Center"/>
                             <TextBlock Text="Ekran główny" Margin="10"/>

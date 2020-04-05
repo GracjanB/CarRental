@@ -1,0 +1,138 @@
+﻿<Window x:Class="CarRentalWPF.Views.RegisterView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:CarRentalWPF.Views"
+        mc:Ignorable="d"
+        Title="RegisterView" Height="780" Width="600" WindowStartupLocation="CenterOwner" ResizeMode="NoResize" WindowStyle="None" BorderBrush="#536DFE" BorderThickness="1">
+
+    <Window.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="Width" Value="200" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="Foreground" Value="#424242" />
+            <Setter Property="FontFamily" Value="Champagne &amp; Limousines" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="0 20 0 0" />
+        </Style>
+    </Window.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="300"/>
+        </Grid.ColumnDefinitions>
+        
+        <!-- Row 0 -->
+        <DockPanel Grid.Row="0" Grid.ColumnSpan="2" Width="600" Height="40" Background="#536DFE">
+            <materialDesign:PackIcon Kind="CarConnected" Foreground="White" Height="30" Width="30" VerticalAlignment="Center"/>
+            <TextBlock Text="Rejestracja" FontFamily="Champagne &amp; Limousines" Foreground="White" FontSize="24" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5 5 0 0" Width="120"/>
+            <Button x:Name="TryClose" Background="{x:Null}" BorderBrush="{x:Null}" Width="50" Height="40" HorizontalAlignment="Right" >
+                <materialDesign:PackIcon Kind="WindowClose" Width="33" VerticalAlignment="Center" HorizontalAlignment="Center" Height="26"/>
+            </Button>
+        </DockPanel>
+
+        <!-- Row 1 -->
+        <TextBlock Grid.Row="1" Grid.ColumnSpan="2" Text="Rejestracja" Margin="0 10 0 0" FontFamily="Champagne &amp; Limousines" FontSize="40" HorizontalAlignment="Center" FontWeight="SemiBold" Foreground="#FF202527"/>
+        
+        <!-- Row 2 -->
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="Imię" Margin="0 15 0 0" />
+
+        <TextBlock Grid.Row="2" Grid.Column="1" Text="Email" Margin="0 15 0 0" />
+
+        <!-- Row 3 -->
+        <TextBox x:Name="registerModel_FirstName" Grid.Row="3" Grid.Column="0" Width="200" FontSize="18" Margin="0 2 0 0" HorizontalAlignment="Center"/>
+
+        <TextBox x:Name="registerModel_Email" Grid.Row="3" Grid.Column="1" Width="200" FontSize="18" Margin="0 2 0 0" HorizontalAlignment="Center"/>
+
+
+        <!-- Row 4 -->
+        <TextBlock Grid.Row="4" Grid.Column="0" Text="Nazwisko" />
+
+        <TextBlock Grid.Row="4" Grid.Column="1" Text="Hasło" />
+
+        <!-- Row 5 -->
+        <TextBox x:Name="registerModel_LastName" Grid.Row="5" Grid.Column="0" Width="200" FontSize="18" Margin="0 2 0 0" HorizontalAlignment="Center"/>
+
+        <PasswordBox x:Name="registerModel_Password" Grid.Row="5" Grid.Column="1" Width="200" FontSize="18" Margin="0 2 0 0" HorizontalAlignment="Center"/>
+
+        <!-- Row 6 -->
+        <TextBlock Grid.Row="6" Grid.Column="0" Text="Ulica" />
+
+        <TextBlock Grid.Row="6" Grid.Column="1" Text="Potwierdź hasło" />
+
+        <!-- Row 7 -->
+        <TextBox x:Name="registerModel_Street" Grid.Row="7" Grid.Column="0" Width="200" FontSize="18" Margin="0 2 0 0" HorizontalAlignment="Center"/>
+
+        <PasswordBox x:Name="registerModel_ConfirmPassword" Grid.Row="7" Grid.Column="1" Width="200" FontSize="18" Margin="0 2 0 0" HorizontalAlignment="Center"/>
+
+        <!-- Row 8 -->
+        <TextBlock Grid.Row="8" Grid.Column="0" Text="Numer budynku" />
+
+        <TextBlock Grid.Row="8" Grid.Column="1" Text="Numer telefonu" />
+
+        <!-- Row 9 -->
+        <TextBox x:Name="registerModel_BuildingNo" Grid.Row="9" Grid.Column="0" Width="200" FontSize="18" Margin="0 2 0 0" HorizontalAlignment="Center"/>
+
+        <TextBox x:Name="registerModel_PhoneNumber" Grid.Row="9" Grid.Column="1" Width="200" FontSize="18" Margin="0 2 0 0" HorizontalAlignment="Center"/>
+
+        <!-- Row 10 -->
+        <TextBlock Grid.Row="10" Grid.Column="0" Text="Mieszkanie" />
+
+        <TextBlock Grid.Row="10" Grid.Column="1" Text="PESEL" />
+
+        <!-- Row 11 -->
+        <TextBox x:Name="registerModel_FlatNo" Grid.Row="11" Grid.Column="0" Width="200" FontSize="18" Margin="0 2 0 0" HorizontalAlignment="Center"/>
+
+        <TextBox x:Name="registerModel_PESEL" Grid.Row="11" Grid.Column="1" Width="200" FontSize="18" Margin="0 2 0 0" HorizontalAlignment="Center"/>
+
+        <!-- Row 12 -->
+        <TextBlock Grid.Row="12" Grid.Column="0" Text="Kod pocztowy" />
+
+        <!-- Row 13 -->
+        <TextBox x:Name="registerModel_PostalCode" Grid.Row="13" Grid.Column="0" Width="200" FontSize="18" Margin="0 2 0 0" HorizontalAlignment="Center"/>
+
+        <!-- Row 14 -->
+        <TextBlock Grid.Row="14" Grid.Column="0" Text="Miasto" />
+
+        <!-- Row 15 -->
+        <TextBox x:Name="registerModel_City" Grid.Row="15" Grid.Column="0" Width="200" FontSize="18" Margin="0 2 0 0" HorizontalAlignment="Center"/>
+
+        <!-- Row 16 -->
+        <TextBlock Grid.Row="16" Grid.Column="0" Text="Kraj" />
+
+        <!-- Row 17 -->
+        <TextBox x:Name="registerModel_Country" Grid.Row="17" Grid.Column="0" Width="200" FontSize="18" Margin="0 2 0 0" HorizontalAlignment="Center"/>
+
+        <!-- Row 18 -->
+        <Button x:Name="RegisterButton" Grid.Row="18" Grid.ColumnSpan="2" Content="Zarejestruj" Width="300" Height="40" HorizontalAlignment="Center" 
+                Style="{StaticResource MaterialDesignRaisedDarkButton}" Margin="0 30 0 0" Background="#FF283FC0" FontSize="18"/>
+
+
+    </Grid>
+</Window>
