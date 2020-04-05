@@ -6,7 +6,7 @@ spring:
     platform: postgres
     driver-class-name: org.postgresql.Driver
   mail:
-    host: smtp.sendgrid.net
+    host: smtp.gmail.com
     port: 587
-    username: d792faab87bcf3147b3908cc7ef34139-46ac6b00-ca08462d
-    password: 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
+    username: carrental.wsiz@gmail.com
+    password: Carrental.wsiz1
