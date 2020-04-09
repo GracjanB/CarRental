@@ -19,7 +19,7 @@ public class Agency extends AbstractBaseEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "agency_id_seq")
     private Long id;
 
-    @OneToOne(optional = false, cascade = CascadeType.REMOVE)
+    @ManyToOne(optional = false, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
     @JoinColumn(name = "address_id", referencedColumnName = "id")
     private Address address;
 

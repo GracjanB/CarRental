@@ -3,16 +3,10 @@ package pl.bucior.carrental.model.request;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
-import pl.bucior.carrental.model.jpa.Address;
 
-import javax.persistence.Column;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Getter
@@ -58,7 +52,7 @@ public class UserCreateRequest implements Serializable {
     private String street;
     @NotBlank
     private String houseNo;
-    @NotBlank
+
     private String flatNo;
 
 }

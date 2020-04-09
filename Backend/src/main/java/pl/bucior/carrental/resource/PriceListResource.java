@@ -9,24 +9,25 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.bucior.carrental.configuration.auth.Manager;
-import pl.bucior.carrental.model.request.CarCreateRequest;
-import pl.bucior.carrental.service.CarService;
+import pl.bucior.carrental.model.request.PriceListCreateRequest;
+import pl.bucior.carrental.model.response.PriceListCreateResponse;
+import pl.bucior.carrental.service.PriceListService;
 
 import javax.validation.Valid;
 
 @Log4j2
 @RestController
-@RequestMapping("car")
+@RequestMapping("priceList")
 @RequiredArgsConstructor
-public class CarResource {
+public class PriceListResource {
 
-    private final CarService carService;
+    private final PriceListService priceListService;
 
     @Manager
     @PostMapping
-    public ResponseEntity<Void> createCar(@RequestBody @Valid CarCreateRequest request) {
-        carService.createCar(request);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+    public ResponseEntity<PriceListCreateResponse> createPriceList(@RequestBody @Valid PriceListCreateRequest request) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(priceListService.createPriceList(request));
     }
+
 
 }

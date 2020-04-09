@@ -12,6 +12,7 @@ import pl.bucior.carrental.configuration.auth.Employee;
 import pl.bucior.carrental.configuration.auth.Manager;
 import pl.bucior.carrental.model.request.RentCreateRequest;
 import pl.bucior.carrental.service.RentService;
+import springfox.documentation.annotations.ApiIgnore;
 
 import java.security.Principal;
 
@@ -26,7 +27,7 @@ public class RentResource {
     @Manager
     @Employee
     @PostMapping
-    public ResponseEntity<Void> createRent(@RequestBody RentCreateRequest request, Principal principal) {
+    public ResponseEntity<Void> createRent(@RequestBody RentCreateRequest request, @ApiIgnore Principal principal) {
         rentService.createRent(request, principal);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }

@@ -37,17 +37,27 @@ public class Car extends AbstractBaseEntity implements Serializable {
     @Column(name = "horse_power", nullable = false)
     private Integer horsePower;
 
-    @Column(name = "engine_power", nullable = false)
-    private Integer enginePower;
+    @Column(name = "engine_capacity", nullable = false)
+    private Integer engineCapacity;
 
     @Column(name = "register_plate", nullable = false)
     private String registerPlate;
 
-//    private Long priceListId;
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH, optional = false)
+    @JoinColumn(name = "price_list_id", referencedColumnName = "id")
+    private PriceList priceList;
 
-//    private Long parentAgencyId;
+    @Column(name = "price_list_id", insertable = false, updatable = false)
+    private Long priceListId;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.DETACH)
+    @JoinColumn(name = "parent_agency_id", referencedColumnName = "id")
+    private Agency parentAgency;
+
+    @Column(name = "parent_agency_id", insertable = false, updatable = false)
+    private Long parentAgencyId;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.DETACH)
     @JoinColumn(name = "current_agency_id", referencedColumnName = "id")
     private Agency currentAgency;
 
