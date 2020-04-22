@@ -29,7 +29,7 @@ public class Rent extends AbstractBaseEntity implements Serializable {
     @Column(name = "user_id", insertable = false, updatable = false)
     private Long userId;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = true, cascade = CascadeType.DETACH)
     @JoinColumn(name = "car_vin", referencedColumnName = "vin")
     private Car car;
 

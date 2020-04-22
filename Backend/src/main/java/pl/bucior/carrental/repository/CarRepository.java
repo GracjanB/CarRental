@@ -5,6 +5,8 @@ import pl.bucior.carrental.model.jpa.Car;
 import pl.bucior.carrental.model.jpa.Car_;
 import pl.bucior.carrental.util.pageable.PageableJpaRepository;
 
+import java.util.List;
+
 @Repository
 public interface CarRepository extends PageableJpaRepository<Car, String> {
     @Override
@@ -12,4 +14,5 @@ public interface CarRepository extends PageableJpaRepository<Car, String> {
         return Car_.VIN;
     }
 
+    List<Car> findAllByEnabledIsTrue();
 }

@@ -27,8 +27,8 @@ public class AgencyResource {
     }
 
     @Manager
-    @DeleteMapping
-    public ResponseEntity<Void> deleteAgency(@RequestParam("id") Long id) {
+    @DeleteMapping(value = "{id}")
+    public ResponseEntity<Void> deleteAgency(@PathVariable("id") Long id) {
         agencyService.deleteAgency(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
