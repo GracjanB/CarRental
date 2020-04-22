@@ -13,10 +13,7 @@ import pl.bucior.carrental.model.jpa.Car;
 import pl.bucior.carrental.model.jpa.PriceList;
 import pl.bucior.carrental.model.request.CarCreateRequest;
 import pl.bucior.carrental.model.response.AvailableCarResponse;
-import pl.bucior.carrental.repository.AgencyRepository;
-import pl.bucior.carrental.repository.CarRepository;
-import pl.bucior.carrental.repository.PriceListRepository;
-import pl.bucior.carrental.repository.RentRepository;
+import pl.bucior.carrental.repository.*;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
@@ -35,6 +32,7 @@ public class CarService {
     private final AgencyRepository agencyRepository;
     private final RentRepository rentRepository;
     private final PriceListRepository priceListRepository;
+    private final TechnicalSupportRepository technicalSupportRepository;
 
     public void createCar(CarCreateRequest request) {
         Agency agency = agencyRepository.findById(request.getAgencyId())
@@ -64,7 +62,9 @@ public class CarService {
         AvailableCarResponse response = new AvailableCarResponse();
         List<Car> cars = carRepository.findAllByEnabledIsTrue();
         List<Car> rentedCars = rentRepository.findCarsWithOpenRent();
+        List<Car> carsWithTechnicalSupport = technicalSupportRepository.findCarsWithOpenTechnicalSupport();
         cars.removeAll(rentedCars);
+        cars.removeAll(carsWithTechnicalSupport);
         List<CarDto> carDtoList = cars.stream().map(CarMapper.INSTANCE::toDto).collect(Collectors.toList());
         response.setCars(carDtoList);
         return response;

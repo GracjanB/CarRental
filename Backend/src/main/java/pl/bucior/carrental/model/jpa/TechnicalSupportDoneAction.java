@@ -12,7 +12,7 @@ import java.io.Serializable;
 @Builder(toBuilder = true)
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "technical_support_has_action", schema = "carrental")
+@Table(name = "technical_support_done_action", schema = "carrental")
 public class TechnicalSupportDoneAction extends AbstractBaseEntity implements Serializable {
 
     @Id

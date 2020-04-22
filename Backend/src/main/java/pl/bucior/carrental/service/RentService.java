@@ -7,16 +7,11 @@ import org.springframework.stereotype.Service;
 import pl.bucior.carrental.configuration.exception.ErrorCode;
 import pl.bucior.carrental.configuration.exception.WsizException;
 import pl.bucior.carrental.model.enums.RentStatus;
-import pl.bucior.carrental.model.jpa.Agency;
-import pl.bucior.carrental.model.jpa.Car;
-import pl.bucior.carrental.model.jpa.Rent;
-import pl.bucior.carrental.model.jpa.User;
+import pl.bucior.carrental.model.enums.TechnicalSupportStatus;
+import pl.bucior.carrental.model.jpa.*;
 import pl.bucior.carrental.model.request.RentCreateRequest;
 import pl.bucior.carrental.model.request.RentFinishRequest;
-import pl.bucior.carrental.repository.AgencyRepository;
-import pl.bucior.carrental.repository.CarRepository;
-import pl.bucior.carrental.repository.RentRepository;
-import pl.bucior.carrental.repository.UserRepository;
+import pl.bucior.carrental.repository.*;
 
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
@@ -38,6 +33,8 @@ public class RentService {
     private final UserRepository userRepository;
     private final CarRepository carRepository;
     private final AgencyRepository agencyRepository;
+    private final TechnicalSupportRepository technicalSupportRepository;
+    private final TechnicalSupportHasActionRepository technicalSupportHasActionRepository;
 
     public void createRent(RentCreateRequest request, Principal principal) {
         User employee = userRepository.findByEmail(principal.getName()).orElseThrow(AssertionError::new);
@@ -50,6 +47,9 @@ public class RentService {
         rentStatusList.add(RentStatus.RETURNED);
         if (rentRepository.findByCarVinAndStatusNotIn(car.getVin(), rentStatusList).isPresent()) {
             throw new WsizException(HttpStatus.CONFLICT, CAR_IS_ALREADY_RENTED);
+        }
+        if (technicalSupportRepository.findAllByCarVinAndStatusIsNot(request.getCarVin(), TechnicalSupportStatus.ENDED).size() > 0) {
+            throw new WsizException(HttpStatus.CONFLICT, CAR_HAS_OPENED_TECHNICAL_SUPPORT);
         }
         if (rentRepository.findByUserIdAndStatusNotIn(request.getUserId(), rentStatusList).isPresent()) {
             throw new WsizException(HttpStatus.CONFLICT, USER_HAS_OPENED_RENT);
@@ -99,14 +99,38 @@ public class RentService {
         List<RentStatus> rentStatusList = new ArrayList<>();
         rentStatusList.add(RentStatus.CANCELLED);
         rentStatusList.add(RentStatus.RETURNED);
+        Car car = carRepository.findById(request.getVin())
+                .orElseThrow(() -> new WsizException(HttpStatus.NOT_FOUND, CAR_NOT_FOUND));
         Rent rent = rentRepository.findByCarVinAndStatusNotIn(request.getVin(), rentStatusList)
                 .orElseThrow(() -> new WsizException(HttpStatus.NOT_FOUND, RENT_NOT_FOUND));
+        User employee = userRepository.findByEmail(principal.getName())
+                .orElseThrow(() -> new WsizException(HttpStatus.NOT_FOUND, USER_NOT_FOUND));
         rent.setFinalPrice(request.getFinalPrice());
         rent.setEndMileage(request.getEndMileage());
         rent.setRentEndDate(request.getRentEndDate() != null ? request.getRentEndDate() : rent.getRentEndDate());
         rent.setStatus(RentStatus.RETURNED);
-        if (request.getTechnicalSupportActions() != null && request.getTechnicalSupportActions().size() > 0) {
-            //TODO dodawanie wsparcia technicznego
+        if (request.getTechnicalSupport() != null &&
+                request.getTechnicalSupport().getTechnicalSupportActions() != null &&
+                request.getTechnicalSupport().getTechnicalSupportActions().size() > 0) {
+            TechnicalSupport technicalSupport = technicalSupportRepository.save(TechnicalSupport
+                    .builder()
+                    .rent(rent)
+                    .employee(employee)
+                    .car(car)
+                    .status(TechnicalSupportStatus.CREATED)
+                    .cost(request.getTechnicalSupport().getTechnicalSupportCost())
+                    .comment(request.getTechnicalSupport().getComment())
+                    .build());
+            request.getTechnicalSupport().getTechnicalSupportActions()
+                    .forEach(tcha -> {
+                        technicalSupportHasActionRepository.save(TechnicalSupportHasAction
+                                .builder()
+                                .completed(false)
+                                .technicalSupport(technicalSupport)
+                                .technicalSupportAction(tcha)
+                                .build());
+                    });
+            //TODO wysyłka dla kierowców zgłoszenia
         }
     }
 
