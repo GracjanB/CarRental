@@ -7,6 +7,7 @@ import pl.bucior.carrental.model.enums.TechnicalSupportStatus;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 @Getter
@@ -52,4 +53,7 @@ public class TechnicalSupport extends AbstractBaseEntity implements Serializable
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
     private TechnicalSupportStatus status;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "technicalSupport")
+    private List<TechnicalSupportHasAction> technicalSupportHasActionList;
 }

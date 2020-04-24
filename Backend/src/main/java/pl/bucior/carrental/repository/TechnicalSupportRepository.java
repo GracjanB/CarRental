@@ -1,6 +1,8 @@
 package pl.bucior.carrental.repository;
 
+import jdk.jshell.EvalException;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import pl.bucior.carrental.model.enums.TechnicalSupportStatus;
 import pl.bucior.carrental.model.jpa.Car;
@@ -22,4 +24,7 @@ public interface TechnicalSupportRepository extends PageableJpaRepository<Techni
 
     @Query(value = "select c from Car c left join TechnicalSupport ts on ts.carVin = c.vin where ts.status='CREATED' and c.enabled = true")
     List<Car> findCarsWithOpenTechnicalSupport();
+
+    @Query(value = "select ts from TechnicalSupport ts left join TechnicalSupportHasAction tsha on ts.id=tsha.technicalSupport.id where ts.car.currentAgency.id= :id and ts.status = 'CREATED'")
+    List<TechnicalSupport> findAllByStatusAndAgency(@Param("id") Long id);
 }
