@@ -34,7 +34,7 @@ public class TechnicalSupportService {
         User employee = userRepository.findByEmail(principal.getName())
                 .orElseThrow(() -> new WsizException(HttpStatus.NOT_FOUND, ErrorCode.USER_NOT_FOUND));
         Agency agency = agencyHasUserRepository.findByUserId(employee.getId())
-                .orElseThrow(() -> new WsizException(HttpStatus.NOT_FOUND, ErrorCode.AGENCY_NOT_FOUND)).getAgency();
+                .orElseThrow(() -> new WsizException(HttpStatus.NOT_FOUND, ErrorCode.AGENCY_HAS_USER_NOT_FOUND)).getAgency();
         List<TechnicalSupportDto> technicalSupports = technicalSupportRepository
                 .findAllByStatusAndAgency(agency.getId()).stream()
                 .map(TechnicalSupportMapper.INSTANCE::toDto).collect(Collectors.toList());
