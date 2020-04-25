@@ -1,6 +1,5 @@
 package pl.bucior.carrental.repository;
 
-import jdk.jshell.EvalException;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -10,7 +9,6 @@ import pl.bucior.carrental.model.jpa.TechnicalSupport;
 import pl.bucior.carrental.model.jpa.TechnicalSupport_;
 import pl.bucior.carrental.util.pageable.PageableJpaRepository;
 
-import java.util.Collection;
 import java.util.List;
 
 @Repository

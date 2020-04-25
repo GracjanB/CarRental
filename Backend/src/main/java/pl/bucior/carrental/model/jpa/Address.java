@@ -34,7 +34,7 @@ public class Address extends AbstractBaseEntity implements Serializable {
     @Column(name = "house_no", nullable = false)
     private String houseNo;
 
-    @Column(name = "flat_no", nullable = false)
+    @Column(name = "flat_no")
     private String flatNo;
 
 }

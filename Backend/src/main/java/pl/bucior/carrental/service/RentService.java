@@ -10,7 +10,9 @@ import pl.bucior.carrental.model.enums.RentStatus;
 import pl.bucior.carrental.model.enums.TechnicalSupportStatus;
 import pl.bucior.carrental.model.jpa.*;
 import pl.bucior.carrental.model.request.RentCreateRequest;
+import pl.bucior.carrental.model.request.RentExpectedCostRequest;
 import pl.bucior.carrental.model.request.RentFinishRequest;
+import pl.bucior.carrental.model.response.RentExpectedCostResponse;
 import pl.bucior.carrental.repository.*;
 
 import javax.transaction.Transactional;
@@ -132,6 +134,19 @@ public class RentService {
                     });
             //TODO wysyłka dla kierowców zgłoszenia
         }
+    }
+
+    public RentExpectedCostResponse calculateExpectedCost(RentExpectedCostRequest request) {
+        Car car = carRepository.findById(request.getCarVin())
+                .orElseThrow(() -> new WsizException(HttpStatus.NOT_FOUND, CAR_NOT_FOUND));
+
+        BigDecimal calculatedPrice = BigDecimal.valueOf(zonedDateTimeDifference(request.getRentStartDate(), request.getRentEndDate(), ChronoUnit.DAYS));
+        calculatedPrice = calculateBonus(calculatedPrice);
+        calculatedPrice = calculatedPrice.multiply(car.getPriceList().getDailyPrice());
+
+        RentExpectedCostResponse rentExpectedCostResponse = new RentExpectedCostResponse();
+        rentExpectedCostResponse.setCost(calculatedPrice);
+        return rentExpectedCostResponse;
     }
 
 }

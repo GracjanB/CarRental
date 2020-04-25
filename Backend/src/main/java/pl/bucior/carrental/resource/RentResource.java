@@ -6,11 +6,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import pl.bucior.carrental.configuration.auth.Employee;
-import pl.bucior.carrental.configuration.auth.Manager;
 import pl.bucior.carrental.model.enums.TechnicalSupportActionEnum;
 import pl.bucior.carrental.model.request.RentCreateRequest;
+import pl.bucior.carrental.model.request.RentExpectedCostRequest;
 import pl.bucior.carrental.model.request.RentFinishRequest;
+import pl.bucior.carrental.model.response.RentExpectedCostResponse;
 import pl.bucior.carrental.service.RentService;
 import springfox.documentation.annotations.ApiIgnore;
 
@@ -27,12 +27,16 @@ public class RentResource {
 
     private final RentService rentService;
 
-    @Manager
-    @Employee
+    @PreAuthorize("hasAnyRole('MANAGER','EMPLOYEE')")
     @PostMapping
     public ResponseEntity<Void> createRent(@RequestBody RentCreateRequest request, @ApiIgnore Principal principal) {
         rentService.createRent(request, principal);
         return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @PostMapping(value = "calculateCost")
+    public ResponseEntity<RentExpectedCostResponse> calculateExpectedCost(@RequestBody RentExpectedCostRequest request) {
+        return ResponseEntity.status(HttpStatus.OK).body(rentService.calculateExpectedCost(request));
     }
 
     @PreAuthorize("hasAnyRole('MANAGER','EMPLOYEE')")

@@ -6,11 +6,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import pl.bucior.carrental.configuration.auth.TechnicalEmployee;
 import pl.bucior.carrental.model.response.TechnicalSupportResponse;
 import pl.bucior.carrental.service.TechnicalSupportService;
+import springfox.documentation.annotations.ApiIgnore;
 
-import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 
 @RestController
@@ -22,7 +21,7 @@ public class TechnicalSupportResource {
 
     @GetMapping("/free")
 //    @TechnicalEmployee
-    public ResponseEntity<TechnicalSupportResponse> getAllFreeTechnicalSupport(Principal principal) {
+    public ResponseEntity<TechnicalSupportResponse> getAllFreeTechnicalSupport(@ApiIgnore Principal principal) {
         return ResponseEntity.ok(technicalSupportService.getAllFreeTechnicalSupport(principal));
     }
 
