@@ -4,3 +4,12 @@
 
 /.vs
 /Wpf/Gracjan/CarRentalWPF/.vs/CarRentalWPF/v16
+/Wpf/Gracjan/CarRentalWPF/packages/
+/Wpf/Gracjan/CarRentalWPF/CarRentalWPF.Library/bin/Debug/
+/Wpf/Gracjan/CarRentalWPF/CarRentalWPF.Library/obj/Debug/
+/Wpf/Gracjan/CarRentalWPF/CarRentalWPF/obj/Debug/
+/Wpf/Gracjan/CarRentalWPF/CarRentalWPF/bin/Debug/
+/Wpf/Gracjan/CarRentalWPF/WebApi/obj/Debug/
+/Wpf/Gracjan/CarRentalWPF/WebApi/bin/Debug/
+
+
