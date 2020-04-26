@@ -1,0 +1,5 @@
+D:\Visual Studio Projects\University\Wpf\Gracjan\CarRentalWPF\WebApi\bin\Debug\WebApi.dll
+D:\Visual Studio Projects\University\Wpf\Gracjan\CarRentalWPF\WebApi\bin\Debug\WebApi.pdb
+D:\Visual Studio Projects\University\Wpf\Gracjan\CarRentalWPF\WebApi\obj\Debug\WebApi.csprojAssemblyReference.cache
+D:\Visual Studio Projects\University\Wpf\Gracjan\CarRentalWPF\WebApi\obj\Debug\WebApi.dll
+D:\Visual Studio Projects\University\Wpf\Gracjan\CarRentalWPF\WebApi\obj\Debug\WebApi.pdb

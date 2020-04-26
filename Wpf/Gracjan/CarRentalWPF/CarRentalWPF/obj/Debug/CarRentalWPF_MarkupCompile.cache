@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 D:\Visual Studio Projects\University\Wpf\Gracjan\CarRentalWPF\CarRentalWPF\App.xaml
-11811751144
+5-1802412333
 
-71090850443
-123-778480030
-Views\MainView.xaml;
+23-929143075
+125483347296
+Views\CarsView.xaml;Views\LoginView.xaml;Views\MainView.xaml;Views\RegisterView.xaml;Views\RentCarFormView.xaml;
 
-False
+True
 
