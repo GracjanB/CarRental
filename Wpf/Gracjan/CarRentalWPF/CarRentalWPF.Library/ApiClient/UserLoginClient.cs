@@ -30,7 +30,7 @@ namespace CarRentalWPF.Library.ApiClient
             _client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
-        public TokenInfo GetToken(UserLogin login)
+        public async Task<TokenInfo> GetToken(UserLogin login)
         {
             var data = new FormUrlEncodedContent(new[]
             {
@@ -48,11 +48,11 @@ namespace CarRentalWPF.Library.ApiClient
 
             try
             {
-                using (var response = _client.PostAsync(URI + endPoint, data).Result)
+                using (var response = await _client.PostAsync(URI + endPoint, data))
                 {
                     if (response.IsSuccessStatusCode)
                     {
-                        var result = response.Content.ReadAsStringAsync().Result;
+                        var result = await response.Content.ReadAsStringAsync();
                         tokenInfo = JsonConvert.DeserializeObject<TokenInfo>(result);
 
                         tokenInfo.isSucceded = true;
@@ -152,21 +152,21 @@ namespace CarRentalWPF.Library.ApiClient
             return refreshedTokenInfo;
         }
 
-        public UserInfo GetUserData(TokenInfo tokenInfo)
+        public async Task<UserInfo> GetUserData(string tokenType, string accessToken)
         {
             string endPoint = "api/user";
             UserInfo userInfo = null;
 
             _client.DefaultRequestHeaders.Clear();
-            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(tokenInfo.token_type, tokenInfo.access_token);
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(tokenType, accessToken);
 
             try
             {
-                using (var response = _client.GetAsync(URI + endPoint).Result)
+                using (var response = await _client.GetAsync(URI + endPoint))
                 {
                     if (response.IsSuccessStatusCode)
                     {
-                        var result = response.Content.ReadAsStringAsync().Result;
+                        var result = await response.Content.ReadAsStringAsync();
                         userInfo = JsonConvert.DeserializeObject<UserInfo>(result);
 
                         userInfo.isSucceded = true;

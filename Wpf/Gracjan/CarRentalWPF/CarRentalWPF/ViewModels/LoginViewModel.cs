@@ -7,6 +7,11 @@ using System.Text;
 using System.Threading.Tasks;
 using CarRentalWPF.Validators;
 using System.Windows;
+using Newtonsoft.Json;
+using CarRentalWPF.Library.ApiClient;
+using CarRentalWPF.Library.Models;
+using CarRentalWPF.User;
+using CarRentalWPF.Events;
 
 namespace CarRentalWPF.ViewModels
 {
@@ -14,23 +19,60 @@ namespace CarRentalWPF.ViewModels
     {
         public LoginModel loginModel { get; set; }
 
+        private UserLogin userLogin { get; set; }
+
         private LoginFormValidator _loginValidator { get; set; }
 
-        public LoginViewModel()
+        private UserLoginClient _userClient;
+
+        private SimpleContainer _container;
+
+        private IEventAggregator _events;
+
+
+        public LoginViewModel(SimpleContainer simpleContainer, IEventAggregator eventAggregator)
         {
             loginModel = new LoginModel();
-            _loginValidator = new LoginFormValidator();
+            _userClient = new UserLoginClient();
+            _container = simpleContainer;
+            _events = eventAggregator;
         }
 
-        public void LoginButton()
+        public async void LoginButton()
         {
+            _loginValidator = new LoginFormValidator();
             var result = _loginValidator.Validate(loginModel);
 
             if (result.IsValid)
             {
-                // TODO: Login user
+                // TODO: Change this
+                userLogin = new UserLogin()
+                {
+                    username = loginModel.Login,
+                    password = loginModel.Password
+                };
 
-                MessageBox.Show("Login good.");
+                var resultResponse = await _userClient.GetToken(userLogin);
+
+                if (resultResponse.isSucceded)
+                {
+                    var userData = await _userClient.GetUserData(resultResponse.token_type, resultResponse.access_token);
+
+                    var user = (AuthenticatedUser)_container.GetInstance(typeof(IAuthenticatedUser), "AuthenticatedUser");
+                    user.Login(resultResponse.access_token, resultResponse.token_type, resultResponse.refresh_token, resultResponse.expires_in);
+
+                    var loggedInUser = (LoggedInUserModel)_container.GetInstance(typeof(ILoggedInUserModel), "LoggedInUserModel");
+
+                    if(userData.isSucceded)
+                    {
+                        loggedInUser.SetUserData(userData);
+                    }
+
+                    // This doesn't work
+                    _events.PublishOnUIThread(new UserLoggedInEvent());     
+                }
+
+                this.TryClose();
             }
             else
             {

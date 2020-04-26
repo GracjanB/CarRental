@@ -8,6 +8,7 @@ using System.Windows.Controls;
 using Caliburn.Micro;
 using CarRentalWPF.Helpers;
 using CarRentalWPF.ViewModels;
+using CarRentalWPF.User;
 
 namespace CarRentalWPF
 {
@@ -29,9 +30,13 @@ namespace CarRentalWPF
         {
             _container.Instance(_container);
 
+            _container.RegisterSingleton(typeof(IAuthenticatedUser), "AuthenticatedUser", typeof(AuthenticatedUser));
+            _container.RegisterSingleton(typeof(ILoggedInUserModel), "LoggedInUserModel", typeof(LoggedInUserModel));
+
             _container
                 .Singleton<IWindowManager, WindowManager>()
                 .Singleton<IEventAggregator, EventAggregator>();
+                
 
             GetType().Assembly.GetTypes()
                 .Where(type => type.IsClass)

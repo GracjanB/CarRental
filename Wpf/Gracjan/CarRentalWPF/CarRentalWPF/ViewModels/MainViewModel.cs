@@ -1,4 +1,6 @@
 ﻿using Caliburn.Micro;
+using CarRentalWPF.Events;
+using CarRentalWPF.User;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CarRentalWPF.ViewModels
 {
-    public class MainViewModel : Conductor<object>
+    public class MainViewModel : Conductor<object>, IHandle<UserLoggedInEvent>
     {
         private SimpleContainer _simpleContainer { get; set; }
 
@@ -18,6 +20,20 @@ namespace CarRentalWPF.ViewModels
             _simpleContainer = simpleContainer;
             _windowManager = windowManager;
         }
+
+        private LoggedInUserModel _loggedInUser;
+
+        public LoggedInUserModel LoggedInUser
+        {
+            get { return _loggedInUser; }
+            set 
+            { 
+                _loggedInUser = value;
+                NotifyOfPropertyChange(() => LoggedInUser);
+            }
+        }
+
+
 
         public void Cars_MouseLeftButtonDown()
         {
@@ -39,6 +55,17 @@ namespace CarRentalWPF.ViewModels
         {
             RegisterViewModel registerVM = _simpleContainer.GetInstance<RegisterViewModel>();
             _windowManager.ShowDialog(registerVM);
+        }
+
+        public void GetAccountInfo()
+        {
+            var user = (AuthenticatedUser)_simpleContainer.GetInstance(typeof(IAuthenticatedUser), "AuthenticatedUser");
+            Console.WriteLine();
+        }
+
+        public void Handle(UserLoggedInEvent userLoggedIn)
+        {
+            LoggedInUser = (LoggedInUserModel)_simpleContainer.GetInstance(typeof(ILoggedInUserModel), "LoggedInUserModel");
         }
     }
 }

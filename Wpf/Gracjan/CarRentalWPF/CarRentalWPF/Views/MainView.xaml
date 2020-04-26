@@ -58,13 +58,13 @@
             <StackPanel VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Right">
 
                 <!-- Currently logged in username -->
-                <TextBlock Text="User Info" VerticalAlignment="Center" Foreground="White" FontSize="16" FontFamily="Champagne &amp; Limousines"/>
+                <TextBlock Text="{Binding LoggedInUser.FullName}" VerticalAlignment="Center" Foreground="White" FontSize="16" FontFamily="Champagne &amp; Limousines"/>
 
                 <!-- Popup Menu -->
                 <materialDesign:PopupBox Margin="10" Foreground="White" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False">
                     <StackPanel Width="150">
                         <Button Content="Rejestracja" cal:Message.Attach="[Event Click] = [Action RegisterButtonPopupBoxClick]"/>
-                        <Button Content="Ustawienia"/>
+                        <Button Content="Konto" cal:Message.Attach="[Event Click] = [Action GetAccountInfo]"/>
                         <Button Content="Pomoc"/>
                         <Separator/>
                         <Button Content="Zaloguj" cal:Message.Attach="[Event Click] = [Action LoginButtonPopupBoxClick]"/>
