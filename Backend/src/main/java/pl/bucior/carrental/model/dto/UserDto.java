@@ -15,4 +15,5 @@ public class UserDto implements Serializable {
     private String pesel;
     private String idCardNumber;
     private Boolean isActive;
+    private Long agencyId;
 }

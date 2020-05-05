@@ -5,12 +5,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.bcrypt.BCrypt;
-import org.springframework.security.oauth2.common.OAuth2AccessToken;
-import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
-import org.springframework.security.oauth2.provider.token.TokenStore;
-import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
-import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.stereotype.Service;
 import pl.bucior.carrental.configuration.exception.ErrorCode;
 import pl.bucior.carrental.configuration.exception.WsizException;
@@ -18,11 +13,14 @@ import pl.bucior.carrental.mapper.UserMapper;
 import pl.bucior.carrental.model.enums.Role;
 import pl.bucior.carrental.model.jpa.AccountVerificationToken;
 import pl.bucior.carrental.model.jpa.Address;
+import pl.bucior.carrental.model.jpa.AgencyHasUser;
 import pl.bucior.carrental.model.jpa.User;
 import pl.bucior.carrental.model.request.UserCreateRequest;
 import pl.bucior.carrental.model.response.UserDetailsResponse;
 import pl.bucior.carrental.model.response.UserRoleResponse;
-import pl.bucior.carrental.repository.*;
+import pl.bucior.carrental.repository.AccountVerificationTokenRepository;
+import pl.bucior.carrental.repository.AgencyHasUserRepository;
+import pl.bucior.carrental.repository.UserRepository;
 import pl.bucior.carrental.service.event.OnRegistrationCompleteEvent;
 
 import javax.servlet.http.HttpServletRequest;
@@ -40,6 +38,7 @@ public class UserService {
     private final DefaultTokenServices defaultTokenServices;
     private final AccountVerificationTokenRepository accountVerificationTokenRepository;
     private final ApplicationEventPublisher applicationEventPublisher;
+    private final AgencyHasUserRepository agencyHasUserRepository;
 
 
     public void create(UserCreateRequest request) {
@@ -105,6 +104,8 @@ public class UserService {
         User user = userRepository.findByEmail(principal.getName())
                 .orElseThrow(() -> new WsizException(HttpStatus.NOT_FOUND, ErrorCode.USER_NOT_FOUND));
         response.setUser(UserMapper.INSTANCE.toDto(user));
+        response.getUser().setAgencyId(agencyHasUserRepository.findByUserId(user.getId())
+                .orElse(AgencyHasUser.builder().build()).getAgencyId());
         return response;
     }
 
