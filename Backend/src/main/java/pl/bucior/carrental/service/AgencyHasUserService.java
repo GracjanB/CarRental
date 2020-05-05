@@ -61,8 +61,7 @@ public class AgencyHasUserService {
     }
 
     void validateDates(ZonedDateTime startDate, ZonedDateTime endDate) {
-        if (startDate.isBefore(ChronoZonedDateTime.from(ZonedDateTime.now())) ||
-                startDate.isAfter(ChronoZonedDateTime.from(endDate))) {
+        if (startDate.isAfter(ChronoZonedDateTime.from(endDate))) {
             throw new WsizException(HttpStatus.CONFLICT, ErrorCode.INVAILD_START_OR_END_CONTRACT_DATE);
         }
     }
