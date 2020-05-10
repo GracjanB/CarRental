@@ -3,10 +3,106 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:cal="http://www.caliburnproject.org"
              xmlns:local="clr-namespace:CarRentalWPF.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="420" d:DesignWidth="650" Background="White">
+             d:DesignHeight="420" d:DesignWidth="650" Background="#FFE5E7F3">
+    
+    <!-- Main Grid -->
     <Grid>
-        <TextBlock Text="Vehicles Fleet" Style="{StaticResource MaterialDesignHeadline2TextBlock}" Padding="10"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Row 0 (Filter options) -->
+        <StackPanel Grid.Row="0" Height="50" Orientation="Horizontal">
+            <ComboBox x:Name="Marks" Width="100" materialDesign:HintAssist.Hint="Marka" Margin="10 0 0 0"/>
+            <ComboBox x:Name="Models" Width="100" materialDesign:HintAssist.Hint="Model" Margin="20 0 0 0"/>
+            <ComboBox x:Name="Status" Width="100" materialDesign:HintAssist.Hint="Status" Margin="20 0 0 0"/>
+            <Button x:Name="FilterCars" Content="Filtruj" Style="{StaticResource MaterialDesignFlatButton}" Margin="20 0 0 0"/>
+        </StackPanel>
+
+        <!-- Row 1 -->
+        <Separator Grid.Row="1" Style="{StaticResource MaterialDesignDarkSeparator}" Margin="10 0 10 0"/>
+
+        <!-- Row 2 -->
+        <ScrollViewer Grid.Row="2" ScrollViewer.VerticalScrollBarVisibility="Hidden">
+            <StackPanel>
+                <ItemsControl ItemsSource="{Binding Path=Cars}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <materialDesign:Card Height="150" Width="600" Margin="0 0 0 20">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="auto" />
+                                        <ColumnDefinition Width="auto" />
+                                        <ColumnDefinition Width="auto" />
+                                        <ColumnDefinition Width="auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <!-- TODO: Show Car Image -->
+                                    <StackPanel Grid.Row="0" Grid.RowSpan="6" Grid.Column="0" Width="150" Height="130" Margin="5">
+                                        <Border BorderBrush="Black" BorderThickness="1" Height="130">
+                                            <TextBlock Text="Obraz" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                    </StackPanel>
+
+                                    <!-- Car title -->
+                                    <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Path=FullName}" Padding="10" 
+                                   Style="{StaticResource MaterialDesignHeadline2TextBlock}" FontSize="18" FontWeight="SemiBold"/>
+
+                                    <!-- Engine Information -->
+                                    <TextBlock Grid.Row="1" Grid.Column="1" Margin="10 0 0 0" Text="{Binding Path=Engine, StringFormat='Silnik: {0}'}" 
+                                               Style="{StaticResource MaterialDesignBody2TextBlock}" FontSize="14"/>
+                                    
+                                    <!-- Power Information -->
+                                    <TextBlock Grid.Row="2" Grid.Column="1" Margin="10 5 0 0" Text="{Binding Path=Power, StringFormat='Moc: {0} KM'}" 
+                                               Style="{StaticResource MaterialDesignBody2TextBlock}" FontSize="14"/>
+                                    
+                                    <!-- Mileage Information -->
+                                    <TextBlock Grid.Row="3" Grid.Column="1" Margin="10 5 0 0" Text="{Binding Path=Mileage, StringFormat='Przebieg: {0} km'}" 
+                                               Style="{StaticResource MaterialDesignBody2TextBlock}" FontSize="14"/>
+
+                                    <!-- Car Plate Information -->
+                                    <TextBlock Grid.Row="1" Grid.Column="2" Margin="10 0 0 0" Text="{Binding Path=Plate, StringFormat='Rejestracja: {0}'}" 
+                                               Style="{StaticResource MaterialDesignBody2TextBlock}" FontSize="14"/>
+                                    
+                                    <!-- VIN Information -->
+                                    <TextBlock Grid.Row="2" Grid.Column="2" Margin="10 5 0 0" Text="{Binding Path=VIN, StringFormat='VIN: {0}'}" 
+                                               Style="{StaticResource MaterialDesignBody2TextBlock}" FontSize="14"/>
+
+                                    <!-- Bottom Menu -->
+                                    <StackPanel Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="5" Orientation="Horizontal" Margin="60 5 0 0">
+                                        
+                                        <Button Content="Szczegóły" Style="{StaticResource MaterialDesignFlatButton}" Padding="5"
+                                                cal:Message.Attach="[Event Click] = [Action CarDetails($dataContext)]"/>
+                                        
+                                        <Button Content="Edytuj" Style="{StaticResource MaterialDesignFlatButton}" Padding="5" Margin="40 0 0 0"
+                                                cal:Message.Attach="[Event Click] = [Action CarEdit($dataContext)]"/>
+                                        
+                                        <Button x:Name="CarPriceList" Content="Cennik" Style="{StaticResource MaterialDesignFlatButton}" Padding="5" Margin="40 0 0 0"
+                                                cal:Message.Attach="[Event Click] = [Action CarPriceList($dataContext)]"/>
+                                    </StackPanel>
+                                
+                                </Grid>
+                            </materialDesign:Card>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+        </ScrollViewer>
+        
     </Grid>
 </UserControl>

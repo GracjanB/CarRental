@@ -92,7 +92,7 @@
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Events\UserLoggedInEvent.cs" />
     <Compile Include="Helpers\PasswordBoxHelper.cs" />
-    <Compile Include="Models\CarsModel.cs" />
+    <Compile Include="Models\CarModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\RegisterModel.cs" />
     <Compile Include="Models\RentCarFormModel.cs" />

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CarRentalWPF.Models
 {
-    public class CarsModel
+    public class CarModel
     {
         public int Id { get; set; }
 
@@ -18,11 +18,23 @@ namespace CarRentalWPF.Models
 
         public string Engine { get; set; }
 
-        public string Power { get; set; }
+        public int Power { get; set; }
 
         public int Mileage { get; set; }
 
         public string Status { get; set; }
+
+        public string Plate { get; set; }
+
+        public string VIN { get; set; }
+
+        public string FullName
+        {
+            get
+            {
+                return Mark + " " + Model + " " + Type;
+            }
+        }
 
     }
 }
