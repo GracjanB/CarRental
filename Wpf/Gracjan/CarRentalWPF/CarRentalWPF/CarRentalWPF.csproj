@@ -102,11 +102,15 @@
     <Compile Include="User\LoggedInUserModel.cs" />
     <Compile Include="Validators\LoginFormValidator.cs" />
     <Compile Include="Validators\RegisterFormValidator.cs" />
+    <Compile Include="ViewModels\AgencyManageViewModel.cs" />
     <Compile Include="ViewModels\CarsViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\RegisterViewModel.cs" />
     <Compile Include="ViewModels\RentCarFormViewModel.cs" />
+    <Compile Include="Views\AgencyManageView.xaml.cs">
+      <DependentUpon>AgencyManageView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\CarsView.xaml.cs">
       <DependentUpon>CarsView.xaml</DependentUpon>
     </Compile>
@@ -152,6 +156,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Page Include="Views\AgencyManageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\CarsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

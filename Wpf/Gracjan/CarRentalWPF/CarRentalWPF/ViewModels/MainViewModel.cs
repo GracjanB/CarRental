@@ -11,14 +11,15 @@ namespace CarRentalWPF.ViewModels
 {
     public class MainViewModel : Conductor<object>, IHandle<UserLoggedInEvent>
     {
-        private SimpleContainer _simpleContainer { get; set; }
+        private SimpleContainer _container { get; set; }
 
         private IWindowManager _windowManager { get; set; }
 
-        public MainViewModel(SimpleContainer simpleContainer, IWindowManager windowManager)
+        public MainViewModel(SimpleContainer simpleContainer, IWindowManager windowManager, IEventAggregator eventAggregator)
         {
-            _simpleContainer = simpleContainer;
+            _container = simpleContainer;
             _windowManager = windowManager;
+            eventAggregator.Subscribe(this);
         }
 
         private LoggedInUserModel _loggedInUser;
@@ -34,38 +35,43 @@ namespace CarRentalWPF.ViewModels
         }
 
 
-
         public void Cars_MouseLeftButtonDown()
         {
-            ActivateItem(_simpleContainer.GetInstance<CarsViewModel>());
+            ActivateItem(_container.GetInstance<CarsViewModel>());
         }
 
         public void MainView_MouseLeftButtonDown()
         {
-            ActivateItem(_simpleContainer.GetInstance<RentCarFormViewModel>());
+            ActivateItem(_container.GetInstance<RentCarFormViewModel>());
+        }
+
+        public void AgencyManageWindowShow()
+        {
+            var agencyManageVM = _container.GetInstance<AgencyManageViewModel>();
+            _windowManager.ShowDialog(agencyManageVM);
         }
 
         public void LoginButtonPopupBoxClick()
         {
-            LoginViewModel loginVM = _simpleContainer.GetInstance<LoginViewModel>();
+            LoginViewModel loginVM = _container.GetInstance<LoginViewModel>();
             _windowManager.ShowDialog(loginVM);
         }
 
         public void RegisterButtonPopupBoxClick()
         {
-            RegisterViewModel registerVM = _simpleContainer.GetInstance<RegisterViewModel>();
+            RegisterViewModel registerVM = _container.GetInstance<RegisterViewModel>();
             _windowManager.ShowDialog(registerVM);
         }
 
         public void GetAccountInfo()
         {
-            var user = (AuthenticatedUser)_simpleContainer.GetInstance(typeof(IAuthenticatedUser), "AuthenticatedUser");
+            var user = (AuthenticatedUser)_container.GetInstance(typeof(IAuthenticatedUser), "AuthenticatedUser");
             Console.WriteLine();
         }
 
         public void Handle(UserLoggedInEvent userLoggedIn)
         {
-            LoggedInUser = (LoggedInUserModel)_simpleContainer.GetInstance(typeof(ILoggedInUserModel), "LoggedInUserModel");
+            LoggedInUser = (LoggedInUserModel)_container.GetInstance(typeof(ILoggedInUserModel), "LoggedInUserModel");
         }
     }
 }

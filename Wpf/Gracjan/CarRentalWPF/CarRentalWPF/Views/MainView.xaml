@@ -9,47 +9,82 @@
         mc:Ignorable="d"
         Title="MainView" Height="600" Width="1080" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None">
     <Window.Resources>
+        
         <Storyboard x:Key="OpenMenu">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)"
                                            Storyboard.TargetName="GridMenu" >
                 <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
                 <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="250"/>
             </DoubleAnimationUsingKeyFrames>
-            <!-- 
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)"
-                                           Storyboard.TargetName="GridBackground" >
-                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1"/>
-            </DoubleAnimationUsingKeyFrames>
-            -->
         </Storyboard>
+        
         <Storyboard x:Key="CloseMenu">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)"
                                            Storyboard.TargetName="GridMenu" >
                 <EasingDoubleKeyFrame KeyTime="0" Value="250"/>
                 <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
             </DoubleAnimationUsingKeyFrames>
-            <!--
+        </Storyboard>
+
+        <Storyboard x:Key="GridBackgroundShow">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)"
+                                           Storyboard.TargetName="GridBackground" >
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Key="GridBackgroundHide">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)"
                                            Storyboard.TargetName="GridBackground" >
                 <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
                 <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
             </DoubleAnimationUsingKeyFrames>
-            -->
         </Storyboard>
+
+        <!--
+        <Storyboard x:Key="AccountInfoOpen">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)"
+                                           Storyboard.TargetName="AccountGrid" >
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="250"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Key="AccountInfoClose">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)"
+                                           Storyboard.TargetName="AccountGrid" >
+                <EasingDoubleKeyFrame KeyTime="0" Value="250"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        -->
     </Window.Resources>
     <Window.Triggers>
         <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="ButtonClose">
-            <BeginStoryboard x:Name="CloseMenu_BeginStoryboard" Storyboard="{StaticResource CloseMenu}"/>
+            <BeginStoryboard Storyboard="{StaticResource CloseMenu}" />
+            <BeginStoryboard Storyboard="{StaticResource GridBackgroundShow}" />
         </EventTrigger>
         <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="ButtonOpen">
-            <BeginStoryboard Storyboard="{StaticResource OpenMenu}"/>
+            <BeginStoryboard Storyboard="{StaticResource OpenMenu}" />
+            <BeginStoryboard Storyboard="{StaticResource GridBackgroundHide}" />
         </EventTrigger>
+        <!--
+        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="AccountButtonOpen">
+            <BeginStoryboard Storyboard="{StaticResource AccountInfoOpen}" />
+            <BeginStoryboard Storyboard="{StaticResource GridBackgroundShow}" />
+        </EventTrigger>
+        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="AccountButtonClose">
+            <BeginStoryboard Storyboard="{StaticResource AccountInfoClose}" />
+            <BeginStoryboard Storyboard="{StaticResource GridBackgroundHide}" />
+        </EventTrigger>
+        -->
+        
     </Window.Triggers>
 
     <Grid>
         <DockPanel Height="50" Background="#536DFE" VerticalAlignment="Top" >
-            <Button x:Name="ButtonOpen" VerticalAlignment="Center" HorizontalAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}" Width="50" Height="50" Padding="0">
+            <Button x:Name="ButtonOpen" VerticalAlignment="Center" HorizontalAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}" Width="50" Height="50" Padding="0" Click="ButtonOpen_Click">
                 <materialDesign:PackIcon Kind="Menu" Foreground="White" Width="25" Height="25"/>
             </Button>
 
@@ -64,7 +99,7 @@
                 <materialDesign:PopupBox Margin="10" Foreground="White" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False">
                     <StackPanel Width="150">
                         <Button Content="Rejestracja" cal:Message.Attach="[Event Click] = [Action RegisterButtonPopupBoxClick]"/>
-                        <Button Content="Konto" cal:Message.Attach="[Event Click] = [Action GetAccountInfo]"/>
+                        <Button x:Name="AccountButtonOpen" Content="Konto" cal:Message.Attach="[Event Click] = [Action GetAccountInfo]"/>
                         <Button Content="Pomoc"/>
                         <Separator/>
                         <Button Content="Zaloguj" cal:Message.Attach="[Event Click] = [Action LoginButtonPopupBoxClick]"/>
@@ -78,11 +113,11 @@
             <ContentControl x:Name="ActiveItem"/>
         </Grid>
         
-        <!-- 
-        <Grid x:Name="GridBackground" Background="#55313131" Opacity="0" Margin="0 50 0 0"/>
-        -->
         
-        <Grid x:Name="GridMenu" Width="250" HorizontalAlignment="Left" Margin="-250 0 0 0"  Background="White" RenderTransformOrigin="0.5,0.5" >
+        <Grid x:Name="GridBackground" Background="#55313131" Opacity="0" Margin="0 50 0 0" Visibility="Collapsed"/>
+        
+        
+        <Grid x:Name="GridMenu" Width="250" HorizontalAlignment="Left" Margin="-250 0 0 0"  Background="#f5f5f5" RenderTransformOrigin="0.5,0.5" >
             <Grid.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -92,7 +127,7 @@
                 </TransformGroup>
             </Grid.RenderTransform>
             <StackPanel>
-                <Image Height="140" Source="Assets\651.jpg" />
+                <Image Height="140"/>
                 <ListView Foreground="#FF313131" FontFamily="Champagne &amp; Limousines">
                     <ListViewItem Height="45" Padding="0" 
                                   cal:Message.Attach="[Event PreviewMouseLeftButtonDown] = [Action MainView_MouseLeftButtonDown]">
@@ -120,6 +155,12 @@
                             <TextBlock Text="Wypożyczenia" Margin="10"/>
                         </StackPanel>
                     </ListViewItem>
+                    <ListViewItem Height="45" Padding="0" cal:Message.Attach="[Event PreviewMouseLeftButtonDown] = [Action AgencyManageWindowShow]">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Width="20" Height="20" Margin="5" Kind="CityVariantOutline" VerticalAlignment="Center"/>
+                            <TextBlock Text="Zarządzanie placówką" Margin="10"/>
+                        </StackPanel>
+                    </ListViewItem>
                     <ListViewItem Height="45" Padding="0">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Width="20" Height="20" Margin="5" Kind="GithubBox" VerticalAlignment="Center"/>
@@ -128,11 +169,43 @@
                     </ListViewItem>
                 </ListView>
             </StackPanel>
-            <Button x:Name="ButtonClose" VerticalAlignment="Top" HorizontalAlignment="Right" Background="{x:Null}" BorderBrush="{x:Null}" Width="30" Height="30" Padding="0">
+            <Button x:Name="ButtonClose" VerticalAlignment="Top" HorizontalAlignment="Right" Background="{x:Null}" BorderBrush="{x:Null}" Width="30" Height="30" Padding="0" Click="ButtonClose_Click">
                 <materialDesign:PackIcon Kind="Close" Foreground="Black"/>
             </Button>
         </Grid>
 
-        
+        <!--
+        <Grid x:Name="AccountGrid" Width="250" HorizontalAlignment="Right" Margin="0 0 -250 0" Background="#f5f5f5" RenderTransformOrigin="0.5,0.5">
+            <Grid.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Grid.RenderTransform>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <StackPanel Orientation="Vertical" Height="180">
+                <Button x:Name="AccountButtonClose" Background="{x:Null}" BorderBrush="{x:Null}" Width="50" Height="30" HorizontalAlignment="Left">
+                    <materialDesign:PackIcon Kind="Close" Foreground="Black"/>
+                </Button>
+                <materialDesign:PackIcon Kind="PersonOutline" Height="100" Width="150" HorizontalAlignment="Center" Foreground="#536DFE"/>
+                <TextBlock Text="Gracjan Bryt" Style="{StaticResource MaterialDesignHeadline1TextBlock}" FontSize="24" HorizontalAlignment="Center"/>
+            </StackPanel>
+            
+        </Grid>
+        -->
     </Grid>
 </Window>
