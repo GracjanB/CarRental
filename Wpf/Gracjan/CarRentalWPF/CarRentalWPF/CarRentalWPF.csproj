@@ -102,12 +102,28 @@
     <Compile Include="User\LoggedInUserModel.cs" />
     <Compile Include="Validators\LoginFormValidator.cs" />
     <Compile Include="Validators\RegisterFormValidator.cs" />
+    <Compile Include="ViewModels\AgencyManageEmployeesViewModel.cs" />
+    <Compile Include="ViewModels\AgencyManageHomeViewModel.cs" />
+    <Compile Include="ViewModels\AgencyManageRaportsViewModel.cs" />
+    <Compile Include="ViewModels\AgencyManageVehiclesViewModel.cs" />
     <Compile Include="ViewModels\AgencyManageViewModel.cs" />
     <Compile Include="ViewModels\CarsViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\RegisterViewModel.cs" />
     <Compile Include="ViewModels\RentCarFormViewModel.cs" />
+    <Compile Include="Views\AgencyManageEmployeesView.xaml.cs">
+      <DependentUpon>AgencyManageEmployeesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AgencyManageHomeView.xaml.cs">
+      <DependentUpon>AgencyManageHomeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AgencyManageRaportsView.xaml.cs">
+      <DependentUpon>AgencyManageRaportsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AgencyManageVehiclesView.xaml.cs">
+      <DependentUpon>AgencyManageVehiclesView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\AgencyManageView.xaml.cs">
       <DependentUpon>AgencyManageView.xaml</DependentUpon>
     </Compile>
@@ -156,6 +172,22 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Page Include="Views\AgencyManageEmployeesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AgencyManageHomeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AgencyManageRaportsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AgencyManageVehiclesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\AgencyManageView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

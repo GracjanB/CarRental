@@ -73,7 +73,7 @@
 
         <!-- Main Grid for User Control -->
         <Grid x:Name="MainGrid" Grid.Column="1" Grid.Row="1" Margin="2">
-            <UserControl x:Name="ActiveItem" />
+            <ContentControl x:Name="ActiveItem" />
         </Grid>
         
     </Grid>

@@ -16,7 +16,9 @@ namespace CarRentalWPF.ViewModels
         public AgencyManageViewModel(SimpleContainer simpleContainer)
         {
             _container = simpleContainer;
-            // TODO: Activate main user control
+
+            var agencyManageHomeVM = _container.GetInstance<AgencyManageHomeViewModel>();
+            ActivateItem(agencyManageHomeVM);
         }
 
 
@@ -24,26 +26,26 @@ namespace CarRentalWPF.ViewModels
 
         public void HomeScreenShow()
         {
-            // TODO: Show home screen
-            MessageBox.Show("Not implemented");
+            var agencyManageHomeVM = _container.GetInstance<AgencyManageHomeViewModel>();
+            ChangeActiveItem(agencyManageHomeVM, true);
         }
 
         public void EmployeesScreenShow()
         {
-            // TODO: Show employees screen
-            MessageBox.Show("Not implemented");
+            var agencyManageEmployeesVM = _container.GetInstance<AgencyManageEmployeesViewModel>();
+            ChangeActiveItem(agencyManageEmployeesVM, true);
         }
 
         public void VehicleFleetScreenShow()
         {
-            // TODO: Show vehicle fleet screen
-            MessageBox.Show("Not implemented");
+            var agencyManageVehiclesVM = _container.GetInstance<AgencyManageVehiclesViewModel>();
+            ChangeActiveItem(agencyManageVehiclesVM, true);
         }
 
         public void ReportsScreenShow()
         {
-            // TODO: Show reports screen
-            MessageBox.Show("Not implemented");
+            var agencyManageRaportsVM = _container.GetInstance<AgencyManageRaportsViewModel>();
+            ChangeActiveItem(agencyManageRaportsVM, true);
         }
 
         #endregion
