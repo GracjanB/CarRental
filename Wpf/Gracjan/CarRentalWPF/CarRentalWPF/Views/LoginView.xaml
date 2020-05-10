@@ -29,11 +29,11 @@
         </Grid.RowDefinitions>
 
         <!-- Row 0 -->
-        <DockPanel Grid.Row="0" Height="40" Background="#536DFE">
-            <materialDesign:PackIcon Kind="CarConnected" Foreground="White" Height="35" Width="35" VerticalAlignment="Center"/>
-            <TextBlock Text="Logowanie" FontFamily="Champagne &amp; Limousines" Foreground="White" FontSize="24" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5 5 0 0" Width="120"/>
-            <Button x:Name="TryClose" Background="{x:Null}" BorderBrush="{x:Null}" Width="50" Height="40" HorizontalAlignment="Right" >
-                <materialDesign:PackIcon Kind="WindowClose" Width="33" VerticalAlignment="Center" HorizontalAlignment="Center" Height="26"/>
+        <DockPanel Grid.Row="0" Height="30" Background="#536DFE">
+            <materialDesign:PackIcon Kind="CarConnected" Foreground="White" Height="20" Width="20" VerticalAlignment="Center"/>
+            <TextBlock Text="Logowanie" FontFamily="Champagne &amp; Limousines" Foreground="White" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5 5 0 0" Width="120"/>
+            <Button x:Name="TryClose" Background="{x:Null}" BorderBrush="{x:Null}" Width="50" Height="20" HorizontalAlignment="Right" >
+                <materialDesign:PackIcon Kind="WindowClose" Width="25" VerticalAlignment="Center" HorizontalAlignment="Center" Height="26"/>
             </Button>
         </DockPanel>
         
