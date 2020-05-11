@@ -41,6 +41,11 @@ namespace CarRentalWPF.ViewModels
         public void EditCar()
         {
             // TODO: Show Edit Car Screen
+            var agencyManageVehicleEditVM = _container.GetInstance<AgencyManageVehicleEditViewModel>();
+            agencyManageVehicleEditVM.LoadModel(this.Car);
+
+            var conductorObject = (AgencyManageViewModel) this.Parent;
+            conductorObject.ActivateItem(agencyManageVehicleEditVM);
         }
 
         public void CarPriceList()

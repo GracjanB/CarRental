@@ -64,7 +64,7 @@
         <StackPanel Grid.Row="0" Grid.Column="4" HorizontalAlignment="Right" Width="45" Margin="0 0 10 0" >
             <materialDesign:PopupBox Margin="10" Foreground="Black" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False">
                 <StackPanel Width="150">
-                    <Button x:Name="EditCar" Content="Edytuj"/>
+                    <Button Content="Edytuj" cal:Message.Attach="[Event Click] = [Action EditCar]"/>
                     <Button x:Name="CarPriceList" Content="Cennik"/>
                     <Separator/>
                     <Button Content="Powrót" cal:Message.Attach="[Event Click] = [Action BackToCarList]" />

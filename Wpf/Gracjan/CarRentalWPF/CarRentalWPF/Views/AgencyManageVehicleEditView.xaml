@@ -1,0 +1,84 @@
+﻿<UserControl x:Class="CarRentalWPF.Views.AgencyManageVehicleEditView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:cal="http://www.caliburnproject.org"
+             xmlns:local="clr-namespace:CarRentalWPF.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="420" d:DesignWidth="650" Background="White">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Row="0" Grid.Column="0" Width="150" Height="130" Margin="5">
+            <Border BorderBrush="Black" BorderThickness="1" Height="130">
+                <TextBlock Text="Obraz" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Border>
+        </StackPanel>
+
+        
+        <!-- Column 0 - Row 1 -->
+        <TextBox Grid.Row="1" Grid.Column="0" Text="{Binding Car.Mark, Mode=TwoWay}" Width="150" Margin="10"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Marka" />
+
+        <!-- Column 0 - Row 2 -->
+        <TextBox Grid.Row="2" Grid.Column="0" Text="{Binding Car.Model, Mode=TwoWay}" Width="150" Margin="10"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Model" />
+
+        <!-- Column 0 - Row 3 -->
+        <TextBox Grid.Row="3" Grid.Column="0" Text="{Binding Car.Type, Mode=TwoWay}" Width="150" Margin="10"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Typ" />
+
+        <!-- Column 0 - Row 4 -->
+        <Button Grid.Row="4" Grid.Column="0" x:Name="MoveBack" Content="Powrót"  Margin="10"
+                Width="100" Style="{StaticResource MaterialDesignFlatButton}" />
+
+        <!-- Column 1 - Row 1 -->
+        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Car.Engine, Mode=TwoWay}" Width="150" Margin="10"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Pojemność silnika" />
+
+        <!-- Column 1 - Row 2 -->
+        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Car.Power, Mode=TwoWay}" Width="150" Margin="10"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Moc" />
+
+        <!-- Column 1 - Row 3 -->
+        <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Car.Power, Mode=TwoWay}" Width="150" Margin="10"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Przebieg" />
+
+        <!-- Column 1 - Row 4 -->
+        <Button Grid.Row="4" Grid.Column="1" x:Name="ClearForm" Content="Wyczyść"  Margin="10"
+                Width="100" Style="{StaticResource MaterialDesignFlatButton}" />
+
+
+        <!-- Column 2 - Row 1 -->
+        <TextBox Grid.Row="1" Grid.Column="2" Text="{Binding Car.Plate, Mode=TwoWay}" Width="150" Margin="10"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Tablica rejestracyjna" />
+
+        <!-- Column 2 - Row 2 -->
+        <TextBox Grid.Row="2" Grid.Column="2" Text="{Binding Car.VIN, Mode=TwoWay}" Width="150" Margin="10"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Numer VIN" />
+
+        <!-- Column 2 - Row 4 -->
+        <Button Grid.Row="4" Grid.Column="2" x:Name="SaveCar" Content="Zapisz"  Margin="10"
+                Width="100" Style="{StaticResource MaterialDesignFlatButton}" />
+
+
+    </Grid>
+</UserControl>
