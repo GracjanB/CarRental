@@ -10,8 +10,11 @@ namespace CarRentalWPF.ViewModels
 {
     public class AgencyManageVehiclesViewModel : Screen
     {
-		public AgencyManageVehiclesViewModel()
+		private SimpleContainer _container { get; set; }
+
+		public AgencyManageVehiclesViewModel(SimpleContainer simpleContainer)
 		{
+			_container = simpleContainer;
 			Cars = GenerateCars();
 		}
 
@@ -77,7 +80,11 @@ namespace CarRentalWPF.ViewModels
 
 		public void CarDetails(CarModel carModel)
 		{
-			// TODO: Show Car Details View
+			var agencyManageVehicleDetailsVM = _container.GetInstance<AgencyManageVehicleDetailsViewModel>();
+			agencyManageVehicleDetailsVM.LoadModel(carModel);
+
+			var conductorObject = (AgencyManageViewModel) this.Parent;
+			conductorObject.ActivateItem(agencyManageVehicleDetailsVM);
 		}
 
 		public void CarEdit(CarModel carModel)
