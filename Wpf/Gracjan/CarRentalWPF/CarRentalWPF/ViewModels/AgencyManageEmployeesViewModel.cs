@@ -11,8 +11,11 @@ namespace CarRentalWPF.ViewModels
 {
     public class AgencyManageEmployeesViewModel : Screen
     {
-		public AgencyManageEmployeesViewModel()
+		private SimpleContainer _container { get; set; }
+
+		public AgencyManageEmployeesViewModel(SimpleContainer simpleContainer)
 		{
+			_container = simpleContainer;
 			Employees = GenerateEmployees();
 		}
 
@@ -21,7 +24,9 @@ namespace CarRentalWPF.ViewModels
 
         public void NewEmployee()
 		{
-			// TODO: Display new employee screen
+			var agencyManageNewEmployeeVM = _container.GetInstance<AgencyManageNewEmployeeViewModel>();
+			var conductorObject = (AgencyManageViewModel) this.Parent;
+			conductorObject.ActivateItem(agencyManageNewEmployeeVM);
 		}
 
         #endregion

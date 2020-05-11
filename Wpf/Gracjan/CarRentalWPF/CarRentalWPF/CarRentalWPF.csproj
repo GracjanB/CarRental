@@ -105,6 +105,7 @@
     <Compile Include="Validators\RegisterFormValidator.cs" />
     <Compile Include="ViewModels\AgencyManageEmployeesViewModel.cs" />
     <Compile Include="ViewModels\AgencyManageHomeViewModel.cs" />
+    <Compile Include="ViewModels\AgencyManageNewEmployeeViewModel.cs" />
     <Compile Include="ViewModels\AgencyManageRaportsViewModel.cs" />
     <Compile Include="ViewModels\AgencyManageVehicleDetailsViewModel.cs" />
     <Compile Include="ViewModels\AgencyManageVehicleEditViewModel.cs" />
@@ -120,6 +121,9 @@
     </Compile>
     <Compile Include="Views\AgencyManageHomeView.xaml.cs">
       <DependentUpon>AgencyManageHomeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AgencyManageNewEmployeeView.xaml.cs">
+      <DependentUpon>AgencyManageNewEmployeeView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\AgencyManageRaportsView.xaml.cs">
       <DependentUpon>AgencyManageRaportsView.xaml</DependentUpon>
@@ -186,6 +190,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\AgencyManageHomeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AgencyManageNewEmployeeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -34,6 +34,6 @@ namespace CarRentalWPF.Models
 
         public string PhoneNumber { get; set; }
 
-
+        public string IdCardNumber { get; set; }
     }
 }
