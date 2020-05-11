@@ -3,10 +3,60 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:cal="http://www.caliburnproject.org"
              xmlns:local="clr-namespace:CarRentalWPF.Views"
              mc:Ignorable="d" 
              d:DesignHeight="420" d:DesignWidth="650" Background="White">
     <Grid>
-        <TextBlock Text="Employees Screen" Style="{StaticResource MaterialDesignHeadline2TextBlock}" Padding="10"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <DockPanel Grid.Row="0">
+            <TextBlock Text="Pracownicy" Style="{StaticResource MaterialDesignHeadline2TextBlock}" Padding="10" FontSize="30"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button x:Name="NewEmployee" Content="Nowy pracownik" Width="150" Style="{StaticResource MaterialDesignFlatButton}" />
+                <materialDesign:PopupBox Margin="10" Foreground="Black" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False">
+                    <StackPanel Width="150">
+                        <Button Content="Edytuj" />
+                        <Button Content="Cennik"/>
+                        <Separator/>
+                        <Button Content="Powrót" />
+                    </StackPanel>
+                </materialDesign:PopupBox>
+            </StackPanel>
+        </DockPanel>
+
+        <Separator Grid.Row="1" Style="{StaticResource MaterialDesignDarkSeparator}" Margin="5 0 5 0" />
+
+        <Grid Grid.Row="2" Margin="1 1 1 1">
+            <DataGrid x:Name="Employees" CanUserAddRows="False" CanUserSortColumns="True" 
+                          AutoGenerateColumns="False" IsReadOnly="True" 
+                          materialDesign:ThemeAssist.Theme="Light"
+                          materialDesign:DataGridAssist.ColumnHeaderPadding="3"
+                          SelectedItem="{Binding SelectedEmployee}"
+                          cal:Message.Attach="[Event MouseDoubleClick] = [Action SelectEmployee]">
+
+                <DataGrid.Columns>
+
+                    <!-- Radio button for proper selecting an element -->
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <RadioButton GroupName="abc"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <materialDesign:DataGridTextColumn Header="Imię" MaxLength="50" Binding="{Binding FirstName}"/>
+                    <materialDesign:DataGridTextColumn Header="Nazwisko" MaxLength="30" Binding="{Binding LastName}"/>
+                    <materialDesign:DataGridTextColumn Header="Email" MaxLength="30" Binding="{Binding Email}"/>
+                    <materialDesign:DataGridTextColumn Header="Stanowisko" MaxLength="10" Binding="{Binding Role}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
     </Grid>
 </UserControl>
