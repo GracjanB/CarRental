@@ -92,6 +92,7 @@
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Events\UserLoggedInEvent.cs" />
     <Compile Include="Helpers\PasswordBoxHelper.cs" />
+    <Compile Include="Helpers\ValidationBehavior.cs" />
     <Compile Include="Models\CarModel.cs" />
     <Compile Include="Models\EmployeeModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
@@ -101,6 +102,7 @@
     <Compile Include="User\IAuthenticatedUser.cs" />
     <Compile Include="User\ILoggedInUserModel.cs" />
     <Compile Include="User\LoggedInUserModel.cs" />
+    <Compile Include="Validators\EmployeeValidators.cs" />
     <Compile Include="Validators\LoginFormValidator.cs" />
     <Compile Include="Validators\RegisterFormValidator.cs" />
     <Compile Include="ViewModels\AgencyManageEmployeeDetailsViewModel.cs" />
