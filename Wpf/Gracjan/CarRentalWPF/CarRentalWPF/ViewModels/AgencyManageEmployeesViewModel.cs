@@ -52,7 +52,11 @@ namespace CarRentalWPF.ViewModels
 		{
 			if (SelectedEmployee != null)
 			{
-				// TODO: Display employee details view
+				var agencyManageEmployeeDetailsVM = _container.GetInstance<AgencyManageEmployeeDetailsViewModel>();
+				agencyManageEmployeeDetailsVM.LoadModel(SelectedEmployee);
+
+				var conductorObject = (AgencyManageViewModel) this.Parent;
+				conductorObject.ActivateItem(agencyManageEmployeeDetailsVM);
 			}
 			else
 			{
@@ -74,7 +78,13 @@ namespace CarRentalWPF.ViewModels
 					Email = "j.kowalski@sample.com",
 					PESEL = "01932912120213",
 					IdCardNumber = "ACV34243",
-					Role = "Pracownik biurowy"
+					Role = "Pracownik biurowy",
+					Street = "Poziomkowa",
+					BuildingNo = "64B",
+					FlatNo = 32,
+					City = "Wrocław",
+					PostalCode = "45-232",
+					PhoneNumber = "198321932"
 				},
 				new EmployeeModel
 				{
