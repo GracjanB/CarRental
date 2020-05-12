@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:v="clr-namespace:CarRentalWPF.Helpers"
              xmlns:Validators="clr-namespace:CarRentalWPF.Validators"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:cal="http://www.caliburnproject.org"
@@ -37,7 +38,8 @@
         
         <!-- Mark -->
         <TextBox Grid.Row="1" Grid.Column="0" Width="150" Margin="10"
-                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Marka" >
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Marka" 
+                 v:ValidationBehavior.HasError="{Binding MarkValidationResult}">
             <TextBox.Text>
                 <Binding Path="Car.Mark" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -49,7 +51,8 @@
 
         <!-- Model -->
         <TextBox Grid.Row="2" Grid.Column="0" Width="150" Margin="10"
-                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Model" >
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Model" 
+                 v:ValidationBehavior.HasError="{Binding ModelValidationResult}">
             <TextBox.Text>
                 <Binding Path="Car.Model" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -61,7 +64,8 @@
 
         <!-- Type -->
         <TextBox Grid.Row="3" Grid.Column="0" Width="150" Margin="10"
-                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Typ" >
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Typ" 
+                 v:ValidationBehavior.HasError="{Binding TypeValidationResult}">
             <TextBox.Text>
                 <Binding Path="Car.Type" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -77,7 +81,8 @@
 
         <!-- Engine -->
         <TextBox Grid.Row="1" Grid.Column="1" Width="150" Margin="10"
-                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Pojemność silnika" >
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Pojemność silnika" 
+                 v:ValidationBehavior.HasError="{Binding EngineValidationResult}">
             <TextBox.Text>
                 <Binding Path="Car.Engine" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -89,7 +94,8 @@
 
         <!-- Power -->
         <TextBox Grid.Row="2" Grid.Column="1" Width="150" Margin="10"
-                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Moc" >
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Moc" 
+                 v:ValidationBehavior.HasError="{Binding PowerValidationResult}">
             <TextBox.Text>
                 <Binding Path="Car.Power" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -101,7 +107,8 @@
 
         <!-- Mileage -->
         <TextBox Grid.Row="3" Grid.Column="1" Width="150" Margin="10"
-                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Przebieg" >
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Przebieg" 
+                 v:ValidationBehavior.HasError="{Binding MileageValidationResult}">
             <TextBox.Text>
                 <Binding Path="Car.Mileage" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -118,7 +125,8 @@
 
         <!-- Plate -->
         <TextBox Grid.Row="1" Grid.Column="2" Width="150" Margin="10"
-                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Tablica rejestracyjna" >
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Tablica rejestracyjna" 
+                 v:ValidationBehavior.HasError="{Binding PlateValidationResult}">
             <TextBox.Text>
                 <Binding Path="Car.Plate" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -130,7 +138,8 @@
 
         <!-- VIN -->
         <TextBox Grid.Row="2" Grid.Column="2" Width="150" Margin="10"
-                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Numer VIN" >
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Numer VIN" 
+                 v:ValidationBehavior.HasError="{Binding VINValidationResult}">
             <TextBox.Text>
                 <Binding Path="Car.VIN" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
