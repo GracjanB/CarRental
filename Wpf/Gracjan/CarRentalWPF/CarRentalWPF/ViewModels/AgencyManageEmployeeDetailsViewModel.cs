@@ -39,12 +39,17 @@ namespace CarRentalWPF.ViewModels
 
         public void EditEmployee()
         {
-            // TODO: Show employee edit screen
+            var agencyManageEmployeeEditVM = _container.GetInstance<AgencyManageEmployeeEditViewModel>();
+            agencyManageEmployeeEditVM.LoadModel(Employee);
+
+            var conductorObject = (AgencyManageViewModel) this.Parent;
+            conductorObject.ActivateItem(agencyManageEmployeeEditVM);
         }
 
         public void MoveBack()
         {
             var agencyManageEmployeesVM = _container.GetInstance<AgencyManageEmployeesViewModel>();
+
             var conductorObject = (AgencyManageViewModel) this.Parent;
             conductorObject.ActivateItem(agencyManageEmployeesVM);
         }

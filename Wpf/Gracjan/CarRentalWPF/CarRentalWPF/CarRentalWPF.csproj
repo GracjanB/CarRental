@@ -104,6 +104,7 @@
     <Compile Include="Validators\LoginFormValidator.cs" />
     <Compile Include="Validators\RegisterFormValidator.cs" />
     <Compile Include="ViewModels\AgencyManageEmployeeDetailsViewModel.cs" />
+    <Compile Include="ViewModels\AgencyManageEmployeeEditViewModel.cs" />
     <Compile Include="ViewModels\AgencyManageEmployeesViewModel.cs" />
     <Compile Include="ViewModels\AgencyManageHomeViewModel.cs" />
     <Compile Include="ViewModels\AgencyManageNewEmployeeViewModel.cs" />
@@ -119,6 +120,9 @@
     <Compile Include="ViewModels\RentCarFormViewModel.cs" />
     <Compile Include="Views\AgencyManageEmployeeDetailsView.xaml.cs">
       <DependentUpon>AgencyManageEmployeeDetailsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AgencyManageEmployeeEditView.xaml.cs">
+      <DependentUpon>AgencyManageEmployeeEditView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\AgencyManageEmployeesView.xaml.cs">
       <DependentUpon>AgencyManageEmployeesView.xaml</DependentUpon>
@@ -190,6 +194,10 @@
   <ItemGroup />
   <ItemGroup>
     <Page Include="Views\AgencyManageEmployeeDetailsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AgencyManageEmployeeEditView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
