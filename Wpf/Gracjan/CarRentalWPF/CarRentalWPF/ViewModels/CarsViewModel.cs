@@ -10,7 +10,7 @@ namespace CarRentalWPF.ViewModels
 {
     public class CarsViewModel : Screen
     {
-        public BindableCollection<CarsModel> Cars { get; set; }
+        public BindableCollection<CarModel> Cars { get; set; }
 
         public CarsViewModel()
         {

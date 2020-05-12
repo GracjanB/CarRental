@@ -92,7 +92,7 @@
                                         <ColumnDefinition Width="auto" MinWidth="249"/>
                                     </Grid.ColumnDefinitions>
 
-                                    <Image Grid.Column="0" Grid.Row="0" Width="155" HorizontalAlignment="Left" Margin="2,2,0,-2" Source="unnamed.png" />
+                                    <Image Grid.Column="0" Grid.Row="0" Width="155" HorizontalAlignment="Left" Margin="2,2,0,-2" />
                                     <StackPanel Grid.Column="1">
                                         <TextBlock Text="{Binding Mark, StringFormat='Marka: {0}'}"  Margin="5 10 0 0" FontSize="16" FontFamily="Champagne &amp; Limousines" FontWeight="Medium"/>
                                         <TextBlock Text="{Binding Model, StringFormat='Model: {0}'}"  Margin="5 10 0 0" FontSize="16" FontFamily="Champagne &amp; Limousines" FontWeight="Medium" />
