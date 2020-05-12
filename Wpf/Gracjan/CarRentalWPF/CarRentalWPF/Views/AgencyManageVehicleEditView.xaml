@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Validators="clr-namespace:CarRentalWPF.Validators"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:cal="http://www.caliburnproject.org"
              xmlns:local="clr-namespace:CarRentalWPF.Views"
@@ -34,46 +35,110 @@
         </StackPanel>
 
         
-        <!-- Column 0 - Row 1 -->
-        <TextBox Grid.Row="1" Grid.Column="0" Text="{Binding Car.Mark, Mode=TwoWay}" Width="150" Margin="10"
-                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Marka" />
+        <!-- Mark -->
+        <TextBox Grid.Row="1" Grid.Column="0" Width="150" Margin="10"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Marka" >
+            <TextBox.Text>
+                <Binding Path="Car.Mark" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <Validators:CarMarkValidator ValidatesOnTargetUpdated="True" />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
 
-        <!-- Column 0 - Row 2 -->
-        <TextBox Grid.Row="2" Grid.Column="0" Text="{Binding Car.Model, Mode=TwoWay}" Width="150" Margin="10"
-                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Model" />
+        <!-- Model -->
+        <TextBox Grid.Row="2" Grid.Column="0" Width="150" Margin="10"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Model" >
+            <TextBox.Text>
+                <Binding Path="Car.Model" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <Validators:CarModelValidator ValidatesOnTargetUpdated="True" />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
 
-        <!-- Column 0 - Row 3 -->
-        <TextBox Grid.Row="3" Grid.Column="0" Text="{Binding Car.Type, Mode=TwoWay}" Width="150" Margin="10"
-                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Typ" />
+        <!-- Type -->
+        <TextBox Grid.Row="3" Grid.Column="0" Width="150" Margin="10"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Typ" >
+            <TextBox.Text>
+                <Binding Path="Car.Type" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <Validators:CarTypeValidator ValidatesOnTargetUpdated="True" />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
 
         <!-- Column 0 - Row 4 -->
         <Button Grid.Row="4" Grid.Column="0" x:Name="MoveBack" Content="Powrót"  Margin="10"
                 Width="100" Style="{StaticResource MaterialDesignFlatButton}" />
 
-        <!-- Column 1 - Row 1 -->
-        <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Car.Engine, Mode=TwoWay}" Width="150" Margin="10"
-                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Pojemność silnika" />
+        <!-- Engine -->
+        <TextBox Grid.Row="1" Grid.Column="1" Width="150" Margin="10"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Pojemność silnika" >
+            <TextBox.Text>
+                <Binding Path="Car.Engine" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <Validators:CarEngineValidator ValidatesOnTargetUpdated="True" />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
 
-        <!-- Column 1 - Row 2 -->
-        <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Car.Power, Mode=TwoWay}" Width="150" Margin="10"
-                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Moc" />
+        <!-- Power -->
+        <TextBox Grid.Row="2" Grid.Column="1" Width="150" Margin="10"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Moc" >
+            <TextBox.Text>
+                <Binding Path="Car.Power" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <Validators:CarPowerValidator ValidatesOnTargetUpdated="True" />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
 
-        <!-- Column 1 - Row 3 -->
-        <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Car.Power, Mode=TwoWay}" Width="150" Margin="10"
-                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Przebieg" />
+        <!-- Mileage -->
+        <TextBox Grid.Row="3" Grid.Column="1" Width="150" Margin="10"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Przebieg" >
+            <TextBox.Text>
+                <Binding Path="Car.Mileage" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <Validators:CarMileageValidator ValidatesOnTargetUpdated="True" />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
 
         <!-- Column 1 - Row 4 -->
         <Button Grid.Row="4" Grid.Column="1" x:Name="ClearForm" Content="Wyczyść"  Margin="10"
                 Width="100" Style="{StaticResource MaterialDesignFlatButton}" />
 
 
-        <!-- Column 2 - Row 1 -->
-        <TextBox Grid.Row="1" Grid.Column="2" Text="{Binding Car.Plate, Mode=TwoWay}" Width="150" Margin="10"
-                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Tablica rejestracyjna" />
+        <!-- Plate -->
+        <TextBox Grid.Row="1" Grid.Column="2" Width="150" Margin="10"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Tablica rejestracyjna" >
+            <TextBox.Text>
+                <Binding Path="Car.Plate" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <Validators:CarPlateValidator ValidatesOnTargetUpdated="True" />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
 
-        <!-- Column 2 - Row 2 -->
-        <TextBox Grid.Row="2" Grid.Column="2" Text="{Binding Car.VIN, Mode=TwoWay}" Width="150" Margin="10"
-                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Numer VIN" />
+        <!-- VIN -->
+        <TextBox Grid.Row="2" Grid.Column="2" Width="150" Margin="10"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Numer VIN" >
+            <TextBox.Text>
+                <Binding Path="Car.VIN" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <Validators:CarVINValidator ValidatesOnTargetUpdated="True" />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
 
         <!-- Column 2 - Row 4 -->
         <Button Grid.Row="4" Grid.Column="2" x:Name="SaveCar" Content="Zapisz"  Margin="10"
