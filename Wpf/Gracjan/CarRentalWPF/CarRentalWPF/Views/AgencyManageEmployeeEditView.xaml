@@ -3,9 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:v="clr-namespace:CarRentalWPF.Helpers"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:cal="http://www.caliburnproject.org"
              xmlns:local="clr-namespace:CarRentalWPF.Views"
+             xmlns:EmployeeValidators="clr-namespace:CarRentalWPF.Validators"
              mc:Ignorable="d" 
              d:DesignHeight="420" d:DesignWidth="650" Background="White">
     <Grid>
@@ -31,56 +33,167 @@
             <TextBlock Text="Edycja pracownika" Style="{StaticResource MaterialDesignHeadline1TextBlock}" FontSize="26" Margin="5"/>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button x:Name="SaveEmployee" Content="Zapisz" Width="80" Style="{StaticResource MaterialDesignFlatButton}" Margin="0 0 20 0"/>
-                <Button x:Name="MoveBack" Content="Powrót" Width="80" Style="{StaticResource MaterialDesignFlatButton}" Margin="0 0 10 0"/>
+                <Button x:Name="MoveBack" Content="Powrót" Width="80" Style="{StaticResource MaterialDesignFlatButton}" Margin="0 0 10 0" />
             </StackPanel>
         </DockPanel>
 
         <Separator Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Style="{StaticResource MaterialDesignDarkSeparator}" Margin="5 0 5 0" />
 
         <!-- Column 0 -->
-        <TextBlock Text="Dane osobowe" Grid.Row="2" Grid.Column="0" Style="{StaticResource MaterialDesignBody1TextBlock}" FontSize="20" HorizontalAlignment="Center" Padding="10"/>
+        <TextBlock Text="Dane osobowe" Grid.Row="2" Grid.Column="0" Style="{StaticResource MaterialDesignBody1TextBlock}" 
+                   FontSize="20" HorizontalAlignment="Center" Padding="10"/>
 
-        <TextBox Grid.Row="3" Grid.Column="0" Text="{Binding Employee.FirstName, Mode=TwoWay}" Width="150" Margin="10"
-                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Imię*" />
+        <!-- FirstName -->
+        <TextBox Grid.Row="3" Grid.Column="0" Width="150" Margin="10"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Imię*" >
+            <TextBox.Text>
+                <Binding Path="Employee.FirstName" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <EmployeeValidators:EmployeeFirstNameValidator ValidatesOnTargetUpdated="True" />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
 
-        <TextBox Grid.Row="4" Grid.Column="0" Text="{Binding Employee.LastName, Mode=TwoWay}" Width="150" Margin="10"
-                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Nazwisko*" />
+        <!-- LastName -->
+        <TextBox Grid.Row="4" Grid.Column="0" Width="150" Margin="10"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Nazwisko*" >
+            <TextBox.Text>
+                <Binding Path="Employee.LastName" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <EmployeeValidators:EmployeeLastNameValidator ValidatesOnTargetUpdated="True" />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
 
-        <TextBox Grid.Row="5" Grid.Column="0" Text="{Binding Employee.PESEL, Mode=TwoWay}" Width="150" Margin="10"
-                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Numer PESEL*" />
+        <!-- PESEL -->
+        <TextBox Grid.Row="5" Grid.Column="0" Width="150" Margin="10"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Numer PESEL*" >
+            <TextBox.Text>
+                <Binding Path="Employee.PESEL" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <EmployeeValidators:EmployeePESELValidator ValidatesOnTargetUpdated="True" />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
 
-        <TextBox Grid.Row="6" Grid.Column="0" Text="{Binding Employee.IdCardNumber, Mode=TwoWay}" Width="150" Margin="10"
-                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Numer dowodu*" />
+        <!-- IdCardNumber -->
+        <TextBox Grid.Row="6" Grid.Column="0" Width="150" Margin="10"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Numer dowodu*" >
+            <TextBox.Text>
+                <Binding Path="Employee.IdCardNumber" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <EmployeeValidators:EmployeeIdCardNumberValidator ValidatesOnTargetUpdated="True" />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
 
         <!-- Column 1 -->
-        <TextBlock Text="Adres zamieszkania" Grid.Row="2" Grid.Column="1" Style="{StaticResource MaterialDesignBody1TextBlock}" FontSize="20" HorizontalAlignment="Center" Padding="10"/>
+        <TextBlock Text="Adres zamieszkania" Grid.Row="2" Grid.Column="1" Style="{StaticResource MaterialDesignBody1TextBlock}" 
+                   FontSize="20" HorizontalAlignment="Center" Padding="10"/>
 
-        <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Employee.Street, Mode=TwoWay}" Width="150" Margin="10"
-                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Ulica*" />
+        <!-- Street -->
+        <TextBox Grid.Row="3" Grid.Column="1" Width="150" Margin="10"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Ulica*" >
+            <TextBox.Text>
+                <Binding Path="Employee.Street" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <EmployeeValidators:EmployeeStreetValidator ValidatesOnTargetUpdated="True" />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
 
-        <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Employee.BuildingNo, Mode=TwoWay}" Width="150" Margin="10"
-                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Numer budynku*" />
+        <!-- BuildingNo -->
+        <TextBox Grid.Row="4" Grid.Column="1" Width="150" Margin="10"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Numer budynku*" >
+            <TextBox.Text>
+                <Binding Path="Employee.BuildingNo" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <EmployeeValidators:EmployeeBuildingNoValidator ValidatesOnTargetUpdated="True" />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
 
-        <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding Employee.FlatNo, Mode=TwoWay}" Width="150" Margin="10"
-                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Numer mieszkania" />
+        <!-- FlatNo -->
+        <TextBox Grid.Row="5" Grid.Column="1" Width="150" Margin="10"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Numer mieszkania" >
+            <TextBox.Text>
+                <Binding Path="Employee.FlatNo" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <EmployeeValidators:EmployeeFlatNoValidator ValidatesOnTargetUpdated="True" />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
 
-        <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding Employee.PostalCode, Mode=TwoWay}" Width="150" Margin="10"
-                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Kod pocztowy*" />
-
-        <TextBox Grid.Row="7" Grid.Column="1" Text="{Binding Employee.City, Mode=TwoWay}" Width="150" Margin="10"
-                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Miasto*" />
+        <!-- PostalCode -->
+        <TextBox Grid.Row="6" Grid.Column="1" Width="150" Margin="10"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Kod pocztowy*" >
+            <TextBox.Text>
+                <Binding Path="Employee.PostalCode" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <EmployeeValidators:EmployeeFlatNoValidator ValidatesOnTargetUpdated="True" />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        
+        <!-- City -->
+        <TextBox Grid.Row="7" Grid.Column="1" Width="150" Margin="10"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Miasto*" >
+            <TextBox.Text>
+                <Binding Path="Employee.City" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <EmployeeValidators:EmployeeCityValidator ValidatesOnTargetUpdated="True" />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
 
         <!-- Column 2 -->
-        <TextBlock Text="Dodatkowe" Grid.Row="2" Grid.Column="2" Style="{StaticResource MaterialDesignBody1TextBlock}" FontSize="20" HorizontalAlignment="Center" Padding="10"/>
+        <TextBlock Text="Dodatkowe" Grid.Row="2" Grid.Column="2" Style="{StaticResource MaterialDesignBody1TextBlock}" 
+                   FontSize="20" HorizontalAlignment="Center" Padding="10"/>
 
-        <TextBox Grid.Row="3" Grid.Column="2" Text="{Binding Employee.Email, Mode=TwoWay}" Width="150" Margin="10"
-                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Adres email*" />
+        <!-- Email -->
+        <TextBox Grid.Row="3" Grid.Column="2" Width="150" Margin="10"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Adres email*" >
+            <TextBox.Text>
+                <Binding Path="Employee.Email" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <EmployeeValidators:EmployeeEmailValidator ValidatesOnTargetUpdated="True" />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
 
-        <TextBox Grid.Row="4" Grid.Column="2" Text="{Binding Employee.PhoneNumber, Mode=TwoWay}" Width="150" Margin="10"
-                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Numer telefonu" />
+        <!-- PhoneNumber -->
+        <TextBox Grid.Row="4" Grid.Column="2" Width="150" Margin="10"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Numer telefonu" >
+            <TextBox.Text>
+                <Binding Path="Employee.PhoneNumber" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <EmployeeValidators:EmployeePhoneNumberValidator ValidatesOnTargetUpdated="True" />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
 
-        <TextBox Grid.Row="5" Grid.Column="2" Text="{Binding Employee.Role, Mode=TwoWay}" Width="150" Margin="10"
-                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Nazwa stanowiska*" />
+        <!-- Role -->
+        <TextBox Grid.Row="5" Grid.Column="2" Width="150" Margin="10"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Nazwa stanowiska*" >
+            <TextBox.Text>
+                <Binding Path="Employee.Role" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <EmployeeValidators:EmployeeRoleValidator ValidatesOnTargetUpdated="True" />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
 
     </Grid>
 </UserControl>

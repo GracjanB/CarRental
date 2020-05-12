@@ -23,12 +23,11 @@ namespace CarRentalWPF.ViewModels
             Employee = employee;
         }
 
-
         #region Top Menu
 
         public void SaveEmployee()
         {
-            // TODO: Make save employee request
+
         }
 
         public void MoveBack()
