@@ -102,6 +102,7 @@
     <Compile Include="User\IAuthenticatedUser.cs" />
     <Compile Include="User\ILoggedInUserModel.cs" />
     <Compile Include="User\LoggedInUserModel.cs" />
+    <Compile Include="Validators\CarValidator.cs" />
     <Compile Include="Validators\EmployeeValidators.cs" />
     <Compile Include="Validators\LoginFormValidator.cs" />
     <Compile Include="Validators\RegisterFormValidator.cs" />
