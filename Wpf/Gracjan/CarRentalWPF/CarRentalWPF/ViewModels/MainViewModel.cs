@@ -63,15 +63,9 @@ namespace CarRentalWPF.ViewModels
             _windowManager.ShowDialog(registerVM);
         }
 
-        public void GetAccountInfo()
-        {
-            var user = (AuthenticatedUser)_container.GetInstance(typeof(IAuthenticatedUser), "AuthenticatedUser");
-            Console.WriteLine();
-        }
-
         public void Handle(UserLoggedInEvent userLoggedIn)
         {
-            LoggedInUser = (LoggedInUserModel)_container.GetInstance(typeof(ILoggedInUserModel), "LoggedInUserModel");
+            LoggedInUser = (LoggedInUserModel)_container.GetInstance<ILoggedInUserModel>();
         }
     }
 }

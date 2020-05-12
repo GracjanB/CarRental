@@ -58,10 +58,11 @@ namespace CarRentalWPF.ViewModels
                 {
                     var userData = await _userClient.GetUserData(resultResponse.token_type, resultResponse.access_token);
 
-                    var user = (AuthenticatedUser)_container.GetInstance(typeof(IAuthenticatedUser), "AuthenticatedUser");
+                    var user = _container.GetInstance<IAuthenticatedUser>();
                     user.Login(resultResponse.access_token, resultResponse.token_type, resultResponse.refresh_token, resultResponse.expires_in);
 
-                    var loggedInUser = (LoggedInUserModel)_container.GetInstance(typeof(ILoggedInUserModel), "LoggedInUserModel");
+                    // var loggedInUser = (LoggedInUserModel)_container.GetInstance(typeof(ILoggedInUserModel), "LoggedInUserModel");
+                    var loggedInUser = _container.GetInstance<ILoggedInUserModel>();
 
                     if(userData.isSucceded)
                     {
