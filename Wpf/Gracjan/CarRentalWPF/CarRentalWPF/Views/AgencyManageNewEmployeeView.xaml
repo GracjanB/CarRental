@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:cal="http://www.caliburnproject.org"
+             xmlns:v="clr-namespace:CarRentalWPF.Helpers"
              xmlns:Validators="clr-namespace:CarRentalWPF.Validators"
              xmlns:local="clr-namespace:CarRentalWPF.Views"
              mc:Ignorable="d" 
@@ -49,7 +50,8 @@
 
         <!-- FirstName -->
         <TextBox Grid.Row="3" Grid.Column="0" Width="150" Margin="10"
-                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Imię*" >
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Imię*"
+                 v:ValidationBehavior.HasError="{Binding FirstNameValidationResult}">
             <TextBox.Text>
                 <Binding Path="RegisterFormModel.FirstName" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -61,7 +63,8 @@
 
         <!-- LastName -->
         <TextBox Grid.Row="4" Grid.Column="0" Width="150" Margin="10"
-                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Nazwisko*" >
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Nazwisko*" 
+                 v:ValidationBehavior.HasError="{Binding LastNameValidationResult}">
             <TextBox.Text>
                 <Binding Path="RegisterFormModel.LastName" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -73,7 +76,8 @@
 
         <!-- PESEL -->
         <TextBox Grid.Row="5" Grid.Column="0" Width="150" Margin="10"
-                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Numer PESEL*" >
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Numer PESEL*" 
+                 v:ValidationBehavior.HasError="{Binding PESELValidationResult}">
             <TextBox.Text>
                 <Binding Path="RegisterFormModel.PESEL" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -85,7 +89,8 @@
 
         <!-- IdCardNumber -->
         <TextBox Grid.Row="6" Grid.Column="0" Width="150" Margin="10"
-                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Numer dowodu*" >
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Numer dowodu*" 
+                 v:ValidationBehavior.HasError="{Binding IdCardNumberValidationResult}">
             <TextBox.Text>
                 <Binding Path="RegisterFormModel.IdCardNumber" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -100,7 +105,8 @@
 
         <!-- Street -->
         <TextBox Grid.Row="3" Grid.Column="1" Width="150" Margin="10"
-                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Ulica*" >
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Ulica*" 
+                 v:ValidationBehavior.HasError="{Binding StreetValidationResult}">
             <TextBox.Text>
                 <Binding Path="RegisterFormModel.Street" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -112,7 +118,8 @@
 
         <!-- BuildingNo -->
         <TextBox Grid.Row="4" Grid.Column="1" Width="150" Margin="10"
-                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Numer budynku*" >
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Numer budynku*" 
+                 v:ValidationBehavior.HasError="{Binding BuildingNoValidationResult}">
             <TextBox.Text>
                 <Binding Path="RegisterFormModel.BuildingNo" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -124,7 +131,8 @@
 
         <!-- FlatNo -->
         <TextBox Grid.Row="5" Grid.Column="1" Width="150" Margin="10"
-                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Numer mieszkania" >
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Numer mieszkania" 
+                 v:ValidationBehavior.HasError="{Binding FlatNoValidationResult}">
             <TextBox.Text>
                 <Binding Path="RegisterFormModel.FlatNo" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -136,7 +144,8 @@
 
         <!-- PostalCode -->
         <TextBox Grid.Row="6" Grid.Column="1" Width="150" Margin="10"
-                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Kod pocztowy*" >
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Kod pocztowy*" 
+                 v:ValidationBehavior.HasError="{Binding PostalCodeValidationResult}">
             <TextBox.Text>
                 <Binding Path="RegisterFormModel.PostalCode" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -148,7 +157,8 @@
         
         <!-- City -->
         <TextBox Grid.Row="7" Grid.Column="1" Width="150" Margin="10"
-                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Miasto*" >
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Miasto*" 
+                 v:ValidationBehavior.HasError="{Binding CityValidationResult}">
             <TextBox.Text>
                 <Binding Path="RegisterFormModel.City" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -163,7 +173,8 @@
 
         <!-- Email -->
         <TextBox Grid.Row="3" Grid.Column="2" Width="150" Margin="10"
-                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Adres email*" >
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Adres email*" 
+                 v:ValidationBehavior.HasError="{Binding EmailValidationResult}">
             <TextBox.Text>
                 <Binding Path="RegisterFormModel.Email" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -175,7 +186,8 @@
 
         <!-- PhoneNumber -->
         <TextBox Grid.Row="4" Grid.Column="2" Width="150" Margin="10"
-                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Numer telefonu" >
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Numer telefonu" 
+                 v:ValidationBehavior.HasError="{Binding PhoneNumberValidationResult}">
             <TextBox.Text>
                 <Binding Path="RegisterFormModel.PhoneNumber" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
