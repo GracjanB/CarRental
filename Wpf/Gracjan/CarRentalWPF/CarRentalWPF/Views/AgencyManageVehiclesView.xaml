@@ -23,6 +23,7 @@
             <ComboBox x:Name="Models" Width="100" materialDesign:HintAssist.Hint="Model" Margin="20 0 0 0"/>
             <ComboBox x:Name="Status" Width="100" materialDesign:HintAssist.Hint="Status" Margin="20 0 0 0"/>
             <Button x:Name="FilterCars" Content="Filtruj" Style="{StaticResource MaterialDesignFlatButton}" Margin="20 0 0 0"/>
+            <Button x:Name="NewCar" Content="Nowy pojazd" Style="{StaticResource MaterialDesignFlatButton}" Margin="80 0 0 0"/>
         </StackPanel>
 
         <!-- Row 1 -->

@@ -73,6 +73,14 @@ namespace CarRentalWPF.ViewModels
 
 		}
 
+		public void NewCar()
+		{
+			var agencyManageNewVehicleVM = _container.GetInstance<AgencyManageNewVehicleViewModel>();
+			var conductorObject = (AgencyManageViewModel) this.Parent;
+
+			conductorObject.ActivateItem(agencyManageNewVehicleVM);
+		}
+
 		#endregion
 
 
