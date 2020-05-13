@@ -10,6 +10,6 @@
 
         string TokenType { get; set; }
 
-        void Login(string accessToken, string tokenType, string refreshToken, int tokenExpireTime);
+        void Login(string accessToken, string tokenType, string refreshToken, int tokenExpireTime, int agencyId, int userId);
     }
 }
