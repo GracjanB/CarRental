@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace CarRentalWPF.ViewModels
 {
@@ -15,10 +16,13 @@ namespace CarRentalWPF.ViewModels
 
         private IWindowManager _windowManager { get; set; }
 
-        public MainViewModel(SimpleContainer simpleContainer, IWindowManager windowManager, IEventAggregator eventAggregator)
+        private ILoggedInUserModel _user { get; set; }
+
+        public MainViewModel(SimpleContainer simpleContainer, IWindowManager windowManager, IEventAggregator eventAggregator, ILoggedInUserModel loggedInUserModel)
         {
             _container = simpleContainer;
             _windowManager = windowManager;
+            _user = loggedInUserModel;
             eventAggregator.Subscribe(this);
         }
 
@@ -47,8 +51,19 @@ namespace CarRentalWPF.ViewModels
 
         public void AgencyManageWindowShow()
         {
-            var agencyManageVM = _container.GetInstance<AgencyManageViewModel>();
-            _windowManager.ShowDialog(agencyManageVM);
+            if(!_user.isActive)
+            {
+                MessageBox.Show("ACCESS ERROR\nYou have to log in");
+            }
+            if(_user.Role == "MANAGER")
+            {
+                var agencyManageVM = _container.GetInstance<AgencyManageViewModel>();
+                _windowManager.ShowDialog(agencyManageVM);
+            }
+            else
+            {
+                MessageBox.Show("You have no access to this element");
+            }
         }
 
         public void LoginButtonPopupBoxClick()

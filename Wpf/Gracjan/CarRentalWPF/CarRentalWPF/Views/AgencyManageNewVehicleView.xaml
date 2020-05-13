@@ -33,6 +33,7 @@
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
@@ -70,6 +71,18 @@
             <ComboBox Grid.Row="2" Grid.Column="0" Width="150" Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                       materialDesign:HintAssist.Hint="Typ" ItemsSource="{Binding CarTypes}" SelectedItem="{Binding SelectedCarType}"/>
 
+            <!-- Model -->
+            <TextBox Grid.Row="3" Grid.Column="0" Width="150" Margin="15"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Wersja" >
+                <TextBox.Text>
+                    <Binding Path="Car.Version" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <!-- Add validator here -->
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+            
             <!-- Engine -->
             <TextBox Grid.Row="0" Grid.Column="1" Width="150" Margin="15"
                  Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Pojemność silnika" 

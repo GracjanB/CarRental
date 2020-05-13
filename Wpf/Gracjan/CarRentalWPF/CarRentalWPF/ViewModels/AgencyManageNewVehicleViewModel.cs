@@ -1,5 +1,9 @@
 ﻿using Caliburn.Micro;
+using CarRentalWPF.Converters;
+using CarRentalWPF.Library.ApiClient.CarResource;
+using CarRentalWPF.Library.Models;
 using CarRentalWPF.Models;
+using CarRentalWPF.User;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,11 +15,22 @@ namespace CarRentalWPF.ViewModels
 {
     public class AgencyManageNewVehicleViewModel : Screen
     {
+        private IModelToRequestContentConverter _converter { get; set; }
 
-        public AgencyManageNewVehicleViewModel()
+        private IAuthenticatedUser _user { get; set; }
+
+        private ICarClient _carClient { get; set; }
+
+
+        public AgencyManageNewVehicleViewModel(IModelToRequestContentConverter modelToRequestContentConverter, IAuthenticatedUser authenticatedUser, ICarClient carClient)
         {
+            _converter = modelToRequestContentConverter;
+            _user = authenticatedUser;
+            _carClient = carClient;
+            Car = new CarModel();
             GenerateCarTypes();
         }
+
 
         #region On Initialize
 
@@ -43,11 +58,39 @@ namespace CarRentalWPF.ViewModels
             }
         }
 
-        public void SaveCar()
+        public async void SaveCar()
         {
             if(!string.IsNullOrEmpty(SelectedCarType))
             {
-                // Procedure to save new car
+                int priceListId;
+                bool result;
+
+                try
+                {
+                    priceListId = _carClient.CreatePriceList(Car.PricePerDay, _user.TokenType, _user.AccessToken).Result;
+                }
+                catch(ArgumentException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    return;
+                }
+
+                var carRequestModel = prepareRequestData(Car, SelectedCarType, priceListId);
+
+                try
+                {
+                    result = await _carClient.CreateCar(carRequestModel, _user.TokenType, _user.AccessToken);
+                }
+                catch(ArgumentException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    return;
+                }
+
+                if(result)
+                {
+                    MessageBox.Show("This worked.");
+                }
             }
             else
             {
@@ -58,6 +101,15 @@ namespace CarRentalWPF.ViewModels
         public void ClearForm()
         {
             // TODO: Make function to clear form
+        }
+
+        private NewCarContent prepareRequestData(CarModel car, string carType, int priceListId)
+        {
+            var agencyId = _user.AgencyId;
+            car.Type = carType;
+            var requestContent = _converter.CarConverter(car, agencyId, priceListId);
+
+            return requestContent;
         }
 
         #endregion

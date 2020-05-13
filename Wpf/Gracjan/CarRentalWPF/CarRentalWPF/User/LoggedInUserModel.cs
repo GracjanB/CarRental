@@ -25,6 +25,8 @@ namespace CarRentalWPF.User
 
         public int AgencyId { get; set; }
 
+        public bool isActive { get; set; } = false;
+
         public string FullName
         {
             get
@@ -43,6 +45,7 @@ namespace CarRentalWPF.User
             this.PESEL = userCredentials.user.pesel;
             this.Role = userCredentials.user.role;
             this.AgencyId = userCredentials.user.agencyId;
+            this.isActive = true;
         }
     }
 }

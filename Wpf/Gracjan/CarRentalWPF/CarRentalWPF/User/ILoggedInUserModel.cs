@@ -20,6 +20,8 @@ namespace CarRentalWPF.User
 
         int AgencyId { get; set; }
 
+        bool isActive { get; set; }
+
         void SetUserData(UserInfo userCredentials);
     }
 }
