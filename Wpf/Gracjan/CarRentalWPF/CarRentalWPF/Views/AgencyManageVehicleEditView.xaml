@@ -149,6 +149,18 @@
             </TextBox.Text>
         </TextBox>
 
+        <!-- VIN -->
+        <TextBox Grid.Row="3" Grid.Column="2" Width="150" Margin="10"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Cena" >
+            <TextBox.Text>
+                <Binding Path="Car.PricePerDay" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <!-- Add validator here -->
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+
         <!-- Column 2 - Row 4 -->
         <Button Grid.Row="4" Grid.Column="2" x:Name="SaveCar" Content="Zapisz"  Margin="10"
                 Width="100" Style="{StaticResource MaterialDesignFlatButton}" />

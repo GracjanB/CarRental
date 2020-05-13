@@ -40,6 +40,10 @@ namespace CarRentalWPF.ViewModels
 
         public async void LoginButton()
         {
+            // For testing
+            loginModel.Login = "pawel121111@gmail.com";
+            loginModel.Password = "Zaq12345@!";
+
             _loginValidator = new LoginFormValidator();
             var result = _loginValidator.Validate(loginModel);
 
@@ -60,8 +64,6 @@ namespace CarRentalWPF.ViewModels
 
                     var user = _container.GetInstance<IAuthenticatedUser>();
                     user.Login(resultResponse.access_token, resultResponse.token_type, resultResponse.refresh_token, resultResponse.expires_in);
-
-                    // var loggedInUser = (LoggedInUserModel)_container.GetInstance(typeof(ILoggedInUserModel), "LoggedInUserModel");
                     var loggedInUser = _container.GetInstance<ILoggedInUserModel>();
 
                     if(userData.isSucceded)
@@ -69,7 +71,10 @@ namespace CarRentalWPF.ViewModels
                         loggedInUser.SetUserData(userData);
                     }
 
-                    // This doesn't work
+                    //var userTest = _container.GetInstance<IAuthenticatedUser>();
+                    //var loggedInUserTest = _container.GetInstance<ILoggedInUserModel>();
+                    //Console.WriteLine();
+
                     _events.PublishOnUIThread(new UserLoggedInEvent());     
                 }
 

@@ -9,6 +9,7 @@ using Caliburn.Micro;
 using CarRentalWPF.Helpers;
 using CarRentalWPF.ViewModels;
 using CarRentalWPF.User;
+using CarRentalWPF.Converters;
 
 namespace CarRentalWPF
 {
@@ -35,7 +36,8 @@ namespace CarRentalWPF
 
             _container
                 .Singleton<IWindowManager, WindowManager>()
-                .Singleton<IEventAggregator, EventAggregator>();
+                .Singleton<IEventAggregator, EventAggregator>()
+                .Singleton<IModelToRequestContentConverter, ModelToRequestContentConverter>();
                 
 
             GetType().Assembly.GetTypes()

@@ -18,6 +18,8 @@ namespace CarRentalWPF.User
 
         string Role { get; set; }
 
+        int AgencyId { get; set; }
+
         void SetUserData(UserInfo userCredentials);
     }
 }

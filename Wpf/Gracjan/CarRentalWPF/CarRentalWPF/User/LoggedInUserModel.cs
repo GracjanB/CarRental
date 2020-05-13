@@ -23,6 +23,8 @@ namespace CarRentalWPF.User
 
         public string Role { get; set; }
 
+        public int AgencyId { get; set; }
+
         public string FullName
         {
             get
@@ -40,6 +42,7 @@ namespace CarRentalWPF.User
             this.IdCardNumber = userCredentials.user.idCardNumber;
             this.PESEL = userCredentials.user.pesel;
             this.Role = userCredentials.user.role;
+            this.AgencyId = userCredentials.user.agencyId;
         }
     }
 }

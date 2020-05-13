@@ -1,5 +1,9 @@
 ﻿using Caliburn.Micro;
+using CarRentalWPF.Converters;
+using CarRentalWPF.Library.ApiClient.CarResource;
+using CarRentalWPF.Library.Models;
 using CarRentalWPF.Models;
+using CarRentalWPF.User;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,7 +46,7 @@ namespace CarRentalWPF.ViewModels
 
         public void SaveCar()
         {
-            // TODO: Make function to save car credentials
+            // TODO: Make save car function
         }
 
         #endregion

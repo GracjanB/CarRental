@@ -24,5 +24,6 @@ namespace CarRentalWPF.User
             this.TokenExpireTime = tokenExpireTime;
         }
 
+
     }
 }

@@ -16,7 +16,9 @@ namespace CarRentalWPF.Models
 
         public string Type { get; set; }
 
-        public string Engine { get; set; }
+        public string Version { get; set; }
+
+        public int Engine { get; set; }
 
         public int Power { get; set; }
 
@@ -27,6 +29,8 @@ namespace CarRentalWPF.Models
         public string Plate { get; set; }
 
         public string VIN { get; set; }
+
+        public int PricePerDay { get; set; }
 
         public string FullName
         {
