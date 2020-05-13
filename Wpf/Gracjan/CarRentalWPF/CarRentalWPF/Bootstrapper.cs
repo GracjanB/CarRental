@@ -10,6 +10,7 @@ using CarRentalWPF.Helpers;
 using CarRentalWPF.ViewModels;
 using CarRentalWPF.User;
 using CarRentalWPF.Converters;
+using CarRentalWPF.Library.ApiClient.CarResource;
 
 namespace CarRentalWPF
 {
@@ -37,7 +38,8 @@ namespace CarRentalWPF
             _container
                 .Singleton<IWindowManager, WindowManager>()
                 .Singleton<IEventAggregator, EventAggregator>()
-                .Singleton<IModelToRequestContentConverter, ModelToRequestContentConverter>();
+                .Singleton<IModelToRequestContentConverter, ModelToRequestContentConverter>()
+                .Singleton<ICarClient, CarClient>();
                 
 
             GetType().Assembly.GetTypes()
