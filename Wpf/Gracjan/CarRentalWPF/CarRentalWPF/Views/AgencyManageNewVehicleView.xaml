@@ -1,0 +1,152 @@
+﻿<UserControl x:Class="CarRentalWPF.Views.AgencyManageNewVehicleView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Validators="clr-namespace:CarRentalWPF.Validators"
+             xmlns:v="clr-namespace:CarRentalWPF.Helpers"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:cal="http://www.caliburnproject.org"
+             xmlns:local="clr-namespace:CarRentalWPF.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="420" d:DesignWidth="650" Background="White">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <DockPanel Grid.Row="0" >
+            <TextBlock Text="Nowy pojazd" Style="{StaticResource MaterialDesignHeadline1TextBlock}" FontSize="30" Padding="5"/>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button x:Name="SaveCar" Content="Dodaj" Style="{StaticResource MaterialDesignFlatButton}" Margin="0 0 20 0"/>
+                <Button x:Name="ClearForm" Content="Wyczyść" Style="{StaticResource MaterialDesignFlatButton}" Margin="0 0 20 0"/>
+            </StackPanel>
+        </DockPanel>
+
+        <Separator Grid.Row="1" Style="{StaticResource MaterialDesignDarkSeparator}" Margin="5 0 5 0" />
+
+        <Grid Grid.Row="2" Margin="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="auto" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Mark -->
+            <TextBox Grid.Row="0" Grid.Column="0" Width="150" Margin="15"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Marka" 
+                 v:ValidationBehavior.HasError="{Binding MarkValidationResult}">
+                <TextBox.Text>
+                    <Binding Path="Car.Mark" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <Validators:CarMarkValidator ValidatesOnTargetUpdated="True" />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+
+            <!-- Model -->
+            <TextBox Grid.Row="1" Grid.Column="0" Width="150" Margin="15"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Model" 
+                 v:ValidationBehavior.HasError="{Binding ModelValidationResult}">
+                <TextBox.Text>
+                    <Binding Path="Car.Model" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <Validators:CarModelValidator ValidatesOnTargetUpdated="True" />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+
+            <!-- Type -->
+            <ComboBox Grid.Row="2" Grid.Column="0" Width="150" Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                      materialDesign:HintAssist.Hint="Typ" ItemsSource="{Binding CarTypes}" SelectedItem="{Binding SelectedCarType}"/>
+
+            <!-- Engine -->
+            <TextBox Grid.Row="0" Grid.Column="1" Width="150" Margin="15"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Pojemność silnika" 
+                 v:ValidationBehavior.HasError="{Binding EngineValidationResult}">
+                <TextBox.Text>
+                    <Binding Path="Car.Engine" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <Validators:CarEngineValidator ValidatesOnTargetUpdated="True" />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+
+            <!-- Power -->
+            <TextBox Grid.Row="1" Grid.Column="1" Width="150" Margin="15"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Moc" 
+                 v:ValidationBehavior.HasError="{Binding PowerValidationResult}">
+                <TextBox.Text>
+                    <Binding Path="Car.Power" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <Validators:CarPowerValidator ValidatesOnTargetUpdated="True" />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+
+            <!-- Mileage -->
+            <TextBox Grid.Row="2" Grid.Column="1" Width="150" Margin="15"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Przebieg" 
+                 v:ValidationBehavior.HasError="{Binding MileageValidationResult}">
+                <TextBox.Text>
+                    <Binding Path="Car.Mileage" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <Validators:CarMileageValidator ValidatesOnTargetUpdated="True" />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+
+            <!-- Plate -->
+            <TextBox Grid.Row="0" Grid.Column="2" Width="150" Margin="15"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Tablica rejestracyjna" 
+                 v:ValidationBehavior.HasError="{Binding PlateValidationResult}">
+                <TextBox.Text>
+                    <Binding Path="Car.Plate" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <Validators:CarPlateValidator ValidatesOnTargetUpdated="True" />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+
+            <!-- VIN -->
+            <TextBox Grid.Row="1" Grid.Column="2" Width="150" Margin="15"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Numer VIN" 
+                 v:ValidationBehavior.HasError="{Binding VINValidationResult}">
+                <TextBox.Text>
+                    <Binding Path="Car.VIN" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <Validators:CarVINValidator ValidatesOnTargetUpdated="True" />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+
+            <!-- Price -->
+            <TextBox Grid.Row="2" Grid.Column="2" Width="150" Margin="15"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.Hint="Cena" >
+                <TextBox.Text>
+                    <Binding Path="Car.PricePerDay" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <!-- Add validator here -->
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+
+        </Grid>
+    </Grid>
+</UserControl>
