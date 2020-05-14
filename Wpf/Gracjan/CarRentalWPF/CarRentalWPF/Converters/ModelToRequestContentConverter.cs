@@ -82,5 +82,27 @@ namespace CarRentalWPF.Converters
 
             return employeeModels;
         }
+
+        public EmployeeModel UserContentConverter(UserContent user)
+        {
+            EmployeeModel employee = null;
+
+            if(user.data != null)
+            {
+                employee = new EmployeeModel
+                {
+                    Id = user.data.id,
+                    FirstName = user.data.firstName,
+                    LastName = user.data.lastName,
+                    Email = user.data.email,
+                    Role = user.data.role,
+                    PESEL = user.data.pesel,
+                    IdCardNumber = user.data.idCardNumber,
+                    AgencyId = user.data.agencyId != null ? (int)user.data.agencyId : 0
+                };
+            }
+
+            return employee;
+        }
     }
 }

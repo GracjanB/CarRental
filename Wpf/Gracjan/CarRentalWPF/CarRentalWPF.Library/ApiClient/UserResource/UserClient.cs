@@ -78,5 +78,44 @@ namespace CarRentalWPF.Library.ApiClient.UserResource
                 }
             }
         }
+
+
+        public async Task<UserContent> GetUserById(string token_type, string access_token, int id)
+        {
+            string endPoint = "api/user/{id}?aLong=" + id.ToString();
+            UserContent user = null;
+            _client.DefaultRequestHeaders.Clear();
+
+            // Set Authorization
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(token_type, access_token);
+
+            using (var response = _client.GetAsync(URI + endPoint).Result)
+            {
+                var result = await response.Content.ReadAsStringAsync();
+
+                if(response.IsSuccessStatusCode)
+                {
+                    user = JsonConvert.DeserializeObject<UserContent>(result);
+
+                    return user;
+                }
+                if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+                {
+                    throw new ArgumentException("Authorization error \nError content:\n" + result);
+                }
+                if (response.StatusCode == System.Net.HttpStatusCode.Forbidden)
+                {
+                    throw new ArgumentException("You have no access to this operation.\nError content:\n" + result);
+                }
+                if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+                {
+                    throw new ArgumentException("Not Found \nCheck your data and try again\nError content:\n" + result);
+                }
+                else
+                {
+                    throw new ArgumentException("Other error\nError content:\n" + result);
+                }
+            }
+        }
     }
 }

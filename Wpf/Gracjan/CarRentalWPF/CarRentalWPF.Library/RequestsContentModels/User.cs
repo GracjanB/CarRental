@@ -24,6 +24,6 @@ namespace CarRentalWPF.Library.RequestsContentModels
 
         public bool isActive { get; set; }
 
-        public int agencyId { get; set; }
+        public int? agencyId { get; set; }
     }
 }
