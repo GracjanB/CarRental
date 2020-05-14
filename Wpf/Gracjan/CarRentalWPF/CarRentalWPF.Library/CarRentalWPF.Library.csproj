@@ -47,6 +47,8 @@
     <Compile Include="ApiClient\CarResource\CarClient.cs" />
     <Compile Include="ApiClient\CarResource\ICarClient.cs" />
     <Compile Include="ApiClient\UserLoginClient.cs" />
+    <Compile Include="ApiClient\UserResource\IUserClient.cs" />
+    <Compile Include="ApiClient\UserResource\UserClient.cs" />
     <Compile Include="Models\NewCarContent.cs" />
     <Compile Include="Models\UserLogin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -56,6 +58,7 @@
     <Compile Include="RequestsContentModels\User.cs" />
     <Compile Include="RequestsContentModels\UserInfo.cs" />
     <Compile Include="RequestsContentModels\UserRole.cs" />
+    <Compile Include="RequestsContentModels\UsersResource.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
