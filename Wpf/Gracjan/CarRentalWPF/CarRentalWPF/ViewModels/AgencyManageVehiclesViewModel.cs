@@ -1,5 +1,9 @@
 ﻿using Caliburn.Micro;
+using CarRentalWPF.Converters;
+using CarRentalWPF.Library.ApiClient.CarResource;
+using CarRentalWPF.Library.RequestsContentModels;
 using CarRentalWPF.Models;
+using CarRentalWPF.User;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,14 +16,50 @@ namespace CarRentalWPF.ViewModels
     {
 		private SimpleContainer _container { get; set; }
 
-		public AgencyManageVehiclesViewModel(SimpleContainer simpleContainer)
+		private IAuthenticatedUser _user;
+
+		private ICarClient _carClient;
+
+		private IModelToRequestContentConverter _converter;
+
+		private List<CarModel> CarsCollection;
+
+
+		public AgencyManageVehiclesViewModel(SimpleContainer simpleContainer, IAuthenticatedUser authenticatedUser, 
+			ICarClient carClient, IModelToRequestContentConverter modelToRequestContentConverter)
 		{
 			_container = simpleContainer;
-			Cars = GenerateCars();
+			_user = authenticatedUser;
+			_carClient = carClient;
+			_converter = modelToRequestContentConverter;
 		}
 
 
-		private BindableCollection<CarModel> _cars;
+        #region On View Loading
+
+        protected override async void OnViewLoaded(object view)
+		{
+			base.OnViewLoaded(view);
+			await LoadCars();
+
+		}
+
+		private async Task LoadCars()
+		{
+			var carResource = await _carClient.GetCars(_user.TokenType, _user.AccessToken, "agencyId", _user.AgencyId.ToString());
+			CarsCollection = _converter.CarResourceConverter(carResource);
+
+			Cars = new BindableCollection<CarModel>();
+			foreach (var car in CarsCollection)
+				Cars.Add(car);
+		}
+
+        #endregion
+
+
+        #region Current Displayed Cars Collection
+
+        private BindableCollection<CarModel> _cars;
 
 		public BindableCollection<CarModel> Cars
 		{
@@ -31,10 +71,12 @@ namespace CarRentalWPF.ViewModels
 			}
 		}
 
+        #endregion
 
-		#region Filter Options Menu
 
-		private BindableCollection<string> _marks;
+        #region Filter Options Menu
+
+        private BindableCollection<string> _marks;
 		private BindableCollection<string> _models;
 		private BindableCollection<string> _status;
 
@@ -110,60 +152,5 @@ namespace CarRentalWPF.ViewModels
 		}
 
 		#endregion
-
-
-		private BindableCollection<CarModel> GenerateCars()
-		{
-			BindableCollection<CarModel> cars = new BindableCollection<CarModel>
-			{
-				new CarModel
-				{
-					Mark = "Toyota",
-					Model = "Avensis",
-					Type = "Kombi",
-					Engine = 1997,
-					Power = 234,
-					Mileage = 236546,
-					VIN = "1C4BJWFG7EL118131",
-					Plate = "KR 39932"
-				},
-				new CarModel
-				{
-					Mark = "Nissan",
-					Model = "Micra",
-					Type = "Sedan",
-					Engine = 1400,
-					Power = 86,
-					Mileage = 35242,
-					VIN = "1J4GS48K16C269261",
-					Plate = "KR 65755"
-				},
-				new CarModel
-				{
-					Mark = "Audi",
-					Model = "A4",
-					Type = "Sedan",
-					Engine = 2000,
-					Power = 256,
-					Mileage = 5645,
-					VIN = "SCBZK14C9TCX46528",
-					Plate = "KR 6873FG"
-				},
-				new CarModel
-				{
-					Mark = "BMW",
-					Model = "Seria 5",
-					Type = "Kombi",
-					Engine = 2996,
-					Power = 316,
-					Mileage = 557,
-					VIN = "1N4AL3AP8DN490078",
-					Plate = "KR 467GH1"
-				},
-			};
-
-			return cars;
-		}
-
 	}
 }
