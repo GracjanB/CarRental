@@ -64,6 +64,48 @@ namespace CarRentalWPF.Library.ApiClient.CarResource
             }
         }
 
+        public async Task<CarsResource> GetCars(string token_type, string access_token, string search_field = "", string search_value = "")
+        {
+            string endPoint = "api/car/bySpec";
+
+            _client.DefaultRequestHeaders.Clear();
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(token_type, access_token);
+
+            if(!string.IsNullOrWhiteSpace(search_field) && !string.IsNullOrWhiteSpace(search_value))
+            {
+                _client.DefaultRequestHeaders.Add("search", search_field + "=" + search_value);
+            }
+
+            CarsResource cars = null;
+
+            using (var response = _client.GetAsync(URI + endPoint).Result)
+            {
+                var result = await response.Content.ReadAsStringAsync();
+
+                if(response.IsSuccessStatusCode)
+                {
+                    cars = JsonConvert.DeserializeObject<CarsResource>(result);
+                    return cars;
+                }
+                if(response.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+                {
+                    throw new ArgumentException("Authorization error \nError content:\n" + result);
+                }
+                if(response.StatusCode == System.Net.HttpStatusCode.Forbidden)
+                {
+                    throw new ArgumentException("You have no access to this operation.\nError content:\n" + result);
+                }
+                if(response.StatusCode == System.Net.HttpStatusCode.NotFound)
+                {
+                    throw new ArgumentException("Not Found \nCheck your data and try again\nError content:\n" + result);
+                }
+                else
+                {
+                    throw new ArgumentException("Other error\nError content:\n" + result);
+                }
+            }
+        }
+
         public async Task<int> CreatePriceList(int price, string token_type, string access_token)
         {
             var jsonData = JsonConvert.SerializeObject(new { dailyPrice = price });

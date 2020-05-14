@@ -50,6 +50,7 @@
     <Compile Include="Models\NewCarContent.cs" />
     <Compile Include="Models\UserLogin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RequestsContentModels\CarsResource.cs" />
     <Compile Include="RequestsContentModels\PriceListContent.cs" />
     <Compile Include="RequestsContentModels\TokenInfo.cs" />
     <Compile Include="RequestsContentModels\User.cs" />
