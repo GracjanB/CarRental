@@ -1,4 +1,5 @@
 ﻿using CarRentalWPF.Library.Models;
+using CarRentalWPF.Library.RequestsContentModels;
 using CarRentalWPF.Models;
 using System;
 using System.Collections.Generic;
@@ -28,6 +29,33 @@ namespace CarRentalWPF.Converters
             };
 
             return newCarModel;
+        }
+
+        public List<CarModel> CarResourceConverter(CarsResource carsResource)
+        {
+            List<CarModel> carModels = new List<CarModel>();
+
+            if(carsResource != null && !carsResource.empty)
+            {
+                foreach(var carResource in carsResource.content)
+                {
+                    carModels.Add(new CarModel
+                    {
+                        VIN = carResource.vin,
+                        Mark = carResource.mark,
+                        Model = carResource.model,
+                        Type = carResource.carType,
+                        Version = carResource.carVersion,
+                        Engine = carResource.engineCapacity,
+                        Power = carResource.horsePower,
+                        Mileage = carResource.mileage,
+                        Plate = carResource.registerPlate,
+                        PricePerDay = carResource.dailyPrice != null ? (int)carResource.dailyPrice : 0
+                    });
+                }
+            }
+
+            return carModels;
         }
     }
 }
