@@ -57,5 +57,30 @@ namespace CarRentalWPF.Converters
 
             return carModels;
         }
+
+        public List<EmployeeModel> UserResourceConverter(UsersResource usersResource)
+        {
+            List<EmployeeModel> employeeModels = new List<EmployeeModel>();
+
+            if(usersResource != null && !usersResource.empty)
+            {
+                foreach(var user in usersResource.body)
+                {
+                    employeeModels.Add(new EmployeeModel
+                    {
+                        Id = user.id,
+                        FirstName = user.firstName,
+                        LastName = user.lastName,
+                        Email = user.email,
+                        Role = user.role,
+                        PESEL = user.pesel,
+                        IdCardNumber = user.idCardNumber,
+                        AgencyId = user.agencyId != null ? (int)user.agencyId : 0
+                    });
+                }
+            }
+
+            return employeeModels;
+        }
     }
 }

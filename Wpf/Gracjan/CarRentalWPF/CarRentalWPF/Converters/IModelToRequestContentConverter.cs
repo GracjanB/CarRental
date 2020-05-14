@@ -10,5 +10,7 @@ namespace CarRentalWPF.Converters
         NewCarContent CarConverter(CarModel carModel, int agencyId, int priceListId);
 
         List<CarModel> CarResourceConverter(CarsResource carsResource);
+
+        List<EmployeeModel> UserResourceConverter(UsersResource usersResource);
     }
 }
