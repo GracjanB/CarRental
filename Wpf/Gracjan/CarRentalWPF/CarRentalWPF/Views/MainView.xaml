@@ -41,45 +41,17 @@
                 <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
-
-        <!--
-        <Storyboard x:Key="AccountInfoOpen">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)"
-                                           Storyboard.TargetName="AccountGrid" >
-                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="250"/>
-            </DoubleAnimationUsingKeyFrames>
-        </Storyboard>
-
-        <Storyboard x:Key="AccountInfoClose">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)"
-                                           Storyboard.TargetName="AccountGrid" >
-                <EasingDoubleKeyFrame KeyTime="0" Value="250"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
-            </DoubleAnimationUsingKeyFrames>
-        </Storyboard>
-        -->
     </Window.Resources>
+    
     <Window.Triggers>
         <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="ButtonClose">
             <BeginStoryboard Storyboard="{StaticResource CloseMenu}" />
-            <BeginStoryboard Storyboard="{StaticResource GridBackgroundShow}" />
+            <BeginStoryboard Storyboard="{StaticResource GridBackgroundHide}" />
         </EventTrigger>
         <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="ButtonOpen">
             <BeginStoryboard Storyboard="{StaticResource OpenMenu}" />
-            <BeginStoryboard Storyboard="{StaticResource GridBackgroundHide}" />
-        </EventTrigger>
-        <!--
-        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="AccountButtonOpen">
-            <BeginStoryboard Storyboard="{StaticResource AccountInfoOpen}" />
             <BeginStoryboard Storyboard="{StaticResource GridBackgroundShow}" />
         </EventTrigger>
-        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="AccountButtonClose">
-            <BeginStoryboard Storyboard="{StaticResource AccountInfoClose}" />
-            <BeginStoryboard Storyboard="{StaticResource GridBackgroundHide}" />
-        </EventTrigger>
-        -->
-        
     </Window.Triggers>
 
     <Grid>
@@ -115,8 +87,8 @@
         
         
         <Grid x:Name="GridBackground" Background="#55313131" Opacity="0" Margin="0 50 0 0" Visibility="Collapsed"/>
-        
-        
+
+
         <Grid x:Name="GridMenu" Width="250" HorizontalAlignment="Left" Margin="-250 0 0 0"  Background="#f5f5f5" RenderTransformOrigin="0.5,0.5" >
             <Grid.RenderTransform>
                 <TransformGroup>
@@ -173,39 +145,5 @@
                 <materialDesign:PackIcon Kind="Close" Foreground="Black"/>
             </Button>
         </Grid>
-
-        <!--
-        <Grid x:Name="AccountGrid" Width="250" HorizontalAlignment="Right" Margin="0 0 -250 0" Background="#f5f5f5" RenderTransformOrigin="0.5,0.5">
-            <Grid.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Grid.RenderTransform>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto" />
-                <RowDefinition Height="auto" />
-                <RowDefinition Height="auto" />
-                <RowDefinition Height="auto" />
-                <RowDefinition Height="auto" />
-                <RowDefinition Height="auto" />
-                <RowDefinition Height="auto" />
-                <RowDefinition Height="auto" />
-                <RowDefinition Height="auto" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-
-            <StackPanel Orientation="Vertical" Height="180">
-                <Button x:Name="AccountButtonClose" Background="{x:Null}" BorderBrush="{x:Null}" Width="50" Height="30" HorizontalAlignment="Left">
-                    <materialDesign:PackIcon Kind="Close" Foreground="Black"/>
-                </Button>
-                <materialDesign:PackIcon Kind="PersonOutline" Height="100" Width="150" HorizontalAlignment="Center" Foreground="#536DFE"/>
-                <TextBlock Text="Gracjan Bryt" Style="{StaticResource MaterialDesignHeadline1TextBlock}" FontSize="24" HorizontalAlignment="Center"/>
-            </StackPanel>
-            
-        </Grid>
-        -->
     </Grid>
 </Window>
