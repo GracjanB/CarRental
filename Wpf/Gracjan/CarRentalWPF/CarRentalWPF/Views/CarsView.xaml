@@ -3,120 +3,103 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+             xmlns:cal="http://www.caliburnproject.org"
              xmlns:local="clr-namespace:CarRentalWPF.Views"
              mc:Ignorable="d" 
              d:DesignHeight="550" d:DesignWidth="1080" Background="White">
     <Grid Margin="1 1 1 1">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
+        <!-- Top Menu (View Title) -->
         <DockPanel Grid.Row="0" VerticalAlignment="Top" Height="60" Margin="1 5 1 5">
-            <TextBlock Text="Lista samochodów" HorizontalAlignment="Left" FontSize="36" FontFamily="Champagne &amp; Limousines" FontWeight="SemiBold" Margin="5 10 0 0"/>
-            <materialDesign:PopupBox PlacementMode="BottomAndAlignRightEdges" StaysOpen="True" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0 10 5 0">
-                <materialDesign:PopupBox.ToggleContent>
-                    <materialDesign:PackIcon Kind="FilterMenu" Width="25" Height="25" />
-                </materialDesign:PopupBox.ToggleContent>
-                <Grid Width="280" Margin="5 5 5 5">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    
-                    <!-- Row 0 -->
-                    <TextBlock Text="Filtrowanie" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" FontSize="24" FontFamily="Champagne &amp; Limousines" HorizontalAlignment="Center"/>
-
-                    <!-- Row 1 -->
-                    <ComboBox Grid.Row="1" 
-                        Width="200" Margin="0 15 0 0" IsEditable="True"
-                        HorizontalAlignment="Center"
-                        x:Name="Mark"
-                        Style="{StaticResource MaterialDesignFloatingHintComboBox}" 
-                        materialDesign:HintAssist.Hint="Marka" />
-
-                    <!-- Row 2 -->
-                    <ComboBox Grid.Row="2" 
-                        Width="200" Margin="0 20 0 0" IsEditable="True"
-                        HorizontalAlignment="Center"
-                        x:Name="Model"
-                        Style="{StaticResource MaterialDesignFloatingHintComboBox}" 
-                        materialDesign:HintAssist.Hint="Model" />
-
-                    <!-- Row 3 -->
-                    <ComboBox Grid.Row="3" 
-                        Width="200" Margin="0 20 0 0" IsEditable="True"
-                        HorizontalAlignment="Center"
-                        x:Name="Nadwozie"
-                        Style="{StaticResource MaterialDesignFloatingHintComboBox}" 
-                        materialDesign:HintAssist.Hint="Typ nadwozia" />
-
-                    <!-- Row 4 -->
-                    <StackPanel Orientation="Horizontal" Grid.Row="4">
-                        <Button 
-                            Width="80" Margin="0 20 0 0"
-                            HorizontalAlignment="Center"
-                            x:Name="CancelButton"
-                            Style="{StaticResource MaterialDesignFlatButton}"
-                            ToolTip="MaterialDesignFlatButton" Content="Anuluj"/>
-
-                        <Button 
-                            Width="80" Margin="0 20 0 0"
-                            HorizontalAlignment="Center"
-                            x:Name="FilterButton"
-                            Style="{StaticResource MaterialDesignFlatButton}"
-                            ToolTip="MaterialDesignFlatButton" Content="Filtruj"/>
-                    </StackPanel>
-                </Grid>
-            </materialDesign:PopupBox>
+            <TextBlock Text="Lista samochodów" HorizontalAlignment="Left" Style="{StaticResource MaterialDesignHeadline2TextBlock}" FontSize="38" Padding="5" />
         </DockPanel>
 
-        <ScrollViewer Grid.Row="1">
+        <Separator Grid.Row="1" Style="{StaticResource MaterialDesignDarkSeparator}" Margin="5 0 5 0" />
+
+        <!-- Filter Menu -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" Height="70">
+            <ComboBox x:Name="Marks" Width="120" materialDesign:HintAssist.Hint="Marka" Margin="30 0 0 0" FontSize="16" SelectedItem="{Binding SelectedMark}"/>
+            <ComboBox x:Name="Models" Width="120" materialDesign:HintAssist.Hint="Model" Margin="30 0 0 0" FontSize="16" SelectedItem="{Binding SelectedModel}"/>
+            <ComboBox x:Name="Type" Width="120" materialDesign:HintAssist.Hint="Typ" Margin="30 0 0 0" FontSize="16" SelectedItem="{Binding SelectedType}"/>
+            <TextBlock Text="Cena:" Style="{StaticResource MaterialDesignBody1TextBlock}" FontSize="18" VerticalAlignment="Center" Margin="30 0 0 0" />
+            <Slider Width="350"  Style="{StaticResource MaterialDesignDiscreteSlider}" Margin="20 0 0 0" VerticalAlignment="Center" 
+                    Value="{Binding SelectedPrice, Mode=TwoWay}" Minimum="{Binding PriceMinValue}" Maximum="{Binding PriceMaxValue}" />
+            <Button x:Name="Filter" Content="Filtruj" Style="{StaticResource MaterialDesignFlatButton}" Width="150" Height="40" FontSize="20" Margin="20 0 0 0"/>
+        </StackPanel>
+
+        <!-- Cars List -->
+        <ScrollViewer Grid.Row="3" ScrollViewer.VerticalScrollBarVisibility="Hidden">
             <StackPanel Margin="5 5 5 0">
-                <ItemsControl x:Name="ListViewCars" ItemsSource="{Binding Path=Cars}">
+                <ItemsControl ItemsSource="{Binding Path=Cars}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <materialDesign:Card x:Name="CardOne"  HorizontalAlignment="Left" Margin="5 5 0 0">
-                                <Grid Width="1040">
+                            <materialDesign:Card HorizontalAlignment="Center" Width="900" Height="200" Margin="0 30 0 0">
+                                <Grid Margin="2">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="auto"/>
-                                        <ColumnDefinition Width="auto"/>
-                                        <ColumnDefinition Width="auto"/>
-                                        <ColumnDefinition Width="auto"/>
-                                        <ColumnDefinition Width="auto" MinWidth="200"/>
-                                        <ColumnDefinition Width="auto" MinWidth="249"/>
+                                        <ColumnDefinition Width="auto" />
+                                        <ColumnDefinition Width="auto" />
+                                        <ColumnDefinition Width="auto" />
+                                        <ColumnDefinition Width="auto" />
+                                        <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
 
-                                    <Image Grid.Column="0" Grid.Row="0" Width="155" HorizontalAlignment="Left" Margin="2,2,0,-2" />
-                                    <StackPanel Grid.Column="1">
-                                        <TextBlock Text="{Binding Mark, StringFormat='Marka: {0}'}"  Margin="5 10 0 0" FontSize="16" FontFamily="Champagne &amp; Limousines" FontWeight="Medium"/>
-                                        <TextBlock Text="{Binding Model, StringFormat='Model: {0}'}"  Margin="5 10 0 0" FontSize="16" FontFamily="Champagne &amp; Limousines" FontWeight="Medium" />
-                                        <TextBlock Text="{Binding Type, StringFormat='Nadwozie: {0}'}"  Margin="5 10 0 0" FontSize="16" FontFamily="Champagne &amp; Limousines" FontWeight="Medium" />
+                                    <!-- TODO: Car Image -->
+                                    <StackPanel Grid.Row="0" Grid.RowSpan="7" Grid.Column="0" Width="200" Height="130" Margin="5" VerticalAlignment="Center">
+                                        <Border BorderBrush="Black" BorderThickness="1" Height="130" >
+                                            <TextBlock Text="Obraz" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
                                     </StackPanel>
-                                    <StackPanel Grid.Column="2" Margin="20 0 0 0">
-                                        <TextBlock Text="{Binding Engine, StringFormat='Pojemność silnika: {0}'}"  Margin="5 10 0 0" FontSize="16" FontFamily="Champagne &amp; Limousines" FontWeight="Medium"/>
-                                        <TextBlock Text="{Binding Power, StringFormat='Moc: {0}'}"  Margin="5 10 0 0" FontSize="16" FontFamily="Champagne &amp; Limousines" FontWeight="Medium" />
-                                        <TextBlock Text="{Binding Mileage, StringFormat='Przebieg: {0}'}"  Margin="5 10 0 0" FontSize="16" FontFamily="Champagne &amp; Limousines" FontWeight="Medium" />
+
+                                    <!-- Car Title -->
+                                    <TextBlock Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding FullName}" 
+                                               Style="{StaticResource MaterialDesignHeadline3TextBlock}" FontSize="30" Padding="10 10 5 5"/>
+
+                                    <!-- Car Engine Info -->
+                                    <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Engine, StringFormat='Silnik: {0} cm3'}"
+                                            Style="{StaticResource MaterialDesignBody1TextBlock}" Margin="20 5 0 0"/>
+
+                                    <!-- Car Power Info -->
+                                    <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Power, StringFormat='Moc: {0} KM'}" 
+                                            Style="{StaticResource MaterialDesignBody1TextBlock}" Margin="20 5 0 0"/>
+
+                                    <!-- Car Mileage Info -->
+                                    <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Mileage, StringFormat='Przebieg: {0} km'}"
+                                            Style="{StaticResource MaterialDesignBody1TextBlock}" Margin="20 5 0 0"/>
+
+                                    <!-- Car Plate Info -->
+                                    <TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding Plate, StringFormat='Tablica: {0}'}" 
+                                            Style="{StaticResource MaterialDesignBody1TextBlock}" Margin="40 5 0 0"/>
+
+                                    <TextBlock Grid.Row="2" Grid.RowSpan="2" Grid.Column="2" Text="{Binding PricePerDay, StringFormat='Cena: {0}zł/dzień'}"
+                                            Style="{StaticResource MaterialDesignBody1TextBlock}" Margin="40 5 0 0" FontSize="30" VerticalAlignment="Center"/>
+
+                                    <StackPanel Grid.Row="0" Grid.Column="4" Grid.RowSpan="7">
+                                        <Button Content="Szczegóły" Style="{StaticResource MaterialDesignFlatButton}" 
+                                            FontSize="18" Width="150" Height="40" Margin="0 10 0 0" cal:Message.Attach="[Event Click] = [Action CarDetails($dataContext)]" />
+
+                                        <Button Content="Edytuj" Style="{StaticResource MaterialDesignFlatButton}"
+                                            FontSize="18" Width="150" Height="40" Margin="0 20 0 0" cal:Message.Attach="[Event Click] = [Action CarEdit($dataContext)]"/>
+
+                                        <Button Content="Wypożyczenie" Style="{StaticResource MaterialDesignFlatButton}"
+                                            FontSize="18" Width="150" Height="40" Margin="0 20 0 0" cal:Message.Attach="[Event Click] = [Action CarRent($dataContext)]"/>
                                     </StackPanel>
-                                    <StackPanel Grid.Column="3" Margin="20 0 0 0">
-                                        <TextBlock Text="{Binding Status, StringFormat='Dostępność: {0}'}"  Margin="5 10 0 0" FontSize="16" FontFamily="Champagne &amp; Limousines" FontWeight="Medium"/>
-                                    </StackPanel>
-                                    <StackPanel Grid.Column="5" HorizontalAlignment="Right" Width="45" Margin="0,0,69,0">
-                                        <materialDesign:PopupBox Margin="10" Foreground="Black" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False">
-                                            <StackPanel Width="150">
-                                                <Button Content="Edytuj"/>
-                                                <Button Content="Wypożycz"/>
-                                                <Button Content="Opcje"/>
-                                                <Separator/>
-                                                <Button Content="Usuń"/>
-                                            </StackPanel>
-                                        </materialDesign:PopupBox>
-                                    </StackPanel>
+
                                 </Grid>
                             </materialDesign:Card>
                         </DataTemplate>
@@ -124,13 +107,6 @@
                 </ItemsControl>
             </StackPanel>
         </ScrollViewer>
-        
-        <!-- 
-        <ListView Grid.Row="1" Margin="0 5 0 0" materialDesign:ScrollBarAssist.ButtonsVisibility="Visible" ScrollViewer.CanContentScroll="True">
-            <ListViewItem Height="120">
-                
-            </ListViewItem>
-        </ListView>
-        -->
+       
     </Grid>
 </UserControl>
