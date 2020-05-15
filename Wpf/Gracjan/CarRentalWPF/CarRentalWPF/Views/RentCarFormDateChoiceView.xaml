@@ -1,0 +1,58 @@
+﻿<UserControl x:Class="CarRentalWPF.Views.RentCarFormDateChoiceView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+             xmlns:cal="http://www.caliburnproject.org"
+             xmlns:local="clr-namespace:CarRentalWPF.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="550" d:DesignWidth="1080" Background="White">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Row 0 (Title) -->
+        <DockPanel Grid.Row="0" >
+            <TextBlock Text="Okres wypożyczenia" Style="{StaticResource MaterialDesignHeadline1TextBlock}" FontSize="36" Padding="10" />
+        </DockPanel>
+
+        <!-- Row 1 -->
+        <Separator Grid.Row="1" Style="{StaticResource MaterialDesignDarkSeparator}" Margin="10 0 10 0" />
+
+        <!-- Row 2 -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
+            
+            <!-- Date From -->
+            <StackPanel Margin="0 0 50 0">
+                <TextBlock Text="Początek wypożyczenia" Style="{StaticResource MaterialDesignHeadline3TextBlock}" FontSize="28" Padding="10" />
+                <DatePicker SelectedDate="{Binding SelectedDateFrom}" materialDesign:HintAssist.Hint="Data od" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Width="200" FontSize="18" Margin="0 15 0 0"/>
+                <materialDesign:TimePicker SelectedTime="{Binding SelectedTimeFrom}" materialDesign:HintAssist.Hint="Godzina" Style="{StaticResource MaterialDesignFloatingHintTimePicker}" Width="200" FontSize="18" Margin="0 30 0 0" />
+            </StackPanel>
+
+            <!-- Date To -->
+            <StackPanel Margin="50 0 0 0">
+                <TextBlock Text="Koniec wypożyczenia" Style="{StaticResource MaterialDesignHeadline3TextBlock}" FontSize="28" Padding="10" />
+                <DatePicker SelectedDate="{Binding SelectedDateTo}" materialDesign:HintAssist.Hint="Data do" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Width="200" FontSize="18" Margin="0 15 0 0"/>
+                <materialDesign:TimePicker SelectedTime="{Binding SelectedTimeTo}" materialDesign:HintAssist.Hint="Godzina" Style="{StaticResource MaterialDesignFloatingHintTimePicker}" Width="200" FontSize="18" Margin="0 30 0 0" />
+            </StackPanel>
+        </StackPanel>
+
+        <!-- Row 3 (Base Price) -->
+        <TextBlock Grid.Row="3" Text="{Binding BasePrice, Mode=TwoWay, StringFormat='Podstawowa cena: {0} zł'}" 
+                   Style="{StaticResource MaterialDesignHeadline3TextBlock}" FontSize="26" Padding="30" HorizontalAlignment="Center"/>
+
+        <!-- Row 4 (Navigation) -->
+        <StackPanel Orientation="Horizontal" Grid.Row="4">
+            <Button x:Name="MoveBack" Content="Wróć" Style="{StaticResource MaterialDesignFlatButton}" FontSize="20" Width="150" Height="40" HorizontalAlignment="Left" Margin="20 0 0 0"/>
+            <Button x:Name="MoveForward" Content="Dalej" Style="{StaticResource MaterialDesignFlatButton}" FontSize="20" Width="150" Height="40" HorizontalAlignment="Right" Margin="720 0 0 0"/>
+        </StackPanel>
+
+    </Grid>
+</UserControl>
