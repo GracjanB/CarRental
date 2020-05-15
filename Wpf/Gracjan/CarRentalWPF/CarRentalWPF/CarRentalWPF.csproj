@@ -125,6 +125,7 @@
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\RegisterViewModel.cs" />
     <Compile Include="ViewModels\RentCarFormCarChoiceViewModel.cs" />
+    <Compile Include="ViewModels\RentCarFormUserChoiceViewModel.cs" />
     <Compile Include="ViewModels\RentCarFormViewModel.cs" />
     <Compile Include="Views\AgencyManageEmployeeDetailsView.xaml.cs">
       <DependentUpon>AgencyManageEmployeeDetailsView.xaml</DependentUpon>
@@ -173,6 +174,9 @@
     </Compile>
     <Compile Include="Views\RentCarFormCarChoiceView.xaml.cs">
       <DependentUpon>RentCarFormCarChoiceView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RentCarFormUserChoiceView.xaml.cs">
+      <DependentUpon>RentCarFormUserChoiceView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\RentCarFormView.xaml.cs">
       <DependentUpon>RentCarFormView.xaml</DependentUpon>
@@ -268,6 +272,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\RentCarFormCarChoiceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RentCarFormUserChoiceView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
