@@ -95,6 +95,7 @@
     <Compile Include="Events\UserLoggedInEvent.cs" />
     <Compile Include="Helpers\PasswordBoxHelper.cs" />
     <Compile Include="Helpers\ValidationBehavior.cs" />
+    <Compile Include="Models\AgencyModel.cs" />
     <Compile Include="Models\CarModel.cs" />
     <Compile Include="Models\EmployeeModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
@@ -123,6 +124,7 @@
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\RegisterViewModel.cs" />
+    <Compile Include="ViewModels\RentCarFormCarChoiceViewModel.cs" />
     <Compile Include="ViewModels\RentCarFormViewModel.cs" />
     <Compile Include="Views\AgencyManageEmployeeDetailsView.xaml.cs">
       <DependentUpon>AgencyManageEmployeeDetailsView.xaml</DependentUpon>
@@ -168,6 +170,9 @@
     </Compile>
     <Compile Include="Views\RegisterView.xaml.cs">
       <DependentUpon>RegisterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RentCarFormCarChoiceView.xaml.cs">
+      <DependentUpon>RentCarFormCarChoiceView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\RentCarFormView.xaml.cs">
       <DependentUpon>RentCarFormView.xaml</DependentUpon>
@@ -259,6 +264,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\RegisterView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RentCarFormCarChoiceView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
