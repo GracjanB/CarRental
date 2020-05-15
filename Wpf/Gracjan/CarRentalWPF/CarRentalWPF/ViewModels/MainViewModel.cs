@@ -46,7 +46,7 @@ namespace CarRentalWPF.ViewModels
 
         public void MainView_MouseLeftButtonDown()
         {
-            ActivateItem(_container.GetInstance<RentCarFormViewModel>());
+            MessageBox.Show("Not implemented.");
         }
 
         public void AgencyManageWindowShow()
@@ -64,6 +64,12 @@ namespace CarRentalWPF.ViewModels
             {
                 MessageBox.Show("You have no access to this element");
             }
+        }
+
+        public void RentalViewShow()
+        {
+            var rentCarFormVM = _container.GetInstance<RentCarFormViewModel>();
+            ChangeActiveItem(rentCarFormVM, true);
         }
 
         public void LoginButtonPopupBoxClick()
