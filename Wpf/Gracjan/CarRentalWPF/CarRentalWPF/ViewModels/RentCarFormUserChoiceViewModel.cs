@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace CarRentalWPF.ViewModels
 {
@@ -57,14 +58,20 @@ namespace CarRentalWPF.ViewModels
 
         public void UserListShow()
         {
-            NewUserGridVisibility = Visibility.Collapsed;
-            UsersListGridVisibility = Visibility.Visible;
+            if(UserListForm != null && NewUserForm != null)
+            {
+                NewUserForm.Visibility = Visibility.Collapsed;
+                UserListForm.Visibility = Visibility.Visible;
+            }
         }
 
         public void UserNewFormShow()
         {
-            UsersListGridVisibility = Visibility.Collapsed;
-            NewUserGridVisibility = Visibility.Visible;
+            if(UserListForm != null && NewUserForm != null)
+            {
+                UserListForm.Visibility = Visibility.Collapsed;
+                NewUserForm.Visibility = Visibility.Visible;
+            }
         }
 
         #endregion
@@ -76,7 +83,7 @@ namespace CarRentalWPF.ViewModels
 
         private BindableCollection<EmployeeModel> _users;
 
-        public Visibility UsersListGridVisibility { get; set; } = Visibility.Visible;
+        public Grid UserListForm { get; set; }
 
         public string NameSearch { get; set; }
 
@@ -90,6 +97,12 @@ namespace CarRentalWPF.ViewModels
                 _users = value;
                 NotifyOfPropertyChange(() => UserList);
             }
+        }
+
+        public void UserListGridLoaded(Grid source)
+        {
+            UserListForm = source;
+            UserListForm.Visibility = Visibility.Visible;
         }
 
         public void SearchUser()
@@ -107,9 +120,15 @@ namespace CarRentalWPF.ViewModels
 
         #region New User Form
 
-        public Visibility NewUserGridVisibility { get; set; } = Visibility.Collapsed;
+        public Grid NewUserForm { get; set; }
 
         public RegisterModel RegisterFormModel { get; set; }
+
+        public void NewUserGridLoaded(Grid source)
+        {
+            NewUserForm = source;
+            NewUserForm.Visibility = Visibility.Collapsed;
+        }
 
         public void ClearForm()
         {

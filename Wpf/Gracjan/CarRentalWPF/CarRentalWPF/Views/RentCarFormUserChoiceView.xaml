@@ -68,7 +68,7 @@
         <Separator Grid.Row="3" Grid.Column="1" Style="{StaticResource MaterialDesignDarkSeparator}" Margin="20 0 10 0" />
 
         <!-- Users List -->
-        <Grid x:Name="UsersListGrid" Grid.Row="4" Grid.Column="1" Margin="10 2 2 2" Visibility="{Binding UsersListGridVisibility, Mode=TwoWay}">
+        <Grid x:Name="UsersListGrid" Grid.Row="4" Grid.Column="1" Margin="10 2 2 2" cal:Message.Attach="[Event Loaded] = [Action UserListGridLoaded($source)]">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="*" />
@@ -101,7 +101,7 @@
         </Grid>
 
         <!-- New User Form -->
-        <Grid x:Name="UserNewGrid" Grid.Row="4" Grid.Column="1" Margin="10 2 2 2" Visibility="{Binding NewUserGridVisibility, Mode=TwoWay}">
+        <Grid x:Name="UserNewGrid" Grid.Row="4" Grid.Column="1" Margin="10 2 2 2" cal:Message.Attach="[Event Loaded] = [Action NewUserGridLoaded($source)]">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="*" />
@@ -124,7 +124,9 @@
                     <TextBox.Text>
                         <Binding Path="RegisterFormModel.FirstName" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
+                                <!--
                                 <Validators:EmployeeFirstNameValidator ValidatesOnTargetUpdated="True" />
+                                -->
                             </Binding.ValidationRules>
                         </Binding>
                     </TextBox.Text>
@@ -136,7 +138,9 @@
                     <TextBox.Text>
                         <Binding Path="RegisterFormModel.LastName" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
+                                <!--
                                 <Validators:EmployeeLastNameValidator ValidatesOnTargetUpdated="True" />
+                                -->
                             </Binding.ValidationRules>
                         </Binding>
                     </TextBox.Text>
@@ -148,7 +152,9 @@
                     <TextBox.Text>
                         <Binding Path="RegisterFormModel.PESEL" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
+                                <!--
                                 <Validators:EmployeePESELValidator ValidatesOnTargetUpdated="True" />
+                                -->
                             </Binding.ValidationRules>
                         </Binding>
                     </TextBox.Text>
@@ -160,7 +166,9 @@
                     <TextBox.Text>
                         <Binding Path="RegisterFormModel.IdCardNumber" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
+                                <!--
                                 <Validators:EmployeeIdCardNumberValidator ValidatesOnTargetUpdated="True" />
+                                -->
                             </Binding.ValidationRules>
                         </Binding>
                     </TextBox.Text>
@@ -179,7 +187,9 @@
                     <TextBox.Text>
                         <Binding Path="RegisterFormModel.Street" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
+                                <!--
                                 <Validators:EmployeeStreetValidator ValidatesOnTargetUpdated="True" />
+                                -->
                             </Binding.ValidationRules>
                         </Binding>
                     </TextBox.Text>
@@ -191,7 +201,9 @@
                     <TextBox.Text>
                         <Binding Path="RegisterFormModel.Street" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
+                                <!--
                                 <Validators:EmployeeBuildingNoValidator ValidatesOnTargetUpdated="True" />
+                                -->
                             </Binding.ValidationRules>
                         </Binding>
                     </TextBox.Text>
@@ -203,7 +215,9 @@
                     <TextBox.Text>
                         <Binding Path="RegisterFormModel.FlatNo" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
+                                <!--
                                 <Validators:EmployeeFlatNoValidator ValidatesOnTargetUpdated="True" />
+                                -->
                             </Binding.ValidationRules>
                         </Binding>
                     </TextBox.Text>
@@ -215,7 +229,9 @@
                     <TextBox.Text>
                         <Binding Path="RegisterFormModel.PostalCode" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
+                                <!--
                                 <Validators:EmployeePostalCodeValidator ValidatesOnTargetUpdated="True" />
+                                -->
                             </Binding.ValidationRules>
                         </Binding>
                     </TextBox.Text>
@@ -227,7 +243,9 @@
                     <TextBox.Text>
                         <Binding Path="RegisterFormModel.City" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
+                                <!--
                                 <Validators:EmployeeCityValidator ValidatesOnTargetUpdated="True" />
+                                -->
                             </Binding.ValidationRules>
                         </Binding>
                     </TextBox.Text>
@@ -246,7 +264,9 @@
                     <TextBox.Text>
                         <Binding Path="RegisterFormModel.Street" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
+                                <!--
                                 <Validators:EmployeeEmailValidator ValidatesOnTargetUpdated="True" />
+                                -->
                             </Binding.ValidationRules>
                         </Binding>
                     </TextBox.Text>
@@ -258,7 +278,9 @@
                     <TextBox.Text>
                         <Binding Path="RegisterFormModel.City" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
+                                <!--
                                 <Validators:EmployeePhoneNumberValidator ValidatesOnTargetUpdated="True" />
+                                -->
                             </Binding.ValidationRules>
                         </Binding>
                     </TextBox.Text>
