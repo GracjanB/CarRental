@@ -44,18 +44,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApiClient\AgencyResource\AgencyClient.cs" />
     <Compile Include="ApiClient\CarResource\CarClient.cs" />
     <Compile Include="ApiClient\CarResource\ICarClient.cs" />
+    <Compile Include="ApiClient\RentResource\IRentClient.cs" />
+    <Compile Include="ApiClient\RentResource\RentClient.cs" />
     <Compile Include="ApiClient\UserLoginClient.cs" />
     <Compile Include="ApiClient\UserResource\IUserClient.cs" />
     <Compile Include="ApiClient\UserResource\UserClient.cs" />
+    <Compile Include="Models\CalculateCostContent.cs" />
+    <Compile Include="Models\FinishRentContent.cs" />
+    <Compile Include="Models\NewAgencyContent.cs" />
     <Compile Include="Models\NewCarContent.cs" />
+    <Compile Include="Models\RentalForm.cs" />
     <Compile Include="Models\UserLogin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RequestsContentModels\AgencyResource.cs" />
     <Compile Include="RequestsContentModels\CarsResource.cs" />
+    <Compile Include="RequestsContentModels\EstimatedCostObject.cs" />
     <Compile Include="RequestsContentModels\PriceListContent.cs" />
     <Compile Include="RequestsContentModels\TokenInfo.cs" />
     <Compile Include="RequestsContentModels\User.cs" />
+    <Compile Include="RequestsContentModels\UserContent.cs" />
     <Compile Include="RequestsContentModels\UserInfo.cs" />
     <Compile Include="RequestsContentModels\UserRole.cs" />
     <Compile Include="RequestsContentModels\UsersResource.cs" />
