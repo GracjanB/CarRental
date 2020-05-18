@@ -40,5 +40,23 @@ namespace CarRentalWPF.Models
             }
         }
 
+        public CarModel() { }
+
+        public CarModel(CarModel car)
+        {
+            Id = car.Id;
+            Mark = car.Mark;
+            Model = car.Model;
+            Type = car.Type;
+            Version = car.Version;
+            Engine = car.Engine;
+            Power = car.Power;
+            Mileage = car.Mileage;
+            Status = car.Status;
+            Plate = car.Plate;
+            VIN = car.VIN;
+            PricePerDay = car.PricePerDay;
+        }
+
     }
 }

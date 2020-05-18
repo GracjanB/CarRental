@@ -53,5 +53,26 @@ namespace CarRentalWPF.Models
                 return FirstName + " " + LastName;
             }
         }
+
+        public EmployeeModel() { }
+
+        public EmployeeModel(EmployeeModel employee)
+        {
+            Id = employee.Id;
+            FirstName = employee.FirstName;
+            LastName = employee.LastName;
+            Email = employee.Email;
+            PESEL = employee.PESEL;
+            IdCardNumber = employee.IdCardNumber;
+            Role = employee.Role;
+            City = employee.City;
+            Country = employee.Country;
+            Street = employee.Street;
+            BuildingNo = employee.BuildingNo;
+            FlatNo = employee.FlatNo;
+            PostalCode = employee.PostalCode;
+            PhoneNumber = employee.PhoneNumber;
+            AgencyId = employee.AgencyId;
+        }
     }
 }
