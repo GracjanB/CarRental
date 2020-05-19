@@ -32,11 +32,6 @@ public class UserCreateRequest implements Serializable {
     private String idCardNumber;
 
     @NotEmpty
-    @Length(min = 8, max = 255)
-    @ApiModelProperty(value = "password", required = true)
-    private String password;
-
-    @NotEmpty
     @Length(max = 255)
     @Email
     @ApiModelProperty(value = "E-mail", required = true)
@@ -44,12 +39,16 @@ public class UserCreateRequest implements Serializable {
 
     @NotBlank
     private String country;
+
     @NotBlank
     private String city;
+
     @NotBlank
     private String postalCode;
+
     @NotBlank
     private String street;
+
     @NotBlank
     private String houseNo;
 

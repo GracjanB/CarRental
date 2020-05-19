@@ -15,10 +15,15 @@ import java.time.ZonedDateTime;
 
 import static pl.bucior.carrental.configuration.exception.ErrorCode.CONTRACT_EXPIRED;
 
+/**
+ * @class Klasa przechwytująca request przed trafieniem do kontrollera
+ */
 @Service
 @RequiredArgsConstructor
 public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
-
+    /**
+     * Wstrzyknięcie zależności - repozytorium dla użytkownika + agencji z użytkownikami
+     */
     private final AgencyHasUserRepository agencyHasUserRepository;
     private final UserRepository userRepository;
 

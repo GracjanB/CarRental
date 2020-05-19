@@ -15,6 +15,8 @@ import pl.bucior.carrental.model.jpa.AccountVerificationToken;
 import pl.bucior.carrental.model.jpa.Address;
 import pl.bucior.carrental.model.jpa.AgencyHasUser;
 import pl.bucior.carrental.model.jpa.User;
+import pl.bucior.carrental.model.message.UserRegistrationMessage;
+import pl.bucior.carrental.model.request.UserChangePasswordRequest;
 import pl.bucior.carrental.model.request.UserCreateRequest;
 import pl.bucior.carrental.model.response.UserDetailsResponse;
 import pl.bucior.carrental.model.response.UserRoleResponse;
@@ -27,6 +29,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 import java.security.Principal;
 import java.time.ZonedDateTime;
+import java.util.Random;
 
 @Log4j2
 @Service
@@ -42,9 +45,17 @@ public class UserService {
 
 
     public void create(UserCreateRequest request) {
+        int leftLimit = 97;
+        int rightLimit = 122;
+        int targetStringLength = 10;
+        Random random = new Random();
 
+        String password = random.ints(leftLimit, rightLimit + 1)
+                .limit(targetStringLength)
+                .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
+                .toString();
         String salt = BCrypt.gensalt();
-        String encryptedPassword = BCrypt.hashpw(request.getPassword(), salt);
+        String encryptedPassword = BCrypt.hashpw(password, salt);
 
         if (userRepository.findByEmail(request.getEmail()).isPresent()) {
             throw new WsizException(String.format("User with email: %s exists.", request.getEmail()), HttpStatus.CONFLICT, ErrorCode.EMAIL_ALREADY_EXISTS);
@@ -52,7 +63,7 @@ public class UserService {
         User user = userRepository.save(User.builder()
                 .email(request.getEmail())
                 .password(encryptedPassword)
-                .role(Role.MANAGER)
+                .role(Role.USER)
                 .salt(salt)
                 .address(Address.builder()
                         .city(request.getCity())
@@ -70,11 +81,25 @@ public class UserService {
                 .build());
         if (user.getId() != null) {
             try {
-                applicationEventPublisher.publishEvent(new OnRegistrationCompleteEvent(user));
+                applicationEventPublisher.publishEvent(new OnRegistrationCompleteEvent(UserRegistrationMessage.builder()
+                        .id(user.getId())
+                        .password(password)
+                        .email(user.getEmail())
+                        .build()));
             } catch (Exception e) {
                 log.error("Error while try to publish registration event for userId = " + user.getId());
             }
         }
+    }
+
+    public void changePassword(UserChangePasswordRequest request, Principal principal) {
+        User user = userRepository.findByEmail(principal.getName())
+                .orElseThrow(() -> new WsizException(HttpStatus.NOT_FOUND, ErrorCode.USER_NOT_FOUND));
+        String salt = BCrypt.gensalt();
+        String encryptedPassword = BCrypt.hashpw(request.getPassword(), salt);
+
+        user.setSalt(salt);
+        user.setPassword(encryptedPassword);
     }
 
     public void confirmRegistration(String token) {

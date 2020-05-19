@@ -23,7 +23,6 @@
         <maven-compiler.version>3.8.1</maven-compiler.version>
         <timestamp>${maven.build.timestamp}</timestamp>
         <maven.build.timestamp.format>yyyy-MM-dd'T'HH.mm</maven.build.timestamp.format>
-<!--        <liquibase.version>3.6.3</liquibase.version>-->
     </properties>
 
     <dependencies>
