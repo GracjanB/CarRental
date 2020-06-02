@@ -2,18 +2,22 @@ package pl.bucior.carrental.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import pl.bucior.carrental.configuration.exception.ErrorCode;
 import pl.bucior.carrental.configuration.exception.WsizException;
 import pl.bucior.carrental.model.enums.RentStatus;
+import pl.bucior.carrental.model.enums.Role;
 import pl.bucior.carrental.model.enums.TechnicalSupportStatus;
 import pl.bucior.carrental.model.jpa.*;
+import pl.bucior.carrental.model.message.TechnicalSupportMessage;
 import pl.bucior.carrental.model.request.RentCreateRequest;
 import pl.bucior.carrental.model.request.RentExpectedCostRequest;
 import pl.bucior.carrental.model.request.RentFinishRequest;
 import pl.bucior.carrental.model.response.RentExpectedCostResponse;
 import pl.bucior.carrental.repository.*;
+import pl.bucior.carrental.service.event.EmailEvent;
 
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
@@ -23,6 +27,7 @@ import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static pl.bucior.carrental.configuration.exception.ErrorCode.*;
 
@@ -37,6 +42,8 @@ public class RentService {
     private final AgencyRepository agencyRepository;
     private final TechnicalSupportRepository technicalSupportRepository;
     private final TechnicalSupportHasActionRepository technicalSupportHasActionRepository;
+    private final AgencyHasUserRepository agencyHasUserRepository;
+    private final ApplicationEventPublisher applicationEventPublisher;
 
     public void createRent(RentCreateRequest request, Principal principal) {
         User employee = userRepository.findByEmail(principal.getName()).orElseThrow(AssertionError::new);
@@ -78,6 +85,7 @@ public class RentService {
                 .status(RentStatus.CREATED)
                 .build();
         rentRepository.save(rent);
+
         //TODO wysyłka maila z potwierdzeniem wynajmu???
     }
 
@@ -107,10 +115,13 @@ public class RentService {
                 .orElseThrow(() -> new WsizException(HttpStatus.NOT_FOUND, RENT_NOT_FOUND));
         User employee = userRepository.findByEmail(principal.getName())
                 .orElseThrow(() -> new WsizException(HttpStatus.NOT_FOUND, USER_NOT_FOUND));
+        AgencyHasUser agencyHasUser = agencyHasUserRepository.findByUserId(employee.getId())
+                .orElseThrow(() -> new WsizException(HttpStatus.CONFLICT, USER_IS_NOT_EMPLOYEE));
         rent.setFinalPrice(request.getFinalPrice());
         rent.setEndMileage(request.getEndMileage());
         rent.setRentEndDate(request.getRentEndDate() != null ? request.getRentEndDate() : rent.getRentEndDate());
         rent.setStatus(RentStatus.RETURNED);
+        car.setCurrentAgency(agencyHasUser.getAgency());
         if (request.getTechnicalSupport() != null &&
                 request.getTechnicalSupport().getTechnicalSupportActions() != null &&
                 request.getTechnicalSupport().getTechnicalSupportActions().size() > 0) {
@@ -132,7 +143,17 @@ public class RentService {
                                 .technicalSupportAction(tcha)
                                 .build());
                     });
-            //TODO wysyłka dla kierowców zgłoszenia
+            TechnicalSupportMessage technicalSupportMessage = new TechnicalSupportMessage();
+            technicalSupportMessage.setEmails(userRepository.findAllByRole(Role.TECHNICAL_EMPLOYEE)
+                    .stream().map(User::getEmail).collect(Collectors.toList()));
+            technicalSupportMessage.setRegisterPlate(car.getRegisterPlate());
+            technicalSupportMessage.setAddress(String.format("%s, %s %s%s",
+                    agencyHasUser.getAgency().getAddress().getCity(),
+                    agencyHasUser.getAgency().getAddress().getStreet(),
+                    agencyHasUser.getAgency().getAddress().getHouseNo(),
+                    agencyHasUser.getAgency().getAddress().getFlatNo() != null ? "/" +
+                            agencyHasUser.getAgency().getAddress().getFlatNo() : ""));
+            applicationEventPublisher.publishEvent(new EmailEvent(technicalSupportMessage));
         }
     }
 

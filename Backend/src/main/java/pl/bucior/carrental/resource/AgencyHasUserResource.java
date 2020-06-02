@@ -31,4 +31,5 @@ public class AgencyHasUserResource {
         agencyHasUserService.fireEmployee(userId);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
+
 }

@@ -23,7 +23,7 @@ import pl.bucior.carrental.model.response.UserRoleResponse;
 import pl.bucior.carrental.repository.AccountVerificationTokenRepository;
 import pl.bucior.carrental.repository.AgencyHasUserRepository;
 import pl.bucior.carrental.repository.UserRepository;
-import pl.bucior.carrental.service.event.OnRegistrationCompleteEvent;
+import pl.bucior.carrental.service.event.EmailEvent;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
@@ -81,7 +81,7 @@ public class UserService {
                 .build());
         if (user.getId() != null) {
             try {
-                applicationEventPublisher.publishEvent(new OnRegistrationCompleteEvent(UserRegistrationMessage.builder()
+                applicationEventPublisher.publishEvent(new EmailEvent(UserRegistrationMessage.builder()
                         .id(user.getId())
                         .password(password)
                         .email(user.getEmail())

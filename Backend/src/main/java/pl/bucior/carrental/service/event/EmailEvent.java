@@ -6,9 +6,9 @@ import org.springframework.context.ApplicationEvent;
 
 @Getter
 @Setter
-public class OnRegistrationCompleteEvent extends ApplicationEvent {
+public class EmailEvent extends ApplicationEvent {
 
-    public OnRegistrationCompleteEvent(Object source) {
+    public EmailEvent(Object source) {
         super(source);
     }
 }

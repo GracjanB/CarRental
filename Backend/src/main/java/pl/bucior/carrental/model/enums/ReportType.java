@@ -7,10 +7,8 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public enum RentStatus {
-    CREATED("Wypożyczono"), RENTED("Wypożyczono"), DELAYED("Wypożyczenie opóźnione"),
-    RETURNED("Zwrócono"), CANCELLED("Anulowano");
-
+public enum ReportType {
+    RENT("Wypożyczenia");
 
     private String value;
 }
