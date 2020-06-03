@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import pl.bucior.carrental.mapper.RentMapper;
 import pl.bucior.carrental.model.dto.RentDto;
@@ -39,8 +38,7 @@ public class ReportGenerationService {
     }
 
 
-    @Scheduled(cron = "0 0 0 1/1 * ?")
-    public void generateEverydayRentReport() {
+    public Report generateRentReport(ZonedDateTime start, ZonedDateTime end) {
         checkDirectoryCreation();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
         Workbook workbook = new XSSFWorkbook();
@@ -96,16 +94,18 @@ public class ReportGenerationService {
             sheet.autoSizeColumn(i);
         }
         try {
-            String path = String.format("report/rent/rent_report_%s.xlsx", ZonedDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
-            FileOutputStream fileOut = new FileOutputStream(String.format("report/rent/rent_report_%s.xlsx", ZonedDateTime.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))));
+            String path = String.format("report/rent/rent_report_%s.xlsx", start.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+            FileOutputStream fileOut = new FileOutputStream(String.format("report/rent/rent_report_%s.xlsx", start.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))));
             workbook.write(fileOut);
             fileOut.close();
-            reportRepository.save(Report.builder()
+            return Report.builder()
                     .path(path)
                     .reportType(ReportType.RENT)
-                    .build());
+                    .build();
+
         } catch (IOException e) {
             log.error(e);
         }
+        return null;
     }
 }

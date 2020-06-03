@@ -15,6 +15,7 @@ import pl.bucior.carrental.service.ReportService;
 import springfox.documentation.annotations.ApiIgnore;
 
 import javax.servlet.http.HttpServletResponse;
+import java.security.Principal;
 import java.util.Date;
 
 @Log4j2
@@ -27,9 +28,10 @@ public class ReportResource {
 
     @GetMapping(value = "rent", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
     public ResponseEntity<byte[]> getAllReportByDate(@RequestParam(name = "date", required = false)
-                                                     @DateTimeFormat(pattern = "yyyy-MM-dd") Date date,
+                                                         @DateTimeFormat(pattern = "yyyy-MM-dd") Date date,
+                                                     @ApiIgnore Principal principal,
                                                      @ApiIgnore HttpServletResponse response) {
-        RentResponse rentResponse = reportService.getReportFile(date);
+        RentResponse rentResponse = reportService.getReportFile(date, principal);
         if (rentResponse != null && rentResponse.getFile() != null) {
             response.setHeader("Content-Disposition", String.format("attachment; filename=%s", rentResponse.getFileName()));
             return ResponseEntity.ok(rentResponse.getFile());

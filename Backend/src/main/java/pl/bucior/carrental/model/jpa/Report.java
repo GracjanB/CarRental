@@ -20,8 +20,11 @@ public class Report extends AbstractBaseEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "report_id_seq")
     private Long id;
 
-    @Column(name = "path", nullable = false, unique = true)
+    @Column(name = "path")
     private String path;
+
+    @Column(name = "user_id", nullable = false)
+    private Long userId;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "report_type", nullable = false)
