@@ -39,7 +39,7 @@ public class ReportGenerationService {
     }
 
 
-    @Scheduled(fixedRate = 1000000)
+    @Scheduled(cron = "0 0 0 1/1 * ?")
     public void generateEverydayRentReport() {
         checkDirectoryCreation();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");

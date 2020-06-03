@@ -16,8 +16,10 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.Optional;
 
@@ -32,12 +34,12 @@ public class ReportService {
     public RentResponse getReportFile(Date date) throws IOException {
         Optional<Report> reportOpt;
         if (date != null) {
-            reportOpt = reportRepository.findByCreationDateBetween(ZonedDateTime.from(date.toInstant().atZone(ZoneId.systemDefault()))
-                    .minusDays(1), ZonedDateTime.from(date.toInstant().atZone(ZoneId.systemDefault())));
+            reportOpt = reportRepository.findByCreationDateBetween(ZonedDateTime.from(date.toInstant().atZone(ZoneId.systemDefault())).truncatedTo(ChronoUnit.DAYS)
+                    .with(LocalTime.MIDNIGHT), ZonedDateTime.from(date.toInstant().atZone(ZoneId.systemDefault())));
         } else {
             Date now = new Date();
             reportOpt = reportRepository.findByCreationDateBetween(ZonedDateTime.from(now.toInstant().atZone(ZoneId.systemDefault()))
-                    .minusDays(1), ZonedDateTime.from(now.toInstant().atZone(ZoneId.systemDefault())));
+                    .with(LocalTime.MIDNIGHT), ZonedDateTime.from(now.toInstant().atZone(ZoneId.systemDefault())));
         }
         Report report = reportOpt.orElseThrow(() -> new WsizException(HttpStatus.NOT_FOUND, ErrorCode.REPORT_NOT_FOUND));
         File file = new File(report.getPath());
