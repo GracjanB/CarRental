@@ -105,7 +105,7 @@ public class UserService {
     public void confirmRegistration(String token) {
         AccountVerificationToken accountVerificationToken = accountVerificationTokenRepository.findByToken(token)
                 .orElseThrow(() -> new WsizException(HttpStatus.NOT_FOUND, ErrorCode.USER_NOT_FOUND));
-        if (accountVerificationToken.getExpirationTime().isBefore(ZonedDateTime.now())) {
+        if (accountVerificationToken.getExpirationTime().isAfter(ZonedDateTime.now())) {
             accountVerificationToken.getUser().setIsActive(true);
             return;
         }
