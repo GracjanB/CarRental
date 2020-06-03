@@ -27,9 +27,9 @@ public class ReportResource {
     private final ReportService reportService;
 
     @GetMapping(value = "rent", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
-    public ResponseEntity<byte[]> getAllReportByDate(@RequestParam(name = "date")
+    public ResponseEntity<byte[]> getAllReportByDate(@RequestParam(name = "startDate")
                                                      @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate,
-                                                     @RequestParam(name = "date")
+                                                     @RequestParam(name = "endDate")
                                                      @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate,
                                                      @ApiIgnore Principal principal,
                                                      @ApiIgnore HttpServletResponse response) {
