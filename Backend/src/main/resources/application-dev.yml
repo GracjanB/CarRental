@@ -6,9 +6,9 @@ spring:
     platform: postgres
     driver-class-name: org.postgresql.Driver
   mail:
-    host: smtp.gmail.com
+    host: smtp.wp.pl
     port: 465
-    username: carrental.wsiz@gmail.com
+    username: carrental.wsiz@wp.pl
     password: Carrental.wsiz1
     properties:
       mail:
@@ -16,6 +16,7 @@ spring:
           auth: true
           starttls:
             enable: true
+            required: true
           socketFactory:
             class: javax.net.ssl.SSLSocketFactory
             port: 465
