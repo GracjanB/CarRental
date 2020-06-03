@@ -2,6 +2,7 @@ package pl.bucior.carrental.resource;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +27,8 @@ public class ReportResource {
     private final ReportService reportService;
 
     @GetMapping(value = "rent", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
-    public ResponseEntity<byte[]> getAllReportByDate(@RequestParam(name = "date", required = false) Date date,
+    public ResponseEntity<byte[]> getAllReportByDate(@RequestParam(name = "date", required = false)
+                                                     @DateTimeFormat(pattern = "yyyy-MM-dd") Date date,
                                                      @ApiIgnore HttpServletResponse response) {
         try {
             RentResponse rentResponse = reportService.getReportFile(date);
