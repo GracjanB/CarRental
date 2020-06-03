@@ -15,7 +15,6 @@ import pl.bucior.carrental.service.ReportService;
 import springfox.documentation.annotations.ApiIgnore;
 
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.util.Date;
 
 @Log4j2
@@ -30,12 +29,10 @@ public class ReportResource {
     public ResponseEntity<byte[]> getAllReportByDate(@RequestParam(name = "date", required = false)
                                                      @DateTimeFormat(pattern = "yyyy-MM-dd") Date date,
                                                      @ApiIgnore HttpServletResponse response) {
-        try {
-            RentResponse rentResponse = reportService.getReportFile(date);
+        RentResponse rentResponse = reportService.getReportFile(date);
+        if (rentResponse != null && rentResponse.getFile() != null) {
             response.setHeader("Content-Disposition", String.format("attachment; filename=%s", rentResponse.getFileName()));
             return ResponseEntity.ok(rentResponse.getFile());
-        } catch (IOException e) {
-            log.info("File not found, error = " + e);
         }
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
