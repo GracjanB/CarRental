@@ -41,7 +41,7 @@ public class EmailEventListener implements ApplicationListener<EmailEvent> {
         try {
             MimeMessage mimeMessage = javaMailSender.createMimeMessage();
             mimeMessage.addRecipient(MimeMessage.RecipientType.TO, new InternetAddress(registrationMessage.getEmail()));
-            mimeMessage.addFrom(new InternetAddress[]{new InternetAddress("carrental.wsiz@gmail.com")});
+            mimeMessage.addFrom(new InternetAddress[]{new InternetAddress("carrental.wsiz@wp.pl")});
             mimeMessage.setSubject("Potwierdź swój email w CarRentalWsiz", "UTF-8");
             mimeMessage.setText("Witaj! Twój link aktywacyjny znajduje się poniżej.\r\n" +
                     "https://carrental-dev.herokuapp.com/user/registrationConfirm?token=" + token +
@@ -59,7 +59,7 @@ public class EmailEventListener implements ApplicationListener<EmailEvent> {
             for (String email : technicalSupportMessage.getEmails()) {
                 mimeMessage.addRecipient(MimeMessage.RecipientType.TO, new InternetAddress(email));
             }
-            mimeMessage.addFrom(new InternetAddress[]{new InternetAddress("carrental.wsiz@gmail.com")});
+            mimeMessage.addFrom(new InternetAddress[]{new InternetAddress("carrental.wsiz@wp.pl")});
             mimeMessage.setSubject("Nowe zlecenie dla Ciebie!", "UTF-8");
             mimeMessage.setText(String.format("Cześć, w systemie znajduje się nowe zlecenie do odbioru już teraz!\nZlecenie zostało utworzone dla pojazdu z nr rej. %s", technicalSupportMessage.getRegisterPlate()));
             javaMailSender.send(mimeMessage);
