@@ -36,20 +36,14 @@ public class ReportService {
     private final ReportGenerationService reportGenerationService;
 
 
-    public RentResponse getReportFile(Date date, Principal principal) {
+    public RentResponse getReportFile(Date startDate, Date endDate, Principal principal) {
         User employee = userRepository.findByEmail(principal.getName())
                 .orElseThrow(() -> new WsizException(HttpStatus.NOT_FOUND, ErrorCode.USER_NOT_FOUND));
-        Report report;
-        if (date != null) {
-            report = reportGenerationService.generateRentReport(ZonedDateTime.from(date.toInstant().atZone(ZoneId.systemDefault())).truncatedTo(ChronoUnit.DAYS)
-                    .with(LocalTime.MIDNIGHT), ZonedDateTime.from(date.toInstant().atZone(ZoneId.systemDefault())).with(LocalTime.MIDNIGHT)
-                    .plusHours(23).plusMinutes(59).plusSeconds(59));
-        } else {
-            Date now = new Date();
-            report = reportGenerationService.generateRentReport(ZonedDateTime.from(now.toInstant().atZone(ZoneId.systemDefault()))
-                    .with(LocalTime.MIDNIGHT), ZonedDateTime.from(now.toInstant().atZone(ZoneId.systemDefault())).with(LocalTime.MIDNIGHT)
-                    .plusHours(23).plusMinutes(59).plusSeconds(59));
-        }
+        Report report = reportGenerationService.generateRentReport(ZonedDateTime
+                        .from(startDate.toInstant().atZone(ZoneId.systemDefault())).truncatedTo(ChronoUnit.DAYS)
+                        .with(LocalTime.MIDNIGHT),
+                ZonedDateTime.from(endDate.toInstant().atZone(ZoneId.systemDefault())).with(LocalTime.MIDNIGHT)
+                        .plusHours(23).plusMinutes(59).plusSeconds(59));
         if (report == null) {
             throw new WsizException("Cannot create report", HttpStatus.CONFLICT, ErrorCode.REPORT_NOT_FOUND);
         }

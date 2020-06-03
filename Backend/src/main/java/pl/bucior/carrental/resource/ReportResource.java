@@ -27,11 +27,13 @@ public class ReportResource {
     private final ReportService reportService;
 
     @GetMapping(value = "rent", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
-    public ResponseEntity<byte[]> getAllReportByDate(@RequestParam(name = "date", required = false)
-                                                         @DateTimeFormat(pattern = "yyyy-MM-dd") Date date,
+    public ResponseEntity<byte[]> getAllReportByDate(@RequestParam(name = "date")
+                                                     @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate,
+                                                     @RequestParam(name = "date")
+                                                     @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate,
                                                      @ApiIgnore Principal principal,
                                                      @ApiIgnore HttpServletResponse response) {
-        RentResponse rentResponse = reportService.getReportFile(date, principal);
+        RentResponse rentResponse = reportService.getReportFile(startDate, endDate, principal);
         if (rentResponse != null && rentResponse.getFile() != null) {
             response.setHeader("Content-Disposition", String.format("attachment; filename=%s", rentResponse.getFileName()));
             return ResponseEntity.ok(rentResponse.getFile());

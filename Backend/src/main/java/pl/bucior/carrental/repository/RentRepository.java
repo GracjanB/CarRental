@@ -8,6 +8,7 @@ import pl.bucior.carrental.model.jpa.Rent;
 import pl.bucior.carrental.model.jpa.Rent_;
 import pl.bucior.carrental.util.pageable.PageableJpaRepository;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,6 +22,8 @@ public interface RentRepository extends PageableJpaRepository<Rent, Long> {
     Optional<Rent> findByCarVinAndStatusNotIn(String vin, List<RentStatus> status);
 
     Optional<Rent> findByUserIdAndStatusNotIn(Long userId, List<RentStatus> status);
+
+    List<Rent> findAllByCreationDateBetween(ZonedDateTime startDate, ZonedDateTime endDate);
 
     @Query(value = "select c from Car c left join Rent r on r.carVin = c.vin where r.status not in ('RETURNED','CANCELLED') and c.enabled = true")
     List<Car> findCarsWithOpenRent();

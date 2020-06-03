@@ -72,7 +72,8 @@ public class ReportGenerationService {
             cell.setCellValue(columns.get(i));
             cell.setCellStyle(headerCellStyle);
         }
-        List<RentDto> rentDtos = rentRepository.findAll().stream().map(RentMapper.INSTANCE::toDto).collect(Collectors.toList());
+        List<RentDto> rentDtos = rentRepository.findAllByCreationDateBetween(start, end)
+                .stream().map(RentMapper.INSTANCE::toDto).collect(Collectors.toList());
         int rowNum = 1;
         for (RentDto rent : rentDtos) {
             Row row = sheet.createRow(rowNum++);
