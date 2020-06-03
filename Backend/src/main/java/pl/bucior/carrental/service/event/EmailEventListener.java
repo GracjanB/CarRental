@@ -44,7 +44,7 @@ public class EmailEventListener implements ApplicationListener<EmailEvent> {
             mimeMessage.addFrom(new InternetAddress[]{new InternetAddress("carrental.wsiz@wp.pl")});
             mimeMessage.setSubject("Potwierdź swój email w CarRentalWsiz", "UTF-8");
             mimeMessage.setText("Witaj! Twój link aktywacyjny znajduje się poniżej.\r\n" +
-                    "https://carrental-dev.herokuapp.com/user/registrationConfirm?token=" + token +
+                    "https://carrental-dev.herokuapp.com/api/user/registrationConfirm?token=" + token +
                     "\nTwoje wygenerowane hasło to: " + registrationMessage.getPassword(), "UTF-8");
             javaMailSender.send(mimeMessage);
             accountVerificationTokenService.changeStatus(token);
