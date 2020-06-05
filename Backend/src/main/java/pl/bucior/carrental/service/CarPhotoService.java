@@ -2,6 +2,7 @@ package pl.bucior.carrental.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import pl.bucior.carrental.configuration.exception.ErrorCode;
@@ -40,6 +41,14 @@ public class CarPhotoService {
     public byte[] getFile(Long id) {
         return carPhotoRepository.findById(id)
                 .orElseThrow(() -> new WsizException(HttpStatus.NOT_FOUND, ErrorCode.CAR_PHOTO_NOT_FOUND)).getPhoto();
+    }
+
+    public void deleteFile(Long id) {
+        try {
+            carPhotoRepository.deleteById(id);
+        } catch (EmptyResultDataAccessException e) {
+            throw new WsizException(HttpStatus.NOT_FOUND, ErrorCode.CAR_PHOTO_NOT_FOUND);
+        }
     }
 
 }

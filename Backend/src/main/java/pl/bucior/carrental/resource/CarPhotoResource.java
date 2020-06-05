@@ -29,4 +29,10 @@ public class CarPhotoResource {
         return ResponseEntity.ok(carPhotoService.getFile(id));
     }
 
+    @DeleteMapping
+    public ResponseEntity<Void> deleteImage(@RequestParam(name = "photoId") Long id) {
+        carPhotoService.deleteFile(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
 }
