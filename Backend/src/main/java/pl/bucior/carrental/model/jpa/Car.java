@@ -64,5 +64,10 @@ public class Car extends AbstractBaseEntity implements Serializable {
     @Column(name = "current_agency_id", insertable = false, updatable = false)
     private Long currentAgencyId;
 
+    @Column(name = "enabled")
     private Boolean enabled;
+
+    @OneToOne
+    @JoinColumn(name = "car_photo_id", referencedColumnName = "id")
+    private CarPhoto carPhoto;
 }
