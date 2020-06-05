@@ -30,7 +30,7 @@ namespace CarRentalWPF.Library2.ApiClient.Implementations
             var jsonData = JsonConvert.SerializeObject(content);
             var data = new StringContent(jsonData, Encoding.UTF8, "application/json");
 
-            string endPoint = "/api/rent";
+            string endPoint = "api/rent";
             _client.DefaultRequestHeaders.Clear();
             _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(token_type, access_token);
 

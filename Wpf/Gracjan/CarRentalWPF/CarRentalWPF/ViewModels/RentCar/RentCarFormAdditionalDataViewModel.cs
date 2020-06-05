@@ -1,33 +1,28 @@
 ﻿using Caliburn.Micro;
+using CarRentalWPF.Events;
+using CarRentalWPF.Library2.FromServerDto;
 using CarRentalWPF.Models;
+using CarRentalWPF.ViewModels.RentCar;
 
 namespace CarRentalWPF.ViewModels
 {
-	public class RentCarFormAdditionalDataViewModel : Screen
+	public class RentCarFormAdditionalDataViewModel : Screen, IHandle<AgencySelectedEvent>
     {
 		private readonly SimpleContainer _container;
 
-		public RentCarFormAdditionalDataViewModel(SimpleContainer container)
+		private readonly IEventAggregator _events;
+
+		private readonly IWindowManager _windowManager;
+
+		public RentCarFormAdditionalDataViewModel(SimpleContainer container, IEventAggregator eventAggregator, IWindowManager windowManager)
 		{
-			Agencies = GenerateAgencies();
 			_container = container;
+			_events = eventAggregator;
+			_windowManager = windowManager;
+			_events.Subscribe(this);
 		}
 
 		public RentalModel rental { get; set; }
-
-		private BindableCollection<string> _agencies;
-
-		public BindableCollection<string> Agencies
-		{
-			get { return _agencies; }
-			set 
-			{ 
-				_agencies = value;
-				NotifyOfPropertyChange(() => Agencies);
-			}
-		}
-
-		public string SelectedAgency { get; set; }
 
 		public int StartingMileage { get; set; }
 
@@ -42,16 +37,6 @@ namespace CarRentalWPF.ViewModels
 		{
 			rental.Deposit = Deposit;
 			rental.StartMileage = StartingMileage;
-			rental.TargetAgency = new AgencyModel
-			{
-				Id = 2,
-				City = "Wroclaw",
-				Country = "Polska",
-				Street = "someStreet",
-				PostalCode = "35-213",
-				HouseNo = "213",
-				FlatNo = "123"
-			};
 
 			var rentCarFormSummaryVM = _container.GetInstance<RentCarFormSummaryViewModel>();
 			rentCarFormSummaryVM.LoadRental(rental);
@@ -65,16 +50,30 @@ namespace CarRentalWPF.ViewModels
 			rental = rentalModel;
 		}
 
-		private BindableCollection<string> GenerateAgencies()
+		public void AgencyChoose()
 		{
-			BindableCollection<string> agencies = new BindableCollection<string>
-			{
-				"Agencja 1",
-				"Agencja 2",
-				"Agencja 3"
-			};
-
-			return agencies;
+			var agencyChooseVM = _container.GetInstance<RentCarFormAgencyChoiceViewModel>();
+			_windowManager.ShowDialog(agencyChooseVM);
 		}
+
+		private string _agencyString;
+
+		public string AgencyString
+		{
+			get { return _agencyString; }
+			set 
+			{
+				_agencyString = value;
+				NotifyOfPropertyChange(() => AgencyString);
+			}
+		}
+
+
+		public void Handle(AgencySelectedEvent agencySelectedEvent)
+		{
+			rental.TargetAgency = agencySelectedEvent.Agency;
+			AgencyString = agencySelectedEvent.Agency.FullAddress;
+		}
+
 	}
 }

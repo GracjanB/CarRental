@@ -80,13 +80,13 @@
                 <TextBlock Text="Data odbioru pojazdu:" Style="{StaticResource MaterialDesignHeadline4TextBlock}" FontSize="16"
                            Margin="15 0 0 0"/>
 
-                <TextBlock Text="{Binding Rental.StartRentalDate}" Style="{StaticResource MaterialDesignHeadline5TextBlock}" FontSize="14" 
+                <TextBlock Text="{Binding RentalStartDate}" Style="{StaticResource MaterialDesignHeadline5TextBlock}" FontSize="14" 
                            Margin="25 5 0 0"/>
 
                 <TextBlock Text="Data zwrotu pojazdu:" Style="{StaticResource MaterialDesignHeadline4TextBlock}" FontSize="16"
                            Margin="15 20 0 0"/>
 
-                <TextBlock Text="{Binding Rental.EndRentalDate}" Style="{StaticResource MaterialDesignHeadline5TextBlock}" FontSize="14" 
+                <TextBlock Text="{Binding RentalEndDate}" Style="{StaticResource MaterialDesignHeadline5TextBlock}" FontSize="14" 
                            Margin="25 5 0 0"/>
             </StackPanel>
         </materialDesign:Card>
@@ -103,7 +103,7 @@
                     <TextBlock Text="Początkowy przebieg:" Style="{StaticResource MaterialDesignHeadline4TextBlock}" FontSize="16"
                            Margin="15 0 0 0"/>
 
-                    <TextBlock Text="{Binding Rental.StartMileage}" Style="{StaticResource MaterialDesignHeadline5TextBlock}" FontSize="14" 
+                    <TextBlock Text="{Binding Rental.StartMileage, StringFormat=' {0} km'}" Style="{StaticResource MaterialDesignHeadline5TextBlock}" FontSize="14" 
                            Margin="25 5 0 0"/>
 
                     <TextBlock Text="Agencja zwrotu pojazdu:" Style="{StaticResource MaterialDesignHeadline4TextBlock}" FontSize="16"
@@ -122,7 +122,7 @@
 
                     <Separator Style="{StaticResource MaterialDesignDarkSeparator}" Margin="5 0 5 0" />
 
-                    <TextBlock Text="Cena wypożyczenia: 348 zł" Style="{StaticResource MaterialDesignHeadline4TextBlock}" FontSize="14"
+                    <TextBlock Text="{Binding Rental.CalculatedCost, StringFormat='Cena wypożyczenia: {0} zł'}" Style="{StaticResource MaterialDesignHeadline4TextBlock}" FontSize="14"
                            Margin="15 0 0 0"/>
 
                     <TextBlock Text="{Binding Rental.Deposit, StringFormat='Kaucja: {0} zł'}" Style="{StaticResource MaterialDesignHeadline4TextBlock}" FontSize="14"
@@ -131,7 +131,7 @@
                     <TextBlock Text="Rabat: 0%" Style="{StaticResource MaterialDesignHeadline4TextBlock}" FontSize="14"
                            Margin="15 5 0 0"/>
 
-                    <TextBlock Text="Cena całkowita: 348 zł" Style="{StaticResource MaterialDesignHeadline4TextBlock}" FontSize="16"
+                    <TextBlock Text="{Binding CompleteCost, StringFormat='Całkowity koszt: {0} zł'}" Style="{StaticResource MaterialDesignHeadline4TextBlock}" FontSize="16"
                            Margin="15 10 0 0"/>
                 </StackPanel>
             </materialDesign:Card>

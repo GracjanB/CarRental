@@ -93,12 +93,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Events\AgencySelectedEvent.cs" />
     <Compile Include="Events\NewAgencyAddedEvent.cs" />
     <Compile Include="Events\UserLoggedInEvent.cs" />
     <Compile Include="Helpers\AutomapperProfiles\CarProfile.cs" />
     <Compile Include="Helpers\AutomapperProfiles\NewCarProfile.cs" />
     <Compile Include="Helpers\AutomapperProfiles\NewRentalProfile.cs" />
     <Compile Include="Helpers\AutomapperProfiles\UserProfile.cs" />
+    <Compile Include="Helpers\Extensions.cs" />
     <Compile Include="Helpers\PasswordBoxHelper.cs" />
     <Compile Include="Helpers\ValidationBehavior.cs" />
     <Compile Include="Models\AgencyModel.cs" />
@@ -135,6 +137,7 @@
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\RegisterViewModel.cs" />
     <Compile Include="ViewModels\RentCar\RentCarFormAdditionalDataViewModel.cs" />
+    <Compile Include="ViewModels\RentCar\RentCarFormAgencyChoiceViewModel.cs" />
     <Compile Include="ViewModels\RentCar\RentCarFormCarChoiceViewModel.cs" />
     <Compile Include="ViewModels\RentCar\RentCarFormDateChoiceViewModel.cs" />
     <Compile Include="ViewModels\RentCar\RentCarFormSummaryViewModel.cs" />
@@ -193,6 +196,9 @@
     </Compile>
     <Compile Include="Views\RentCar\RentCarFormAdditionalDataView.xaml.cs">
       <DependentUpon>RentCarFormAdditionalDataView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RentCar\RentCarFormAgencyChoiceView.xaml.cs">
+      <DependentUpon>RentCarFormAgencyChoiceView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\RentCar\RentCarFormCarChoiceView.xaml.cs">
       <DependentUpon>RentCarFormCarChoiceView.xaml</DependentUpon>
@@ -310,6 +316,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\RentCar\RentCarFormAdditionalDataView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RentCar\RentCarFormAgencyChoiceView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

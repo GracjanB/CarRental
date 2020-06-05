@@ -8,6 +8,6 @@ namespace CarRentalWPF.Library2.FromServerDto
 {
     public class CalculatedCostDto
     {
-        public int cost;
+        public decimal cost;
     }
 }

@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Caliburn.Micro;
+using CarRentalWPF.Helpers;
 using CarRentalWPF.Library2.ApiClient.Implementations;
+using CarRentalWPF.Library2.FromServerDto;
 using CarRentalWPF.Library2.ToServerDto;
 using CarRentalWPF.Models;
 using CarRentalWPF.User;
@@ -27,7 +29,18 @@ namespace CarRentalWPF.ViewModels
 
         public DateTime SelectedTimeTo { get; set; }
 
-        public string BasePrice { get; set; }
+        private string _basePrice;
+
+        public string BasePrice
+        {
+            get { return _basePrice; }
+            set 
+            { 
+                _basePrice = value;
+                NotifyOfPropertyChange(() => BasePrice);
+            }
+        }
+
 
         private bool DatesValid { get; set; } = false;
 
@@ -58,6 +71,11 @@ namespace CarRentalWPF.ViewModels
 
         public void MoveForward()
         {
+            rental.RentalStartDate = SelectedDateFrom;
+            rental.RentalStartTime = SelectedTimeFrom;
+            rental.RentalEndDate = SelectedDateTo;
+            rental.RentalEndTime = SelectedTimeTo;
+
             var rentCarFormAdditionalDataVM = _container.GetInstance<RentCarFormAdditionalDataViewModel>();
             rentCarFormAdditionalDataVM.LoadRental(rental);
 
@@ -71,20 +89,11 @@ namespace CarRentalWPF.ViewModels
 
             if (areDatesValid)
             {
-                SnackbarShowMessage("Daty są prawidłowe");
-
-                var fullDateFrom = ConvertDate(SelectedDateFrom, SelectedTimeFrom);
-                var fullDateTo = ConvertDate(SelectedDateTo, SelectedTimeTo);
+                var fullDateFrom = Extensions.ConvertToZonedDate(SelectedDateFrom, SelectedTimeFrom);
+                var fullDateTo = Extensions.ConvertToZonedDate(SelectedDateTo, SelectedTimeTo);
 
                 rental.StartRentalDate = fullDateFrom;
                 rental.EndRentalDate = fullDateTo;
-
-                //var calculateCostContent = new CalculateCostContent
-                //{
-                //    carVin = rental.Car.VIN,
-                //    rentStartDate = fullDateFrom,
-                //    rentEndDate = fullDateTo
-                //};
 
                 var calculateCostDto = new CalculateCostDto
                 {
@@ -93,16 +102,19 @@ namespace CarRentalWPF.ViewModels
                     rentEndDate = fullDateTo
                 };
 
+                CalculatedCostDto calculatedCost = null;
+
                 try
                 {
-                    //var requestResult = _carClient.CalculateCost(calculateCostContent, _user.TokenType, _user.AccessToken);
-                    var requestResult = await _rentClient.CalculateCostAsync(calculateCostDto, _user.TokenType, _user.AccessToken);
+                    calculatedCost = await _rentClient.CalculateCostAsync(calculateCostDto, _user.TokenType, _user.AccessToken);
                 }
                 catch(ArgumentException ex)
                 {
                     Console.WriteLine(ex.Message);
                 }
 
+                rental.CalculatedCost = calculatedCost.cost;
+                BasePrice = calculatedCost.cost.ToString("F");
                 DatesValid = true;
             }  
             else
@@ -112,15 +124,6 @@ namespace CarRentalWPF.ViewModels
             }
 
             NotifyOfPropertyChange(() => CanMoveForward);
-        }
-
-        private string ConvertDate(DateTime date, DateTime time)
-        {
-            DateTime fullDate = new DateTime(date.Year, date.Month, date.Day, time.Hour, time.Minute, time.Second);
-            var zonedDate = fullDate.ToString("s");
-            zonedDate += "Z";
-
-            return zonedDate;
         }
 
         private bool CompareDates(DateTime dateFrom, DateTime dateTo)

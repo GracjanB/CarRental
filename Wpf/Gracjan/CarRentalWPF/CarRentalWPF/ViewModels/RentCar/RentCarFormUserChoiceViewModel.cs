@@ -128,7 +128,7 @@ namespace CarRentalWPF.ViewModels
             // TODO: Function to filter users
         }
 
-        public void UserChoose(EmployeeModel user)
+        public void UserChoose(UserModel user)
         {
             rental.User = user;
 
