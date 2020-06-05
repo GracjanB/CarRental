@@ -24,6 +24,21 @@ namespace CarRentalWPF.Models
 
         public int maxCarQuantity { get; set; }
 
+        public string FullAddress
+        {
+            get
+            {
+                return Street + " " + HouseNo + "/" + FlatNo + "\n" + PostalCode + " " + City + "\n" + Country;
+            }
+        }
+
+        public string FullStreet
+        {
+            get
+            {
+                return Street + " " + HouseNo + "/" + FlatNo;
+            }
+        }
 
         public AgencyModel() { }
 

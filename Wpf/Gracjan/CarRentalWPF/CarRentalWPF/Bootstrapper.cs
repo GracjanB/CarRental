@@ -1,17 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using Caliburn.Micro;
 using CarRentalWPF.Helpers;
 using CarRentalWPF.ViewModels;
 using CarRentalWPF.User;
-using CarRentalWPF.Converters;
-using CarRentalWPF.Library.ApiClient.CarResource;
-using CarRentalWPF.Library.ApiClient.UserResource;
+using AutoMapper;
+using CarRentalWPF.Library2.FromServerDto;
+using CarRentalWPF.Models;
+using CarRentalWPF.Library2.ApiClient.Implementations;
+using CarRentalWPF.Library2.ApiClient;
+using CarRentalWPF.Helpers.AutomapperProfiles;
+using CarRentalWPF.Library2.ToServerDto;
 
 namespace CarRentalWPF
 {
@@ -39,10 +41,27 @@ namespace CarRentalWPF
             _container
                 .Singleton<IWindowManager, WindowManager>()
                 .Singleton<IEventAggregator, EventAggregator>()
-                .Singleton<IModelToRequestContentConverter, ModelToRequestContentConverter>()
+                .Singleton<IAuthenticationService, AuthenticationService>()
+                .Singleton<IUserClient, UserClient>()
                 .Singleton<ICarClient, CarClient>()
-                .Singleton<IUserClient, UserClient>();
-                
+                .Singleton<IAgencyClient, AgencyClient>()
+                .Singleton<IRentClient, RentClient>();
+
+            MapperConfiguration mapperConfig = new MapperConfiguration(config =>
+            {
+                config.CreateMap<LoginModel, UserLoginDto>();
+                config.CreateMap<AgencyModel, NewAgencyDto>();
+                config.CreateMap<Agency, AgencyModel>();
+                config.CreateMap<RegisterModel, NewUserDto>();
+                config.AddProfile(new UserProfile());
+                config.AddProfile(new NewCarProfile());
+                config.AddProfile(new NewRentalProfile());
+                config.AddProfile(new CarProfile());
+            });
+
+            var Mapper = mapperConfig.CreateMapper();
+            _container
+                .RegisterInstance(typeof(IMapper), "automapper", Mapper);
 
             GetType().Assembly.GetTypes()
                 .Where(type => type.IsClass)

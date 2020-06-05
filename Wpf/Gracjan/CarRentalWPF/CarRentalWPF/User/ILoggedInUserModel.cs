@@ -1,4 +1,4 @@
-﻿using CarRentalWPF.Library.RequestsContentModels;
+﻿using CarRentalWPF.Library2.FromServerDto;
 
 namespace CarRentalWPF.User
 {
@@ -22,6 +22,8 @@ namespace CarRentalWPF.User
 
         bool isActive { get; set; }
 
-        void SetUserData(UserInfo userCredentials);
+        void SetUserData2(UserInfoDto user);
+
+        void ClearUserData();
     }
 }

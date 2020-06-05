@@ -1,36 +1,32 @@
-﻿using Caliburn.Micro;
-using CarRentalWPF.Converters;
-using CarRentalWPF.Library.ApiClient.CarResource;
-using CarRentalWPF.Library.RequestsContentModels;
+﻿using AutoMapper;
+using Caliburn.Micro;
+using CarRentalWPF.Library2.ApiClient.Implementations;
 using CarRentalWPF.Models;
 using CarRentalWPF.User;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace CarRentalWPF.ViewModels
 {
     public class CarsViewModel : Screen
     {
-        private SimpleContainer _container;
+        private readonly SimpleContainer _container;
 
-        private IAuthenticatedUser _user;
+        private readonly IAuthenticatedUser _user;
 
-        private ICarClient _carClient;
+        private readonly ICarClient _carClient;
 
-        private IModelToRequestContentConverter _converter;
+        private readonly IMapper _mapper;
 
         private List<CarModel> CarsCollection;
 
-        public CarsViewModel(SimpleContainer simpleContainer, IAuthenticatedUser authenticatedUser, ICarClient carClient, 
-            IModelToRequestContentConverter converter)
+        public CarsViewModel(SimpleContainer simpleContainer, IAuthenticatedUser authenticatedUser, 
+            ICarClient carClient, IMapper mapper)
         {
             _container = simpleContainer;
             _user = authenticatedUser;
             _carClient = carClient;
-            _converter = converter;
+            _mapper = mapper;
 
             // For testing
             Cars = GenerateCars();
@@ -44,12 +40,18 @@ namespace CarRentalWPF.ViewModels
 
         private async Task LoadCars()
         {
-            var carResource = await _carClient.GetCars(_user.TokenType, _user.AccessToken, "agencyId", _user.AgencyId.ToString());
-            CarsCollection = _converter.CarResourceConverter(carResource);
+            //var carResource = await _carClient.GetCars(_user.TokenType, _user.AccessToken, "agencyId", _user.AgencyId.ToString());
+            //CarsCollection = _converter.CarResourceConverter(carResource);
 
+            //Cars = new BindableCollection<CarModel>();
+            //foreach (var car in CarsCollection)
+            //    Cars.Add(car);
+
+            var carResource = await _carClient.GetCarsAsync(_user.TokenType, _user.AccessToken, "agencyId", _user.AgencyId.ToString());
             Cars = new BindableCollection<CarModel>();
-            foreach (var car in CarsCollection)
-                Cars.Add(car);
+
+            foreach (var car in carResource.content)
+                Cars.Add(_mapper.Map<CarModel>(car));
         }
 
         #region Car Card Operations

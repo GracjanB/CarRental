@@ -37,6 +37,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=9.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.9.0.0\lib\net461\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="Caliburn.Micro, Version=3.2.0.0, Culture=neutral, PublicKeyToken=8e5891231f2ed21f, processorArchitecture=MSIL">
       <HintPath>..\packages\Caliburn.Micro.Core.3.2.0\lib\net45\Caliburn.Micro.dll</HintPath>
     </Reference>
@@ -90,9 +93,12 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Bootstrapper.cs" />
-    <Compile Include="Converters\IModelToRequestContentConverter.cs" />
-    <Compile Include="Converters\ModelToRequestContentConverter.cs" />
+    <Compile Include="Events\NewAgencyAddedEvent.cs" />
     <Compile Include="Events\UserLoggedInEvent.cs" />
+    <Compile Include="Helpers\AutomapperProfiles\CarProfile.cs" />
+    <Compile Include="Helpers\AutomapperProfiles\NewCarProfile.cs" />
+    <Compile Include="Helpers\AutomapperProfiles\NewRentalProfile.cs" />
+    <Compile Include="Helpers\AutomapperProfiles\UserProfile.cs" />
     <Compile Include="Helpers\PasswordBoxHelper.cs" />
     <Compile Include="Helpers\ValidationBehavior.cs" />
     <Compile Include="Models\AgencyModel.cs" />
@@ -100,6 +106,7 @@
     <Compile Include="Models\EmployeeModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\RegisterModel.cs" />
+    <Compile Include="Models\RentalModel.cs" />
     <Compile Include="Models\RentCarFormModel.cs" />
     <Compile Include="User\AuthenticatedUser.cs" />
     <Compile Include="User\IAuthenticatedUser.cs" />
@@ -109,58 +116,66 @@
     <Compile Include="Validators\EmployeeValidators.cs" />
     <Compile Include="Validators\LoginFormValidator.cs" />
     <Compile Include="Validators\RegisterFormValidator.cs" />
-    <Compile Include="ViewModels\AgencyManageEmployeeDetailsViewModel.cs" />
-    <Compile Include="ViewModels\AgencyManageEmployeeEditViewModel.cs" />
-    <Compile Include="ViewModels\AgencyManageEmployeesViewModel.cs" />
-    <Compile Include="ViewModels\AgencyManageHomeViewModel.cs" />
-    <Compile Include="ViewModels\AgencyManageNewEmployeeViewModel.cs" />
-    <Compile Include="ViewModels\AgencyManageNewVehicleViewModel.cs" />
-    <Compile Include="ViewModels\AgencyManageRaportsViewModel.cs" />
-    <Compile Include="ViewModels\AgencyManageVehicleDetailsViewModel.cs" />
-    <Compile Include="ViewModels\AgencyManageVehicleEditViewModel.cs" />
-    <Compile Include="ViewModels\AgencyManageVehiclesViewModel.cs" />
-    <Compile Include="ViewModels\AgencyManageViewModel.cs" />
+    <Compile Include="ViewModels\AgencyManage\AgencyManageAgenciesListViewModel.cs" />
+    <Compile Include="ViewModels\AgencyManage\AgencyManageEmployeeDetailsViewModel.cs" />
+    <Compile Include="ViewModels\AgencyManage\AgencyManageEmployeeEditViewModel.cs" />
+    <Compile Include="ViewModels\AgencyManage\AgencyManageEmployeesViewModel.cs" />
+    <Compile Include="ViewModels\AgencyManage\AgencyManageHomeViewModel.cs" />
+    <Compile Include="ViewModels\AgencyManage\AgencyManageNewAgencyViewModel.cs" />
+    <Compile Include="ViewModels\AgencyManage\AgencyManageNewEmployeeViewModel.cs" />
+    <Compile Include="ViewModels\AgencyManage\AgencyManageNewVehicleViewModel.cs" />
+    <Compile Include="ViewModels\AgencyManage\AgencyManageRaportsViewModel.cs" />
+    <Compile Include="ViewModels\AgencyManage\AgencyManageVehicleDetailsViewModel.cs" />
+    <Compile Include="ViewModels\AgencyManage\AgencyManageVehicleEditViewModel.cs" />
+    <Compile Include="ViewModels\AgencyManage\AgencyManageVehiclesViewModel.cs" />
+    <Compile Include="ViewModels\AgencyManage\AgencyManageViewModel.cs" />
     <Compile Include="ViewModels\CarsViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\RegisterViewModel.cs" />
-    <Compile Include="ViewModels\RentCarFormAdditionalDataViewModel.cs" />
-    <Compile Include="ViewModels\RentCarFormCarChoiceViewModel.cs" />
-    <Compile Include="ViewModels\RentCarFormDateChoiceViewModel.cs" />
-    <Compile Include="ViewModels\RentCarFormSummaryViewModel.cs" />
-    <Compile Include="ViewModels\RentCarFormUserChoiceViewModel.cs" />
-    <Compile Include="ViewModels\RentCarFormViewModel.cs" />
-    <Compile Include="Views\AgencyManageEmployeeDetailsView.xaml.cs">
+    <Compile Include="ViewModels\RentCar\RentCarFormAdditionalDataViewModel.cs" />
+    <Compile Include="ViewModels\RentCar\RentCarFormCarChoiceViewModel.cs" />
+    <Compile Include="ViewModels\RentCar\RentCarFormDateChoiceViewModel.cs" />
+    <Compile Include="ViewModels\RentCar\RentCarFormSummaryViewModel.cs" />
+    <Compile Include="ViewModels\RentCar\RentCarFormUserChoiceViewModel.cs" />
+    <Compile Include="ViewModels\RentCar\RentCarFormViewModel.cs" />
+    <Compile Include="Views\AgencyManage\AgencyManageAgenciesListView.xaml.cs">
+      <DependentUpon>AgencyManageAgenciesListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AgencyManage\AgencyManageEmployeeDetailsView.xaml.cs">
       <DependentUpon>AgencyManageEmployeeDetailsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\AgencyManageEmployeeEditView.xaml.cs">
+    <Compile Include="Views\AgencyManage\AgencyManageEmployeeEditView.xaml.cs">
       <DependentUpon>AgencyManageEmployeeEditView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\AgencyManageEmployeesView.xaml.cs">
+    <Compile Include="Views\AgencyManage\AgencyManageEmployeesView.xaml.cs">
       <DependentUpon>AgencyManageEmployeesView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\AgencyManageHomeView.xaml.cs">
+    <Compile Include="Views\AgencyManage\AgencyManageHomeView.xaml.cs">
       <DependentUpon>AgencyManageHomeView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\AgencyManageNewEmployeeView.xaml.cs">
+    <Compile Include="Views\AgencyManage\AgencyManageNewAgencyView.xaml.cs">
+      <DependentUpon>AgencyManageNewAgencyView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AgencyManage\AgencyManageNewEmployeeView.xaml.cs">
       <DependentUpon>AgencyManageNewEmployeeView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\AgencyManageNewVehicleView.xaml.cs">
+    <Compile Include="Views\AgencyManage\AgencyManageNewVehicleView.xaml.cs">
       <DependentUpon>AgencyManageNewVehicleView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\AgencyManageRaportsView.xaml.cs">
+    <Compile Include="Views\AgencyManage\AgencyManageRaportsView.xaml.cs">
       <DependentUpon>AgencyManageRaportsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\AgencyManageVehicleDetailsView.xaml.cs">
+    <Compile Include="Views\AgencyManage\AgencyManageVehicleDetailsView.xaml.cs">
       <DependentUpon>AgencyManageVehicleDetailsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\AgencyManageVehicleEditView.xaml.cs">
+    <Compile Include="Views\AgencyManage\AgencyManageVehicleEditView.xaml.cs">
       <DependentUpon>AgencyManageVehicleEditView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\AgencyManageVehiclesView.xaml.cs">
+    <Compile Include="Views\AgencyManage\AgencyManageVehiclesView.xaml.cs">
       <DependentUpon>AgencyManageVehiclesView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\AgencyManageView.xaml.cs">
+    <Compile Include="Views\AgencyManage\AgencyManageView.xaml.cs">
       <DependentUpon>AgencyManageView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\CarsView.xaml.cs">
@@ -175,22 +190,22 @@
     <Compile Include="Views\RegisterView.xaml.cs">
       <DependentUpon>RegisterView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\RentCarFormAdditionalDataView.xaml.cs">
+    <Compile Include="Views\RentCar\RentCarFormAdditionalDataView.xaml.cs">
       <DependentUpon>RentCarFormAdditionalDataView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\RentCarFormCarChoiceView.xaml.cs">
+    <Compile Include="Views\RentCar\RentCarFormCarChoiceView.xaml.cs">
       <DependentUpon>RentCarFormCarChoiceView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\RentCarFormDateChoiceView.xaml.cs">
+    <Compile Include="Views\RentCar\RentCarFormDateChoiceView.xaml.cs">
       <DependentUpon>RentCarFormDateChoiceView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\RentCarFormSummaryView.xaml.cs">
+    <Compile Include="Views\RentCar\RentCarFormSummaryView.xaml.cs">
       <DependentUpon>RentCarFormSummaryView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\RentCarFormUserChoiceView.xaml.cs">
+    <Compile Include="Views\RentCar\RentCarFormUserChoiceView.xaml.cs">
       <DependentUpon>RentCarFormUserChoiceView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\RentCarFormView.xaml.cs">
+    <Compile Include="Views\RentCar\RentCarFormView.xaml.cs">
       <DependentUpon>RentCarFormView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -221,49 +236,59 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <Page Include="Views\AgencyManageEmployeeDetailsView.xaml">
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Views\AgencyManage\AgencyManageAgenciesListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\AgencyManageEmployeeEditView.xaml">
+    <Page Include="Views\AgencyManage\AgencyManageEmployeeDetailsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\AgencyManageEmployeesView.xaml">
+    <Page Include="Views\AgencyManage\AgencyManageEmployeeEditView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\AgencyManageHomeView.xaml">
+    <Page Include="Views\AgencyManage\AgencyManageEmployeesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\AgencyManageNewEmployeeView.xaml">
+    <Page Include="Views\AgencyManage\AgencyManageHomeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\AgencyManageNewVehicleView.xaml">
+    <Page Include="Views\AgencyManage\AgencyManageNewAgencyView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\AgencyManageRaportsView.xaml">
+    <Page Include="Views\AgencyManage\AgencyManageNewEmployeeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\AgencyManageVehicleDetailsView.xaml">
+    <Page Include="Views\AgencyManage\AgencyManageNewVehicleView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\AgencyManageVehicleEditView.xaml">
+    <Page Include="Views\AgencyManage\AgencyManageRaportsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\AgencyManageVehiclesView.xaml">
+    <Page Include="Views\AgencyManage\AgencyManageVehicleDetailsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\AgencyManageView.xaml">
+    <Page Include="Views\AgencyManage\AgencyManageVehicleEditView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AgencyManage\AgencyManageVehiclesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AgencyManage\AgencyManageView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -283,27 +308,27 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\RentCarFormAdditionalDataView.xaml">
+    <Page Include="Views\RentCar\RentCarFormAdditionalDataView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\RentCarFormCarChoiceView.xaml">
+    <Page Include="Views\RentCar\RentCarFormCarChoiceView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\RentCarFormDateChoiceView.xaml">
+    <Page Include="Views\RentCar\RentCarFormDateChoiceView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\RentCarFormSummaryView.xaml">
+    <Page Include="Views\RentCar\RentCarFormSummaryView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\RentCarFormUserChoiceView.xaml">
+    <Page Include="Views\RentCar\RentCarFormUserChoiceView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\RentCarFormView.xaml">
+    <Page Include="Views\RentCar\RentCarFormView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -315,8 +340,8 @@
     <Resource Include="Assets\logo.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CarRentalWPF.Library\CarRentalWPF.Library.csproj">
-      <Project>{EC7A0665-4197-44EC-A6F9-97FC5BDFA35A}</Project>
+    <ProjectReference Include="..\CarRentalWPF.Library2\CarRentalWPF.Library.csproj">
+      <Project>{D2E5CB94-96F3-4519-9AA1-5D2EB2DBF29F}</Project>
       <Name>CarRentalWPF.Library</Name>
     </ProjectReference>
   </ItemGroup>

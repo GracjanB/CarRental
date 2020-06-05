@@ -36,7 +36,7 @@ namespace CarRentalWPF.Validators
             RuleFor(x => x.Street)
                 .Length(5, 50);
 
-            RuleFor(x => x.BuildingNo)
+            RuleFor(x => x.HouseNo)
                 .NotEmpty();
 
             RuleFor(x => x.FlatNo)

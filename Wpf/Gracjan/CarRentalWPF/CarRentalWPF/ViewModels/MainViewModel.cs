@@ -1,22 +1,17 @@
 ﻿using Caliburn.Micro;
 using CarRentalWPF.Events;
 using CarRentalWPF.User;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace CarRentalWPF.ViewModels
 {
     public class MainViewModel : Conductor<object>, IHandle<UserLoggedInEvent>
     {
-        private SimpleContainer _container { get; set; }
+        private readonly SimpleContainer _container;
 
-        private IWindowManager _windowManager { get; set; }
+        private readonly IWindowManager _windowManager;
 
-        private ILoggedInUserModel _user { get; set; }
+        private readonly ILoggedInUserModel _user;
 
         public MainViewModel(SimpleContainer simpleContainer, IWindowManager windowManager, IEventAggregator eventAggregator, ILoggedInUserModel loggedInUserModel)
         {

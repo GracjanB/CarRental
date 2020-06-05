@@ -30,6 +30,15 @@ namespace CarRentalWPF.User
             this.UserId = userId;
         }
 
+        public void Logout()
+        {
+            AccessToken = null;
+            TokenType = null;
+            RefreshToken = null;
+            TokenExpireTime = 0;
+            AgencyId = 0;
+            UserId = 0;
+        }
 
     }
 }

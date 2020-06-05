@@ -1,41 +1,44 @@
 ﻿using Caliburn.Micro;
 using CarRentalWPF.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using CarRentalWPF.Validators;
 using System.Windows;
-using Newtonsoft.Json;
-using CarRentalWPF.Library.ApiClient;
-using CarRentalWPF.Library.Models;
 using CarRentalWPF.User;
 using CarRentalWPF.Events;
+using CarRentalWPF.Library2.ApiClient;
+using AutoMapper;
+using CarRentalWPF.Library2.ApiClient.Implementations;
+using CarRentalWPF.Library2.FromServerDto;
 
 namespace CarRentalWPF.ViewModels
 {
     public class LoginViewModel : Screen
     {
-        public LoginModel loginModel { get; set; }
+        private readonly SimpleContainer _container;
 
-        private UserLogin userLogin { get; set; }
+        private readonly IEventAggregator _events;
+
+        private readonly IAuthenticationService _authService;
+
+        private readonly IMapper _mapper;
+
+        private readonly IUserClient _userClient;
+
+        public LoginModel loginModel { get; set; }
 
         private LoginFormValidator _loginValidator { get; set; }
 
-        private UserLoginClient _userClient;
 
-        private SimpleContainer _container;
-
-        private IEventAggregator _events;
-
-
-        public LoginViewModel(SimpleContainer simpleContainer, IEventAggregator eventAggregator)
+        public LoginViewModel(SimpleContainer simpleContainer, IEventAggregator eventAggregator,
+            IAuthenticationService authService, IMapper mapper, IUserClient userClient)
         {
             loginModel = new LoginModel();
-            _userClient = new UserLoginClient();
             _container = simpleContainer;
             _events = eventAggregator;
+
+            _authService = authService;
+            _mapper = mapper;
+            _userClient = userClient;
         }
 
         public async void LoginButton()
@@ -49,36 +52,33 @@ namespace CarRentalWPF.ViewModels
 
             if (result.IsValid)
             {
-                // TODO: Change this
-                userLogin = new UserLogin()
+                var userLoginDto = new UserLoginDto
                 {
                     username = loginModel.Login,
                     password = loginModel.Password
                 };
 
-                var resultResponse = await _userClient.GetToken(userLogin);
+                TokenInfoDto token = null;
 
-                if (resultResponse.isSucceded)
+                try
                 {
-                    var userData = await _userClient.GetUserData(resultResponse.token_type, resultResponse.access_token);
-
-                    var user = _container.GetInstance<IAuthenticatedUser>();
-                    user.Login(resultResponse.access_token, resultResponse.token_type, resultResponse.refresh_token, resultResponse.expires_in, 
-                        userData.user.agencyId, userData.user.id);
-                    var loggedInUser = _container.GetInstance<ILoggedInUserModel>();
-
-                    if(userData.isSucceded)
-                    {
-                        loggedInUser.SetUserData(userData);
-                    }
-
-                    //var userTest = _container.GetInstance<IAuthenticatedUser>();
-                    //var loggedInUserTest = _container.GetInstance<ILoggedInUserModel>();
-                    //Console.WriteLine();
-
-                    _events.PublishOnUIThread(new UserLoggedInEvent());     
+                    token = await _authService.GetTokenAsync(userLoginDto);
+                }
+                catch(ArgumentException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    return;
                 }
 
+                var authenticatedUser = _container.GetInstance<IAuthenticatedUser>();
+                var loggedInUser = _container.GetInstance<ILoggedInUserModel>();
+                var userData = await _userClient.GetUserDataAsync(token.token_type, token.access_token);
+
+                authenticatedUser.Login(token.access_token, token.token_type, token.refresh_token, token.expires_in,
+                    userData.user.agencyId, userData.user.id);
+                loggedInUser.SetUserData2(userData);
+
+                _events.PublishOnUIThread(new UserLoggedInEvent());
                 this.TryClose();
             }
             else

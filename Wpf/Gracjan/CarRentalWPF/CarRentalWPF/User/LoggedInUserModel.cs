@@ -1,16 +1,10 @@
-﻿using CarRentalWPF.Library.RequestsContentModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CarRentalWPF.Library2.FromServerDto;
 
 namespace CarRentalWPF.User
 {
     public class LoggedInUserModel : ILoggedInUserModel
     {
         public int Id { get; set; }
-
         public string FirstName { get; set; }
 
         public string LastName { get; set; }
@@ -35,17 +29,30 @@ namespace CarRentalWPF.User
             }
         }
 
-        public void SetUserData(UserInfo userCredentials)
+        public void SetUserData2(UserInfoDto user)
         {
-            this.Id = userCredentials.user.id;
-            this.FirstName = userCredentials.user.firstName;
-            this.LastName = userCredentials.user.lastName;
-            this.Email = userCredentials.user.email;
-            this.IdCardNumber = userCredentials.user.idCardNumber;
-            this.PESEL = userCredentials.user.pesel;
-            this.Role = userCredentials.user.role;
-            this.AgencyId = userCredentials.user.agencyId;
-            this.isActive = true;
+            Id = user.user.id;
+            FirstName = user.user.firstName;
+            LastName = user.user.lastName;
+            Email = user.user.email;
+            IdCardNumber = user.user.idCardNumber;
+            PESEL = user.user.pesel;
+            Role = user.user.role;
+            AgencyId = user.user.agencyId;
+            isActive = true;
+        }
+
+        public void ClearUserData()
+        {
+            Id = 0;
+            FirstName = null;
+            LastName = null;
+            Email = null;
+            IdCardNumber = null;
+            PESEL = null;
+            Role = null;
+            AgencyId = 0;
+            isActive = false;
         }
     }
 }

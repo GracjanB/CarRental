@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29728.190
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarRentalWPF", "CarRentalWPF\CarRentalWPF.csproj", "{FB4465FF-C6AB-4511-ADFD-08E3ED30F403}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarRentalWPF.Library", "CarRentalWPF.Library\CarRentalWPF.Library.csproj", "{EC7A0665-4197-44EC-A6F9-97FC5BDFA35A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarRentalWPF.Library", "CarRentalWPF.Library2\CarRentalWPF.Library.csproj", "{D2E5CB94-96F3-4519-9AA1-5D2EB2DBF29F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{FB4465FF-C6AB-4511-ADFD-08E3ED30F403}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FB4465FF-C6AB-4511-ADFD-08E3ED30F403}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FB4465FF-C6AB-4511-ADFD-08E3ED30F403}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EC7A0665-4197-44EC-A6F9-97FC5BDFA35A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EC7A0665-4197-44EC-A6F9-97FC5BDFA35A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EC7A0665-4197-44EC-A6F9-97FC5BDFA35A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EC7A0665-4197-44EC-A6F9-97FC5BDFA35A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2E5CB94-96F3-4519-9AA1-5D2EB2DBF29F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2E5CB94-96F3-4519-9AA1-5D2EB2DBF29F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2E5CB94-96F3-4519-9AA1-5D2EB2DBF29F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2E5CB94-96F3-4519-9AA1-5D2EB2DBF29F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

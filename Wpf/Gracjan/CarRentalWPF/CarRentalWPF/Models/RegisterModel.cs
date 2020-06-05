@@ -24,7 +24,7 @@ namespace CarRentalWPF.Models
 
         public string Street { get; set; }
 
-        public string BuildingNo { get; set; }
+        public string HouseNo { get; set; }
 
         public int FlatNo { get; set; }
 
