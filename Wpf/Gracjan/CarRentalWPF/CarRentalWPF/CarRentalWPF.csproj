@@ -108,6 +108,7 @@
     <Compile Include="Models\RegisterModel.cs" />
     <Compile Include="Models\RentalModel.cs" />
     <Compile Include="Models\RentCarFormModel.cs" />
+    <Compile Include="Models\UserModel.cs" />
     <Compile Include="User\AuthenticatedUser.cs" />
     <Compile Include="User\IAuthenticatedUser.cs" />
     <Compile Include="User\ILoggedInUserModel.cs" />

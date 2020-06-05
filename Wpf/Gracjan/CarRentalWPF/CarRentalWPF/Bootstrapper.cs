@@ -14,6 +14,7 @@ using CarRentalWPF.Library2.ApiClient.Implementations;
 using CarRentalWPF.Library2.ApiClient;
 using CarRentalWPF.Helpers.AutomapperProfiles;
 using CarRentalWPF.Library2.ToServerDto;
+using CarRentalWPF.Library.FromServerDto;
 
 namespace CarRentalWPF
 {
@@ -53,6 +54,7 @@ namespace CarRentalWPF
                 config.CreateMap<AgencyModel, NewAgencyDto>();
                 config.CreateMap<Agency, AgencyModel>();
                 config.CreateMap<RegisterModel, NewUserDto>();
+                config.CreateMap<UserDto, UserModel>();
                 config.AddProfile(new UserProfile());
                 config.AddProfile(new NewCarProfile());
                 config.AddProfile(new NewRentalProfile());

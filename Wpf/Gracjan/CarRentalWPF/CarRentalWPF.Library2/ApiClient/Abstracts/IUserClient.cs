@@ -13,7 +13,7 @@ namespace CarRentalWPF.Library2.ApiClient.Implementations
         Task<UserRoleDto> GetUserRoleAsync(string tokenType, string accessToken);
 
         Task<UsersDto> GetUsersAsync(string token_type, string access_token, string search_field = "",
-            string search_value = "", bool isAscending = true, int pageNumber = 0, int pageSize = 25);
+            string search_value = "", bool isAscending = true, int pageNumber = 0, int pageSize = 25, string field = "id");
 
         Task<bool> CreateUserAsync(NewUserDto userDto, string tokenType, string accessToken);
     }

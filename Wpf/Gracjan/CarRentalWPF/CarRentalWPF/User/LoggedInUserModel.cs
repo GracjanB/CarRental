@@ -38,7 +38,7 @@ namespace CarRentalWPF.User
             IdCardNumber = user.user.idCardNumber;
             PESEL = user.user.pesel;
             Role = user.user.role;
-            AgencyId = user.user.agencyId;
+            AgencyId = (int)user.user.agencyId;
             isActive = true;
         }
 

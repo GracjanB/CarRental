@@ -36,6 +36,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -59,6 +60,7 @@
     <Compile Include="FromServerDto\CarsDto.cs" />
     <Compile Include="FromServerDto\PriceListDto.cs" />
     <Compile Include="FromServerDto\TokenInfoDto.cs" />
+    <Compile Include="FromServerDto\UserDto.cs" />
     <Compile Include="FromServerDto\UsersDto.cs" />
     <Compile Include="FromServerDto\UserInfoDto.cs" />
     <Compile Include="FromServerDto\UserRoleDto.cs" />

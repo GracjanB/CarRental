@@ -21,7 +21,7 @@ namespace CarRentalWPF.Helpers.AutomapperProfiles
                 .ForMember(dest => dest.PESEL, opt => opt.MapFrom(src => src.user.pesel))
                 .ForMember(dest => dest.Role, opt => opt.MapFrom(src => src.user.role))
                 .ForMember(dest => dest.IdCardNumber, opt => opt.MapFrom(src => src.user.idCardNumber))
-                .ForMember(dest => dest.AgencyId, opt => opt.MapFrom(src => src.user.agencyId));
+                .ForMember(dest => dest.AgencyId, opt => opt.Condition(src => (src.user.agencyId != null)));
         }
     }
 }

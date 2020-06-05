@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CarRentalWPF.Library.FromServerDto;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,6 @@ namespace CarRentalWPF.Library2.FromServerDto
 {
     public class UsersDto
     {
-        List<User> content;
+        public List<UserDto> content;
     }
 }

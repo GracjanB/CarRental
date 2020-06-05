@@ -6,6 +6,7 @@ using CarRentalWPF.Models;
 using CarRentalWPF.User;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -30,15 +31,28 @@ namespace CarRentalWPF.ViewModels
             _userClient = userClient;
             _mapper = mapper;
             _user = user;
-
-            UserList = GenerateUsers();
             RegisterFormModel = new RegisterModel();
+        }
+
+        protected override async void OnViewLoaded(object view)
+        {
+            base.OnViewLoaded(view);
+            await LoadUsers();
         }
 
         public void LoadRental(RentalModel rentalModel)
         {
             rental = rentalModel;
             Car = rental.Car;
+        }
+
+        private async Task LoadUsers()
+        {
+            var usersList = await _userClient.GetUsersAsync(_user.TokenType, _user.AccessToken, "role", "USER");
+            UserList = new BindableCollection<UserModel>();
+
+            foreach (var user in usersList.content)
+                UserList.Add(_mapper.Map<UserModel>(user));
         }
 
         #region Car Card Info
@@ -85,7 +99,7 @@ namespace CarRentalWPF.ViewModels
 
         private List<EmployeeModel> _usersCollection;
 
-        private BindableCollection<EmployeeModel> _users;
+        private BindableCollection<UserModel> _users;
 
         public Grid UserListForm { get; set; }
 
@@ -93,7 +107,7 @@ namespace CarRentalWPF.ViewModels
 
         public string LastNameSearch { get; set; }
 
-        public BindableCollection<EmployeeModel> UserList
+        public BindableCollection<UserModel> UserList
         {
             get { return _users; }
             set 
@@ -160,31 +174,5 @@ namespace CarRentalWPF.ViewModels
         }
 
         #endregion
-
-        private BindableCollection<EmployeeModel> GenerateUsers()
-        {
-            BindableCollection<EmployeeModel> users = new BindableCollection<EmployeeModel>
-            {
-                new EmployeeModel
-                {
-                    Id = 13,
-                    FirstName = "Krystian",
-                    LastName = "Krystian"
-                },
-                new EmployeeModel
-                {
-                    Id = 43,
-                    FirstName = "Bartek",
-                    LastName = "Bartek"
-                },
-                new EmployeeModel
-                {
-                    FirstName = "test",
-                    LastName = "test"
-                },
-            };
-
-            return users;
-        }
     }
 }

@@ -36,7 +36,7 @@ namespace CarRentalWPF.Models
 
         public string PhoneNumber { get; set; }
 
-        public int AgencyId { get; set; }
+        public int? AgencyId { get; set; }
 
         public string FullStreet
         {

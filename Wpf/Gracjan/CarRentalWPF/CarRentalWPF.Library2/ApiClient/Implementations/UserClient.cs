@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace CarRentalWPF.Library2.ApiClient.Implementations
 {
@@ -93,27 +94,32 @@ namespace CarRentalWPF.Library2.ApiClient.Implementations
         }
 
         public async Task<UsersDto> GetUsersAsync(string token_type, string access_token, string search_field = "", string search_value = "",
-            bool isAscending = true, int pageNumber = 0, int pageSize = 25)
+            bool isAscending = true, int pageNumber = 0, int pageSize = 25, string field = "id")
         {
-            string endPoint = "api/user/bySpec";
             UsersDto usersDto = null;
             _client.DefaultRequestHeaders.Clear();
 
-            // Set Authorization
-            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(token_type, access_token);
-
-            // Set default values for headers
-            _client.DefaultRequestHeaders.Add("isAscending", isAscending.ToString());
-            _client.DefaultRequestHeaders.Add("pageNumber", pageNumber.ToString());
-            _client.DefaultRequestHeaders.Add("pageSize", pageSize.ToString());
+            var uriBuilder = new UriBuilder(URI);
+            uriBuilder.Path = "api/user/bySpec";
+            var query = HttpUtility.ParseQueryString(uriBuilder.Query);
+            query["field"] = field;
+            query["isAscending"] = isAscending.ToString();
+            query["pageNumber"] = pageNumber.ToString();
+            query["pageSize"] = pageSize.ToString();
 
             // Set search field
             if (!string.IsNullOrWhiteSpace(search_field) && !string.IsNullOrWhiteSpace(search_value))
             {
-                _client.DefaultRequestHeaders.Add("search", search_field + "=" + search_value);
+                query["search"] = search_field + "=" + search_value;
             }
+            else
+                query["search"] = "";
+            uriBuilder.Query = query.ToString();
 
-            using (var response = await _client.GetAsync(URI + endPoint))
+            // Set Authorization
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(token_type, access_token);
+
+            using (var response = await _client.GetAsync(uriBuilder.ToString()))
             {
                 var result = await response.Content.ReadAsStringAsync();
 

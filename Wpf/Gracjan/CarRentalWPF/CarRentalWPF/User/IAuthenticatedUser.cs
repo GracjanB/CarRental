@@ -14,7 +14,7 @@
 
         int UserId { get; set; }
 
-        void Login(string accessToken, string tokenType, string refreshToken, int tokenExpireTime, int agencyId, int userId);
+        void Login(string accessToken, string tokenType, string refreshToken, int tokenExpireTime, int? agencyId, int userId);
 
         void Logout();
     }

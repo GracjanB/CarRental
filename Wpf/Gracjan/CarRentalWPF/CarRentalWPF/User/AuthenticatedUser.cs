@@ -20,13 +20,13 @@ namespace CarRentalWPF.User
 
         public int UserId { get; set; }
 
-        public void Login(string accessToken, string tokenType, string refreshToken, int tokenExpireTime, int agencyId, int userId)
+        public void Login(string accessToken, string tokenType, string refreshToken, int tokenExpireTime, int? agencyId, int userId)
         {
             this.AccessToken = accessToken;
             this.TokenType = tokenType;
             this.RefreshToken = refreshToken;
             this.TokenExpireTime = tokenExpireTime;
-            this.AgencyId = agencyId;
+            this.AgencyId = (int)agencyId;
             this.UserId = userId;
         }
 
