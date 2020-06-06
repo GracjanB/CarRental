@@ -1,8 +1,8 @@
-package pl.bucior.carrental.model.dto;
+package pl.bucior.carrental.mapper;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
-import pl.bucior.carrental.mapper.ToDtoMapper;
+import pl.bucior.carrental.model.dto.ReportDto;
 import pl.bucior.carrental.model.jpa.Report;
 
 @Mapper(componentModel = "spring")

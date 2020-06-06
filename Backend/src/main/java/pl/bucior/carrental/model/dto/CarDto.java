@@ -22,5 +22,6 @@ public class CarDto implements Serializable {
     private BigDecimal dailyPrice;
     private Long parentAgencyId;
     private Long currentAgencyId;
+    private Long carPhotoId;
 
 }

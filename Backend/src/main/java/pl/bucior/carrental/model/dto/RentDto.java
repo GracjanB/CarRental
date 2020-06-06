@@ -12,11 +12,17 @@ public class RentDto implements Serializable {
 
     private Long id;
 
+    private Long userId;
+
     private String userMail;
 
     private String carVin;
 
+    private Long agencyId;
+
     private String agencyCity;
+
+    private Long targetAgencyId;
 
     private String targetAgencyCity;
 
