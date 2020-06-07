@@ -1,0 +1,62 @@
+﻿<UserControl x:Class="CarRentalWPF.Views.Rentals.FinishRentalView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+             xmlns:cal="http://www.caliburnproject.org"
+             xmlns:local="clr-namespace:CarRentalWPF.Views.Rentals"
+             mc:Ignorable="d" 
+             d:DesignHeight="550" d:DesignWidth="1080" Background="White">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Top Menu (View Title) -->
+        <DockPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" VerticalAlignment="Top" Height="60" Margin="1 5 1 5">
+            <TextBlock Text="Zakończenie wypożyczenia" HorizontalAlignment="Left" Style="{StaticResource MaterialDesignHeadline2TextBlock}" 
+                       FontSize="38" Padding="5" />
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0 10 0">
+                <Button x:Name="FinishRental" Content="Zakończ wypożyczenie" Style="{StaticResource MaterialDesignFlatButton}" Width="200" />
+            </StackPanel>
+        </DockPanel>
+
+        <Separator Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Style="{StaticResource MaterialDesignDarkSeparator}" Margin="5 0 5 0" />
+
+        <StackPanel Grid.Row="2" Grid.Column="0" Margin="30 20 0 0">
+            <TextBox x:Name="EndMileage" Width="200" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.IsFloating="True"
+                     materialDesign:HintAssist.Hint="Końcowy przebieg" />
+            <TextBox x:Name="FinalPrice" Width="200" Style="{StaticResource MaterialDesignFloatingHintTextBox}" materialDesign:HintAssist.IsFloating="True"
+                     materialDesign:HintAssist.Hint="Końcowa cena" Margin="0 25 0 0"/>
+            <TextBlock Text="Data zakończenia" Style="{StaticResource MaterialDesignHeadline3TextBlock}" FontSize="20" HorizontalAlignment="Center"
+                       Margin="0 20 0 0"/>
+            <DatePicker SelectedDate="{Binding SelectedEndDate, Mode=TwoWay}" materialDesign:HintAssist.Hint="Data zakończenia" 
+                        Style="{StaticResource MaterialDesignFloatingHintDatePicker}" Width="200" FontSize="12" Margin="0 15 0 0"/>
+            <materialDesign:TimePicker SelectedTime="{Binding SelectedEndTime}" materialDesign:HintAssist.Hint="Godzina zakończenia" 
+                        Style="{StaticResource MaterialDesignFloatingHintTimePicker}" Width="200" FontSize="12" Margin="0 30 0 0" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Grid.Column="1" Margin="50 20 0 0">
+            <TextBlock Text="Serwis" Style="{StaticResource MaterialDesignHeadline3TextBlock}" FontSize="20" HorizontalAlignment="Center"/>
+            <TextBox x:Name="TechnicalSupportCost" Width="200" Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                     materialDesign:HintAssist.IsFloating="True" materialDesign:HintAssist.Hint="Koszt serwisu" Margin="0 20 0 0" />
+            <TextBox x:Name="TechnicalSupportComment" Width="200" TextWrapping="Wrap" Height="100" VerticalScrollBarVisibility="Hidden"
+                     materialDesign:HintAssist.Hint="Komentarz" AcceptsReturn="True" Margin="0 20 0 0"/>
+            <ComboBox x:Name="Actions" Width="150" Style="{StaticResource MaterialDesignFloatingHintComboBox}" materialDesign:HintAssist.IsFloating="True"
+                      materialDesign:HintAssist.Hint="Akcje" Margin="0 20 0 0" SelectedItem="{Binding SelectedAction}"/>
+            <Button x:Name="AddAction" Content="Dodaj" Width="100" Style="{StaticResource MaterialDesignFlatButton}" Margin="0 10 0 0"/>
+            <TextBlock Text="{Binding ActionsString}" Style="{StaticResource MaterialDesignBody1TextBlock}" FontSize="16" Margin="0 10 0 0"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

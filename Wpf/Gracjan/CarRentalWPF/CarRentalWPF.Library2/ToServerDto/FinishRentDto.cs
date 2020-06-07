@@ -10,7 +10,7 @@ namespace CarRentalWPF.Library2.ToServerDto
     {
         public int endMileage;
 
-        public int finalPrice;
+        public decimal finalPrice;
 
         public string rentEndDate;
 
@@ -23,8 +23,8 @@ namespace CarRentalWPF.Library2.ToServerDto
     {
         public string comment;
 
-        public string[] technicalSupportActions;
+        public List<string> technicalSupportActions;
 
-        public int technicalSupportCost;
+        public decimal technicalSupportCost;
     }
 }
