@@ -19,5 +19,13 @@ namespace CarRentalWPF.Models
         public string PESEL { get; set; }
 
         public string IdCardNumber { get; set; }
+
+        public string FullName
+        {
+            get
+            {
+                return FirstName + " " + LastName;
+            }
+        }
     }
 }

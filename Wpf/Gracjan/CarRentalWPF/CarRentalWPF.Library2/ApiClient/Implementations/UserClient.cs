@@ -71,7 +71,7 @@ namespace CarRentalWPF.Library2.ApiClient.Implementations
 
         public async Task<UserInfoDto> GetUserByIdAsync(string token_type, string access_token, int id)
         {
-            string endPoint = "api/user/{id}?aLong=" + id.ToString();
+            string endPoint = "api/user/" + id.ToString();
             UserInfoDto user = null;
             _client.DefaultRequestHeaders.Clear();
 

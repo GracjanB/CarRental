@@ -1,4 +1,5 @@
-﻿using CarRentalWPF.Library2.FromServerDto;
+﻿using CarRentalWPF.Library.FromServerDto;
+using CarRentalWPF.Library2.FromServerDto;
 using CarRentalWPF.Library2.ToServerDto;
 using Newtonsoft.Json;
 using System;
@@ -8,6 +9,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace CarRentalWPF.Library2.ApiClient.Implementations
 {
@@ -73,6 +75,35 @@ namespace CarRentalWPF.Library2.ApiClient.Implementations
                 {
                     var agencies = JsonConvert.DeserializeObject<AgenciesDto>(result);
                     return agencies;
+                }
+
+                throw new Exception("Something went wrong.");
+            }
+        }
+
+        public async Task<AgencyDto> GetAgencyByIdAsync(int id, string tokenType, string accessToken)
+        {
+            AgencyDto agencyDto = null;
+            _client.DefaultRequestHeaders.Clear();
+
+            var uriBuilder = new UriBuilder(URI);
+            uriBuilder.Path = "api/agency/";
+            var query = HttpUtility.ParseQueryString(uriBuilder.Query);
+            query["id"] = id.ToString();
+            uriBuilder.Query = query.ToString();
+
+            // Set Authorization
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(tokenType, accessToken);
+
+            using(var response = await _client.GetAsync(uriBuilder.ToString()))
+            {
+                var result = await response.Content.ReadAsStringAsync();
+
+                if(response.IsSuccessStatusCode)
+                {
+                    agencyDto = JsonConvert.DeserializeObject<AgencyDto>(result);
+
+                    return agencyDto;
                 }
 
                 throw new Exception("Something went wrong.");

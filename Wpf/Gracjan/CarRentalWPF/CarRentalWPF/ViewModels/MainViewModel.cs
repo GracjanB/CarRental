@@ -1,6 +1,7 @@
 ﻿using Caliburn.Micro;
 using CarRentalWPF.Events;
 using CarRentalWPF.User;
+using CarRentalWPF.ViewModels.Rentals;
 using System.Windows;
 
 namespace CarRentalWPF.ViewModels
@@ -13,7 +14,8 @@ namespace CarRentalWPF.ViewModels
 
         private readonly ILoggedInUserModel _user;
 
-        public MainViewModel(SimpleContainer simpleContainer, IWindowManager windowManager, IEventAggregator eventAggregator, ILoggedInUserModel loggedInUserModel)
+        public MainViewModel(SimpleContainer simpleContainer, IWindowManager windowManager, IEventAggregator eventAggregator, 
+            ILoggedInUserModel loggedInUserModel)
         {
             _container = simpleContainer;
             _windowManager = windowManager;
@@ -41,7 +43,9 @@ namespace CarRentalWPF.ViewModels
 
         public void MainView_MouseLeftButtonDown()
         {
-            MessageBox.Show("Not implemented.");
+            // FOR TESTING
+            var finishRentVM = _container.GetInstance<FinishRentalViewModel>();
+            ActivateItem(finishRentVM);
         }
 
         public void AgencyManageWindowShow()
@@ -59,6 +63,12 @@ namespace CarRentalWPF.ViewModels
             {
                 MessageBox.Show("You have no access to this element");
             }
+        }
+
+        public void RentalListViewShow()
+        {
+            var rentalsVM = _container.GetInstance<RentalsViewModel>();
+            ActivateItem(rentalsVM);
         }
 
         public void RentalViewShow()

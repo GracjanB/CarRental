@@ -52,13 +52,14 @@ namespace CarRentalWPF
             {
                 config.CreateMap<LoginModel, UserLoginDto>();
                 config.CreateMap<AgencyModel, NewAgencyDto>();
-                config.CreateMap<Agency, AgencyModel>();
+                config.CreateMap<AgencyDto, AgencyModel>();
                 config.CreateMap<RegisterModel, NewUserDto>();
                 config.CreateMap<UserDto, UserModel>();
                 config.AddProfile(new UserProfile());
                 config.AddProfile(new NewCarProfile());
                 config.AddProfile(new NewRentalProfile());
                 config.AddProfile(new CarProfile());
+                config.AddProfile(new RentalProfile());
             });
 
             var Mapper = mapperConfig.CreateMapper();

@@ -27,16 +27,5 @@ namespace CarRentalWPF.Models
         public int StartMileage { get; set; }
 
         public decimal CalculatedCost { get; set; }
-
-
-        // 
-        // Additional data
-        //
-
-        public int RentalStage { get; private set; }
-
-        public void IncrementStage() { RentalStage++; }
-
-        public void DecrementStage() { RentalStage--; }
     }
 }

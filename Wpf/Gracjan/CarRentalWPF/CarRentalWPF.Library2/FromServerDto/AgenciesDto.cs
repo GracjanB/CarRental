@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CarRentalWPF.Library.FromServerDto;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,25 +9,6 @@ namespace CarRentalWPF.Library2.FromServerDto
 {
     public class AgenciesDto
     {
-        public List<Agency> content;
-    }
-
-    public class Agency
-    {
-        public int id;
-
-        public string street;
-
-        public string houseNo;
-
-        public string flatNo;
-
-        public string city;
-
-        public string postalCode;
-
-        public string country;
-
-        public int maxCarQuantity;
+        public List<AgencyDto> content;
     }
 }

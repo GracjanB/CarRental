@@ -115,7 +115,7 @@
                             <TextBlock Text="Flota" Margin="10"/>
                         </StackPanel>
                     </ListViewItem>
-                    <ListViewItem Height="45" Padding="0">
+                    <ListViewItem Height="45" Padding="0" cal:Message.Attach="[Event PreviewMouseLeftButtonDown] = [Action RentalListViewShow]">
                         <StackPanel Orientation="Horizontal">
                             <materialDesign:PackIcon Width="20" Height="20" Margin="5" Kind="ClipboardListOutline" Foreground="Gray" VerticalAlignment="Center"/>
                             <TextBlock Text="Rezerwacje" Margin="10"/>

@@ -1,4 +1,5 @@
-﻿using CarRentalWPF.Library2.FromServerDto;
+﻿using CarRentalWPF.Library.FromServerDto;
+using CarRentalWPF.Library2.FromServerDto;
 using CarRentalWPF.Library2.ToServerDto;
 using Newtonsoft.Json;
 using System;
@@ -8,6 +9,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace CarRentalWPF.Library2.ApiClient.Implementations
 {
@@ -65,9 +67,9 @@ namespace CarRentalWPF.Library2.ApiClient.Implementations
             }
         }
 
-        public async Task GetActionsAsync(string token_type, string access_token)
+        public async Task<string[]> GetActionsAsync(string token_type, string access_token)
         {
-            string endPoint = "/api/rent/action";
+            string endPoint = "api/rent/action";
             _client.DefaultRequestHeaders.Clear();
             _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(token_type, access_token);
 
@@ -77,9 +79,11 @@ namespace CarRentalWPF.Library2.ApiClient.Implementations
 
                 if (response.IsSuccessStatusCode)
                 {
-                    // 1. Convert to table
-                    // 2. Return table of actions
+                    var actions = JsonConvert.DeserializeObject<string[]>(result);
+                    return actions;
                 }
+
+                throw new Exception("Something went wrong.");
             }
         }
 
@@ -101,6 +105,47 @@ namespace CarRentalWPF.Library2.ApiClient.Implementations
                     var calculatedCost = JsonConvert.DeserializeObject<CalculatedCostDto>(result);
 
                     return calculatedCost;
+                }
+
+                throw new Exception("Something went wrong");
+            }
+        }
+
+        public async Task<RentalsDto> GetRentalsAsync(string tokenType, string accessToken, string search_field = "", string search_value = "",
+            bool isAscending = true, int pageNumber = 0, int pageSize = 25, string field = "id")
+        {
+            RentalsDto rentalsDto = null;
+            _client.DefaultRequestHeaders.Clear();
+
+            var uriBuilder = new UriBuilder(URI);
+            uriBuilder.Path = "api/rent/bySpec";
+            var query = HttpUtility.ParseQueryString(uriBuilder.Query);
+            query["field"] = field;
+            query["isAscending"] = isAscending.ToString();
+            query["pageNumber"] = pageNumber.ToString();
+            query["pageSize"] = pageSize.ToString();
+
+            // Set search field
+            if (!string.IsNullOrWhiteSpace(search_field) && !string.IsNullOrWhiteSpace(search_value))
+            {
+                query["search"] = search_field + "=" + search_value;
+            }
+            else
+                query["search"] = "";
+            uriBuilder.Query = query.ToString();
+
+            // Set Authorization
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(tokenType, accessToken);
+
+            using(var response = await _client.GetAsync(uriBuilder.ToString()))
+            {
+                var result = await response.Content.ReadAsStringAsync();
+
+                if(response.IsSuccessStatusCode)
+                {
+                    rentalsDto = JsonConvert.DeserializeObject<RentalsDto>(result);
+
+                    return rentalsDto;
                 }
 
                 throw new Exception("Something went wrong");

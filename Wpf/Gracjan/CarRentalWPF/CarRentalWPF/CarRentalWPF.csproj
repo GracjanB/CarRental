@@ -99,6 +99,7 @@
     <Compile Include="Helpers\AutomapperProfiles\CarProfile.cs" />
     <Compile Include="Helpers\AutomapperProfiles\NewCarProfile.cs" />
     <Compile Include="Helpers\AutomapperProfiles\NewRentalProfile.cs" />
+    <Compile Include="Helpers\AutomapperProfiles\RentalProfile.cs" />
     <Compile Include="Helpers\AutomapperProfiles\UserProfile.cs" />
     <Compile Include="Helpers\Extensions.cs" />
     <Compile Include="Helpers\PasswordBoxHelper.cs" />
@@ -108,6 +109,7 @@
     <Compile Include="Models\EmployeeModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\RegisterModel.cs" />
+    <Compile Include="Models\RentalDetailsModel.cs" />
     <Compile Include="Models\RentalModel.cs" />
     <Compile Include="Models\RentCarFormModel.cs" />
     <Compile Include="Models\UserModel.cs" />
@@ -136,6 +138,9 @@
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\RegisterViewModel.cs" />
+    <Compile Include="ViewModels\Rentals\FinishRentalViewModel.cs" />
+    <Compile Include="ViewModels\Rentals\RentalDetailsViewModel.cs" />
+    <Compile Include="ViewModels\Rentals\RentalsViewModel.cs" />
     <Compile Include="ViewModels\RentCar\RentCarFormAdditionalDataViewModel.cs" />
     <Compile Include="ViewModels\RentCar\RentCarFormAgencyChoiceViewModel.cs" />
     <Compile Include="ViewModels\RentCar\RentCarFormCarChoiceViewModel.cs" />
@@ -193,6 +198,15 @@
     </Compile>
     <Compile Include="Views\RegisterView.xaml.cs">
       <DependentUpon>RegisterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Rentals\FinishRentalView.xaml.cs">
+      <DependentUpon>FinishRentalView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Rentals\RentalDetailsView.xaml.cs">
+      <DependentUpon>RentalDetailsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Rentals\RentalsView.xaml.cs">
+      <DependentUpon>RentalsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\RentCar\RentCarFormAdditionalDataView.xaml.cs">
       <DependentUpon>RentCarFormAdditionalDataView.xaml</DependentUpon>
@@ -312,6 +326,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\RegisterView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Rentals\FinishRentalView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Rentals\RentalDetailsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Rentals\RentalsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

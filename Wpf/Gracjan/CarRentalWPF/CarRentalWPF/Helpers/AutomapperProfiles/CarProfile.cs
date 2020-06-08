@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using CarRentalWPF.Library.FromServerDto;
 using CarRentalWPF.Library2.FromServerDto;
 using CarRentalWPF.Models;
 using System;
@@ -13,7 +14,7 @@ namespace CarRentalWPF.Helpers.AutomapperProfiles
     {
         public CarProfile()
         {
-            CreateMap<Car, CarModel>()
+            CreateMap<CarDto, CarModel>()
                 .ForMember(dest => dest.Version, opt => opt.MapFrom(src => src.carVersion))
                 .ForMember(dest => dest.Type, opt => opt.MapFrom(src => src.carType))
                 .ForMember(dest => dest.Power, opt => opt.MapFrom(src => src.horsePower))
