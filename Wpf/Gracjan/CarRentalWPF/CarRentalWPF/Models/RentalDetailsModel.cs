@@ -11,6 +11,10 @@ namespace CarRentalWPF.Models
     {
         public int Id { get; set; }
 
+        public int AgencyId { get; set; }
+
+        public int TargetAgencyId { get; set; }
+
         public decimal Deposit { get; set; }
 
         public decimal CalculatedPrice { get; set; }

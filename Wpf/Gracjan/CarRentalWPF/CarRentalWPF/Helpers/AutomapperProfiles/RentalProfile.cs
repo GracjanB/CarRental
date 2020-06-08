@@ -22,7 +22,9 @@ namespace CarRentalWPF.Helpers.AutomapperProfiles
                 .ForMember(dest => dest.EndMileage, opt => opt.MapFrom(src => src.endMileage))
                 .ForMember(dest => dest.FinalPrice, opt => opt.MapFrom(src => src.finalPrice))
                 .ForMember(dest => dest.RentStartDate, opt => opt.MapFrom(src => src.rentStartDate))
-                .ForMember(dest => dest.RentEndDate, opt => opt.MapFrom(src => src.rentEndDate));
+                .ForMember(dest => dest.RentEndDate, opt => opt.MapFrom(src => src.rentEndDate))
+                .ForMember(dest => dest.AgencyId, opt => opt.MapFrom(src => src.agencyId))
+                .ForMember(dest => dest.TargetAgencyId, opt => opt.MapFrom(src => src.targetAgencyId));
         }
     }
 }

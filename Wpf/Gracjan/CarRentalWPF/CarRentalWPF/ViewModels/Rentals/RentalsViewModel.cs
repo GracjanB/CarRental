@@ -5,6 +5,7 @@ using CarRentalWPF.Models;
 using CarRentalWPF.User;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,8 @@ namespace CarRentalWPF.ViewModels.Rentals
 {
     public class RentalsViewModel : Screen
     {
+        private readonly SimpleContainer _container;
+
         private readonly IRentClient _rentClient;
 
         private readonly IUserClient _userClient;
@@ -23,9 +26,10 @@ namespace CarRentalWPF.ViewModels.Rentals
 
         private readonly IMapper _mapper;
 
-        public RentalsViewModel(IRentClient rentClient, IUserClient userClient, ICarClient carClient, 
+        public RentalsViewModel(SimpleContainer container, IRentClient rentClient, IUserClient userClient, ICarClient carClient, 
             IAuthenticatedUser user, IMapper mapper)
         {
+            _container = container;
             _rentClient = rentClient;
             _userClient = userClient;
             _carClient = carClient;
@@ -73,14 +77,20 @@ namespace CarRentalWPF.ViewModels.Rentals
             }
         }
 
-        public void RentDetails(RentalDetailsModel rentalDetailsModel)
+        public async void RentDetails(RentalDetailsModel rentalDetailsModel)
         {
-            // TODO
+            var rentDetailsVM = _container.GetInstance<RentalDetailsViewModel>();
+            await rentDetailsVM.LoadRental(rentalDetailsModel);
+            var conductorObject = (MainViewModel)this.Parent;
+            conductorObject.ActivateItem(rentDetailsVM);
         }
 
         public void FinishRent(RentalDetailsModel rentalDetailsModel)
         {
-            // TODO
+            var finishRentalVM = _container.GetInstance<FinishRentalViewModel>();
+            finishRentalVM.LoadRentalId(rentalDetailsModel.Id);
+            var conductorObject = (MainViewModel)this.Parent;
+            conductorObject.ActivateItem(finishRentalVM);
         }
 
         #endregion
