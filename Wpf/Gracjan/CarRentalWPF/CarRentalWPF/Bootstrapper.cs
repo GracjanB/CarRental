@@ -55,6 +55,7 @@ namespace CarRentalWPF
                 config.CreateMap<AgencyDto, AgencyModel>();
                 config.CreateMap<RegisterModel, NewUserDto>();
                 config.CreateMap<UserDto, UserModel>();
+                config.CreateMap<UserDto, EmployeeModel>();
                 config.AddProfile(new UserProfile());
                 config.AddProfile(new NewCarProfile());
                 config.AddProfile(new NewRentalProfile());

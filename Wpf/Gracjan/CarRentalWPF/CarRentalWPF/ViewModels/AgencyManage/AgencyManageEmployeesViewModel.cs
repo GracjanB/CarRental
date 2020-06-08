@@ -1,8 +1,12 @@
-﻿using Caliburn.Micro;
+﻿using AutoMapper;
+using Caliburn.Micro;
+using CarRentalWPF.Library2.ApiClient.Implementations;
+using CarRentalWPF.Library2.FromServerDto;
 using CarRentalWPF.Models;
 using CarRentalWPF.User;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace CarRentalWPF.ViewModels
@@ -13,64 +17,52 @@ namespace CarRentalWPF.ViewModels
 
 		private readonly IAuthenticatedUser _user;
 
-		private List<EmployeeModel> employees;
+		private readonly IUserClient _userClient;
 
-		public AgencyManageEmployeesViewModel(SimpleContainer simpleContainer, IAuthenticatedUser authenticatedUser)
+		private readonly IMapper _mapper;
+
+		public AgencyManageEmployeesViewModel(SimpleContainer simpleContainer, IAuthenticatedUser authenticatedUser, IUserClient userClient,
+			IMapper mapper)
 		{
 			_container = simpleContainer;
 			_user = authenticatedUser;
-			Employees = GenerateEmployees();
+			_userClient = userClient;
+			_mapper = mapper;
 		}
 
 
-		protected override void OnViewLoaded(object view)
+		protected override async void OnViewLoaded(object view)
 		{
 			base.OnViewLoaded(view);
+			await LoadEmployees();
 		}
 
-		private async void LoadUsers()
+		private async Task LoadEmployees()
 		{
-			//UsersResource users = null;
+			UsersDto users = null;
 
-			//try
-			//{
-			//	users = await _userClient.GetUsers(_user.TokenType, _user.AccessToken, "role", "MANAGER");
-			//}
-			//catch (ArgumentException ex)
-			//{
-			//	MessageBox.Show(ex.Message);
-			//}
+			try
+			{
+				users = await _userClient.GetUsersAsync(_user.TokenType, _user.AccessToken, "agencyId", _user.AgencyId.ToString());
+			}
+			catch(Exception ex)
+			{
+				MessageBox.Show(ex.Message);
+			}
 
-			////employees = _converter.UserResourceConverter(users);
-			//LoadEmployeesToDisplay();
-		}
-
-		private void LoadEmployeesToDisplay()
-		{
 			Employees = new BindableCollection<EmployeeModel>();
 
-			foreach (var employee in employees)
-				Employees.Add(employee);
+			foreach (var user in users.content)
+				Employees.Add(_mapper.Map<EmployeeModel>(user));
 		}
 
 		#region Top Menu
 
-		public async void NewEmployee()
+		public void NewEmployee()
 		{
-			//var agencyManageNewEmployeeVM = _container.GetInstance<AgencyManageNewEmployeeViewModel>();
-			//var conductorObject = (AgencyManageViewModel)this.Parent;
-			//conductorObject.ActivateItem(agencyManageNewEmployeeVM);
-
-			//try
-			//{
-			//	var result = await _userClient.GetUserById(_user.TokenType, _user.AccessToken, 6);
-			//}
-			//catch(ArgumentException ex)
-			//{
-			//	Console.WriteLine(ex.Message);
-			//}
-
-			Console.WriteLine();
+			var newEmployeeVM = _container.GetInstance<AgencyManageNewEmployeeViewModel>();
+			var conductorObject = (AgencyManageViewModel)this.Parent;
+			conductorObject.ActivateItem(newEmployeeVM);
 		}
 
         #endregion
@@ -110,49 +102,5 @@ namespace CarRentalWPF.ViewModels
 
 		#endregion
 
-		private BindableCollection<EmployeeModel> GenerateEmployees()
-		{
-			var employees = new BindableCollection<EmployeeModel>
-			{
-				new EmployeeModel
-				{
-					Id = 1,
-					FirstName = "Jan",
-					LastName = "Kowalski",
-					Email = "j.kowalski@sample.com",
-					PESEL = "01932912120213",
-					IdCardNumber = "ACV34243",
-					Role = "Pracownik biurowy",
-					Street = "Poziomkowa",
-					BuildingNo = "64B",
-					FlatNo = 32,
-					City = "Wrocław",
-					PostalCode = "45-232",
-					PhoneNumber = "198321932"
-				},
-				new EmployeeModel
-				{
-					Id = 2,
-					FirstName = "Wiesiu",
-					LastName = "Nowak",
-					Email = "j.nowak@sample.com",
-					PESEL = "8342348932498",
-					IdCardNumber = "ADS98323",
-					Role = "Pracownik techniczny"
-				},
-				new EmployeeModel
-				{
-					Id = 2,
-					FirstName = "Zbysiu",
-					LastName = "Zbysiowski",
-					Email = "z.zbysiowski@sample.com",
-					PESEL = "342342343232",
-					IdCardNumber = "SDI98983",
-					Role = "Pracownik techniczny"
-				},
-			};
-
-			return employees;
-		}
 	}
 }
