@@ -1,5 +1,8 @@
-﻿using Caliburn.Micro;
+﻿using AutoMapper;
+using Caliburn.Micro;
+using CarRentalWPF.Library2.ApiClient.Implementations;
 using CarRentalWPF.Models;
+using CarRentalWPF.User;
 
 namespace CarRentalWPF.ViewModels
 {
@@ -7,23 +10,45 @@ namespace CarRentalWPF.ViewModels
     {
         private readonly SimpleContainer _container;
 
-        public AgencyManageNewEmployeeViewModel(SimpleContainer simpleContainer)
+        private readonly IUserClient _userClient;
+
+        private readonly IAuthenticatedUser _user;
+
+        private readonly IMapper _mapper;
+
+        public AgencyManageNewEmployeeViewModel(SimpleContainer simpleContainer, IUserClient userClient,
+            IAuthenticatedUser user, IMapper mapper)
         {
             _container = simpleContainer;
+            _userClient = userClient;
+            _user = user;
+            _mapper = mapper;
             RegisterFormModel = new RegisterModel();
         }
 
-
         #region Top Menu 
+
+        public bool CanRegisterEmployee
+        {
+            get
+            {
+                return FirstNameValidationResult &&
+                       LastNameValidationResult &&
+                       PESELValidationResult &&
+                       IdCardNumberValidationResult &&
+                       StreetValidationResult &&
+                       BuildingNoValidationResult &&
+                       FlatNoValidationResult &&
+                       PostalCodeValidationResult &&
+                       CityValidationResult &&
+                       EmailValidationResult &&
+                       PhoneNumberValidationResult;
+            }
+        }
 
         public void RegisterEmployee()
         {
             // TODO: Make function to register new employee
-        }
-
-        public void ClearForm()
-        {
-            // TODO: Make function to entire register form
         }
 
         public void MoveBack()
@@ -43,7 +68,11 @@ namespace CarRentalWPF.ViewModels
         public RegisterModel RegisterFormModel
         {
             get { return _registerFormModel; }
-            set { _registerFormModel = value; }
+            set 
+            { 
+                _registerFormModel = value;
+                NotifyOfPropertyChange(() => RegisterFormModel);
+            }
         }
 
         #endregion
@@ -69,7 +98,7 @@ namespace CarRentalWPF.ViewModels
             set
             {
                 _firstNameValidationResult = value;
-                NotifyOfPropertyChange(() => OverallValidationResult);
+                NotifyOfPropertyChange(() => CanRegisterEmployee);
             }
         }
 
@@ -79,7 +108,7 @@ namespace CarRentalWPF.ViewModels
             set
             {
                 _lastNameValidationResult = value;
-                NotifyOfPropertyChange(() => OverallValidationResult);
+                NotifyOfPropertyChange(() => CanRegisterEmployee);
             }
         }
 
@@ -89,7 +118,7 @@ namespace CarRentalWPF.ViewModels
             set
             {
                 _peselValidationResult = value;
-                NotifyOfPropertyChange(() => OverallValidationResult);
+                NotifyOfPropertyChange(() => CanRegisterEmployee);
             }
         }
 
@@ -99,7 +128,7 @@ namespace CarRentalWPF.ViewModels
             set
             {
                 _idCardNumberValidationResult = value;
-                NotifyOfPropertyChange(() => OverallValidationResult);
+                NotifyOfPropertyChange(() => CanRegisterEmployee);
             }
         }
 
@@ -109,7 +138,7 @@ namespace CarRentalWPF.ViewModels
             set
             {
                 _streetValidationResult = value;
-                NotifyOfPropertyChange(() => OverallValidationResult);
+                NotifyOfPropertyChange(() => CanRegisterEmployee);
             }
         }
 
@@ -119,7 +148,7 @@ namespace CarRentalWPF.ViewModels
             set
             {
                 _buildingNoValidationResult = value;
-                NotifyOfPropertyChange(() => OverallValidationResult);
+                NotifyOfPropertyChange(() => CanRegisterEmployee);
             }
         }
 
@@ -129,7 +158,7 @@ namespace CarRentalWPF.ViewModels
             set
             {
                 _flatNoValidationResult = value;
-                NotifyOfPropertyChange(() => OverallValidationResult);
+                NotifyOfPropertyChange(() => CanRegisterEmployee);
             }
         }
 
@@ -139,7 +168,7 @@ namespace CarRentalWPF.ViewModels
             set
             {
                 _postalCodeValidationResult = value;
-                NotifyOfPropertyChange(() => OverallValidationResult);
+                NotifyOfPropertyChange(() => CanRegisterEmployee);
             }
         }
 
@@ -149,7 +178,7 @@ namespace CarRentalWPF.ViewModels
             set
             {
                 _cityValidationResult = value;
-                NotifyOfPropertyChange(() => OverallValidationResult);
+                NotifyOfPropertyChange(() => CanRegisterEmployee);
             }
         }
 
@@ -159,7 +188,7 @@ namespace CarRentalWPF.ViewModels
             set
             {
                 _emailValidationResult = value;
-                NotifyOfPropertyChange(() => OverallValidationResult);
+                NotifyOfPropertyChange(() => CanRegisterEmployee);
             }
         }
 
@@ -169,28 +198,9 @@ namespace CarRentalWPF.ViewModels
             set
             {
                 _phoneNumberValidationResult = value;
-                NotifyOfPropertyChange(() => OverallValidationResult);
+                NotifyOfPropertyChange(() => CanRegisterEmployee);
             }
         }
-
-        public bool OverallValidationResult
-        {
-            get
-            {
-                return FirstNameValidationResult &&
-                       LastNameValidationResult &&
-                       PESELValidationResult &&
-                       IdCardNumberValidationResult &&
-                       StreetValidationResult &&
-                       BuildingNoValidationResult &&
-                       FlatNoValidationResult &&
-                       PostalCodeValidationResult &&
-                       CityValidationResult &&
-                       EmailValidationResult &&
-                       PhoneNumberValidationResult;
-            }
-        }
-
 
         #endregion
     }

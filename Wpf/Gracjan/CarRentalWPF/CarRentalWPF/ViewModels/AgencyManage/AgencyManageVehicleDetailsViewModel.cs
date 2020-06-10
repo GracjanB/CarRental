@@ -17,7 +17,6 @@ namespace CarRentalWPF.ViewModels
             Car = carModel;
         }
 
-
         #region Model
 
         private CarModel _carModel;
@@ -35,17 +34,11 @@ namespace CarRentalWPF.ViewModels
 
         public void EditCar()
         {
-            // TODO: Show Edit Car Screen
             var agencyManageVehicleEditVM = _container.GetInstance<AgencyManageVehicleEditViewModel>();
             agencyManageVehicleEditVM.LoadModel(this.Car);
 
             var conductorObject = (AgencyManageViewModel) this.Parent;
             conductorObject.ActivateItem(agencyManageVehicleEditVM);
-        }
-
-        public void CarPriceList()
-        {
-            // TODO: Show Car Price List Screen
         }
 
         public void BackToCarList()

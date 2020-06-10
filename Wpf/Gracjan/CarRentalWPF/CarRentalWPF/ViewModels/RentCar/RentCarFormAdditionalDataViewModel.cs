@@ -14,7 +14,10 @@ namespace CarRentalWPF.ViewModels
 
 		private readonly IWindowManager _windowManager;
 
-		public RentCarFormAdditionalDataViewModel(SimpleContainer container, IEventAggregator eventAggregator, IWindowManager windowManager)
+		public RentalModel rental { get; set; }
+
+		public RentCarFormAdditionalDataViewModel(SimpleContainer container, IEventAggregator eventAggregator, 
+			IWindowManager windowManager)
 		{
 			_container = container;
 			_events = eventAggregator;
@@ -22,15 +25,27 @@ namespace CarRentalWPF.ViewModels
 			_events.Subscribe(this);
 		}
 
-		public RentalModel rental { get; set; }
+		public void LoadRental(RentalModel rentalModel)
+		{
+			rental = rentalModel;
+		}
+
+		#region Form Controls
+
+		private string _agencyString;
 
 		public int StartingMileage { get; set; }
 
 		public int Deposit { get; set; }
 
-		public void MoveBack()
+		public string AgencyString
 		{
-			// TODO: Function to get back
+			get { return _agencyString; }
+			set
+			{
+				_agencyString = value;
+				NotifyOfPropertyChange(() => AgencyString);
+			}
 		}
 
 		public void MoveForward()
@@ -45,35 +60,23 @@ namespace CarRentalWPF.ViewModels
 			conductorObject.ActivateItem(rentCarFormSummaryVM);
 		}
 
-		public void LoadRental(RentalModel rentalModel)
-		{
-			rental = rentalModel;
-		}
-
 		public void AgencyChoose()
 		{
 			var agencyChooseVM = _container.GetInstance<RentCarFormAgencyChoiceViewModel>();
 			_windowManager.ShowDialog(agencyChooseVM);
 		}
 
-		private string _agencyString;
+		#endregion
 
-		public string AgencyString
-		{
-			get { return _agencyString; }
-			set 
-			{
-				_agencyString = value;
-				NotifyOfPropertyChange(() => AgencyString);
-			}
-		}
-
+		#region Events
 
 		public void Handle(AgencySelectedEvent agencySelectedEvent)
 		{
 			rental.TargetAgency = agencySelectedEvent.Agency;
 			AgencyString = agencySelectedEvent.Agency.FullAddress;
 		}
+
+		#endregion
 
 	}
 }

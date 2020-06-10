@@ -22,7 +22,8 @@ namespace CarRentalWPF.ViewModels.RentCar
 
         private readonly IAuthenticatedUser _user;
 
-        public RentCarFormAgencyChoiceViewModel(IEventAggregator eventAggregator, IAgencyClient agencyClient, IMapper mapper, IAuthenticatedUser user)
+        public RentCarFormAgencyChoiceViewModel(IEventAggregator eventAggregator, IAgencyClient agencyClient,
+            IMapper mapper, IAuthenticatedUser user)
         {
             _events = eventAggregator;
             _agencyClient = agencyClient;
@@ -45,31 +46,31 @@ namespace CarRentalWPF.ViewModels.RentCar
                 Agencies.Add(_mapper.Map<AgencyModel>(agency));
         }
 
+        #region Form Controls
+
         private BindableCollection<AgencyModel> _agencies;
+        private AgencyModel _selectedAgency;
 
         public BindableCollection<AgencyModel> Agencies
         {
             get { return _agencies; }
-            set 
-            { 
+            set
+            {
                 _agencies = value;
                 NotifyOfPropertyChange(() => Agencies);
             }
         }
 
-        private AgencyModel _selectedAgency;
-
         public AgencyModel SelectedAgency
         {
             get { return _selectedAgency; }
-            set 
-            { 
+            set
+            {
                 _selectedAgency = value;
                 NotifyOfPropertyChange(() => SelectedAgency);
                 NotifyOfPropertyChange(() => CanSave);
             }
         }
-
 
         public bool CanSave
         {
@@ -89,6 +90,8 @@ namespace CarRentalWPF.ViewModels.RentCar
             _events.PublishOnUIThread(new AgencySelectedEvent(SelectedAgency));
             TryClose();
         }
+
+        #endregion
 
     }
 }

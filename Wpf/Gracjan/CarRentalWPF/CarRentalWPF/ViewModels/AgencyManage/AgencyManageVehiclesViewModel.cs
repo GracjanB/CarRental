@@ -14,8 +14,6 @@ namespace CarRentalWPF.ViewModels
 
 		private readonly IAuthenticatedUser _user;
 
-		private List<CarModel> CarsCollection;
-
 		private readonly ICarClient _carClient;
 
 		private readonly IMapper _mapper;
@@ -26,7 +24,6 @@ namespace CarRentalWPF.ViewModels
 		{
 			_container = simpleContainer;
 			_user = authenticatedUser;
-
 			_carClient = carClient;
 			_mapper = mapper;
 		}

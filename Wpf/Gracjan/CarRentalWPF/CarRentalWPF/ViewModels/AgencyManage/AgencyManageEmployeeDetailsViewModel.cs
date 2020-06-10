@@ -24,11 +24,14 @@ namespace CarRentalWPF.ViewModels
         public EmployeeModel Employee
         {
             get { return _employee; }
-            set { _employee = value; }
+            set 
+            { 
+                _employee = value;
+                NotifyOfPropertyChange(() => Employee);
+            }
         }
 
         #endregion
-
 
         #region PopUp Menu
 

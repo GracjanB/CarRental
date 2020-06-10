@@ -14,7 +14,6 @@ namespace CarRentalWPF.ViewModels
 
         public void LoadModel(EmployeeModel employee)
         {
-            // Change it to copy constructor
             Employee = employee;
         }
 

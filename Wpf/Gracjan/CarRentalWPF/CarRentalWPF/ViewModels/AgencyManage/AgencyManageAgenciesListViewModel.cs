@@ -30,7 +30,6 @@ namespace CarRentalWPF.ViewModels
             _container = container;
             _windowManager = windowManager;
             _user = user;
-
             _agencyClient = agencyClient;
             _mapper = mapper;
         }
@@ -59,23 +58,27 @@ namespace CarRentalWPF.ViewModels
                 Agencies.Add(_mapper.Map<AgencyModel>(agency));
         }
 
-        public void NewAgency()
-        {
-            var newAgencyVM = _container.GetInstance<AgencyManageNewAgencyViewModel>();
-            _windowManager.ShowDialog(newAgencyVM);
-        }
+        #region Form Controls
 
         private BindableCollection<AgencyModel> _agencies;
 
         public BindableCollection<AgencyModel> Agencies
         {
             get { return _agencies; }
-            set 
-            { 
+            set
+            {
                 _agencies = value;
                 NotifyOfPropertyChange(() => Agencies);
             }
         }
+
+        public void NewAgency()
+        {
+            var newAgencyVM = _container.GetInstance<AgencyManageNewAgencyViewModel>();
+            _windowManager.ShowDialog(newAgencyVM);
+        }
+
+        #endregion
 
         #region Snackbar PopUp Notification
 
@@ -103,7 +106,6 @@ namespace CarRentalWPF.ViewModels
         }
 
         #endregion
-
 
         #region Events
 

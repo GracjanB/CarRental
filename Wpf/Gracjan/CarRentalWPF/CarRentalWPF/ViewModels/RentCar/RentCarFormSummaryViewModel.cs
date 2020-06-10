@@ -33,73 +33,69 @@ namespace CarRentalWPF.ViewModels
             CompleteCost = Convert.ToDecimal(Rental.Deposit) + Rental.CalculatedCost;
         }
 
+        private void FormDates()
+        {
+            RentalStartDate = Extensions.ConvertToReprDate(Rental.RentalStartDate, Rental.RentalStartTime);
+            RentalEndDate = Extensions.ConvertToReprDate(Rental.RentalEndDate, Rental.RentalEndTime);
+        }
+
+
+        public async Task MakeRental()
+        {
+            var rentalDto = _mapper.Map<NewRentalDto>(Rental);
+            var result = await _rentClient.CreateRentAsync(rentalDto, _user.TokenType, _user.AccessToken);
+            string message = result ? "Wypożyczenie zrealizowano pomyślnie" : "Wystąpił błąd podczas składania wypożyczenia, \nspróbuj ponownie";
+            MessageBox.Show(message);
+        }
+
+        #region View Models
+
         private string _rentalStartDate;
+        private string _rentalEndDate;
+        private decimal _completeCost;
+        private RentalModel _rental;
 
         public string RentalStartDate
         {
             get { return _rentalStartDate; }
-            set 
-            { 
+            set
+            {
                 _rentalStartDate = value;
                 NotifyOfPropertyChange(() => RentalStartDate);
             }
         }
 
-        private string _rentalEndDate;
-
         public string RentalEndDate
         {
             get { return _rentalEndDate; }
-            set 
+            set
             {
                 _rentalEndDate = value;
                 NotifyOfPropertyChange(() => RentalEndDate);
             }
         }
 
-        private decimal _completeCost;
-
         public decimal CompleteCost
         {
             get { return _completeCost; }
-            set 
-            { 
+            set
+            {
                 _completeCost = value;
                 NotifyOfPropertyChange(() => CompleteCost);
             }
         }
 
-
-
-
-        private RentalModel _rental;
-
         public RentalModel Rental
         {
             get { return _rental; }
-            set 
-            { 
+            set
+            {
                 _rental = value;
                 NotifyOfPropertyChange(() => Rental);
             }
         }
 
-        private void FormDates()
-        {
-            RentalStartDate = Extensions.ConvertToReprDate(Rental.RentalStartDate, Rental.RentalStartTime);
-            RentalEndDate = Extensions.ConvertToReprDate(Rental.RentalEndDate, Rental.RentalEndTime);
-        }
-        
+        #endregion
 
-        public async Task MakeRental()
-        {
-            var rentalDto = _mapper.Map<NewRentalDto>(Rental);
-            var result = await _rentClient.CreateRentAsync(rentalDto, _user.TokenType, _user.AccessToken);
-
-            if (result)
-                MessageBox.Show("HURAA");
-            else
-                MessageBox.Show("NOPE");
-        }
     }
 }

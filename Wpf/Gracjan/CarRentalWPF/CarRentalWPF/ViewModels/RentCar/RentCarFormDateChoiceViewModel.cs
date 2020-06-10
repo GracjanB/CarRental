@@ -21,31 +21,6 @@ namespace CarRentalWPF.ViewModels
 
         private readonly IMapper _mapper;
 
-        public DateTime SelectedDateFrom { get; set; } = DateTime.Today;
-
-        public DateTime SelectedTimeFrom { get; set; }
-
-        public DateTime SelectedDateTo { get; set; } = DateTime.Today;
-
-        public DateTime SelectedTimeTo { get; set; }
-
-        private string _basePrice;
-
-        public string BasePrice
-        {
-            get { return _basePrice; }
-            set 
-            { 
-                _basePrice = value;
-                NotifyOfPropertyChange(() => BasePrice);
-            }
-        }
-
-
-        private bool DatesValid { get; set; } = false;
-
-        public RentalModel rental { get; set; }
-
         public RentCarFormDateChoiceViewModel(SimpleContainer simpleContainer, IAuthenticatedUser user,
             IRentClient rentClient, IMapper mapper)
         {
@@ -56,9 +31,46 @@ namespace CarRentalWPF.ViewModels
             _mapper = mapper;
         }
 
-        public void MoveBack()
+        private bool CompareDates(DateTime dateFrom, DateTime dateTo)
         {
+            bool output = false;
+            int result = DateTime.Compare(dateFrom, dateTo);
 
+            if (result > 0)
+                output = true;
+
+            return output;
+        }
+
+        public void LoadRental(RentalModel rentalModel)
+        {
+            rental = rentalModel;
+        }
+
+        #region Form Controls
+
+        public DateTime SelectedDateFrom { get; set; } = DateTime.Today;
+
+        public DateTime SelectedTimeFrom { get; set; }
+
+        public DateTime SelectedDateTo { get; set; } = DateTime.Today;
+
+        public DateTime SelectedTimeTo { get; set; }
+
+        private bool DatesValid { get; set; } = false;
+
+        public RentalModel rental { get; set; }
+
+        private string _basePrice;
+
+        public string BasePrice
+        {
+            get { return _basePrice; }
+            set
+            {
+                _basePrice = value;
+                NotifyOfPropertyChange(() => BasePrice);
+            }
         }
 
         public bool CanMoveForward
@@ -108,7 +120,7 @@ namespace CarRentalWPF.ViewModels
                 {
                     calculatedCost = await _rentClient.CalculateCostAsync(calculateCostDto, _user.TokenType, _user.AccessToken);
                 }
-                catch(ArgumentException ex)
+                catch (ArgumentException ex)
                 {
                     Console.WriteLine(ex.Message);
                 }
@@ -116,7 +128,7 @@ namespace CarRentalWPF.ViewModels
                 rental.CalculatedCost = calculatedCost.cost;
                 BasePrice = calculatedCost.cost.ToString("F");
                 DatesValid = true;
-            }  
+            }
             else
             {
                 SnackbarShowMessage("Daty są błędne. Spróbuj ponownie");
@@ -126,22 +138,7 @@ namespace CarRentalWPF.ViewModels
             NotifyOfPropertyChange(() => CanMoveForward);
         }
 
-        private bool CompareDates(DateTime dateFrom, DateTime dateTo)
-        {
-            bool output = false;
-            int result = DateTime.Compare(dateFrom, dateTo);
-
-            if (result > 0)
-                output = true;
-
-            return output;
-        }
-
-        public void LoadRental(RentalModel rentalModel)
-        {
-            rental = rentalModel;
-        }
-
+        #endregion
 
         #region Snackbar PopUp Notification
 
@@ -169,5 +166,6 @@ namespace CarRentalWPF.ViewModels
         }
 
         #endregion
+
     }
 }

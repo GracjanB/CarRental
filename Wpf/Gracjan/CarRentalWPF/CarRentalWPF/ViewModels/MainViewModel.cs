@@ -43,9 +43,7 @@ namespace CarRentalWPF.ViewModels
 
         public void MainView_MouseLeftButtonDown()
         {
-            // FOR TESTING
-            var finishRentVM = _container.GetInstance<FinishRentalViewModel>();
-            ActivateItem(finishRentVM);
+            MessageBox.Show("Not implemented");
         }
 
         public void AgencyManageWindowShow()
@@ -81,12 +79,6 @@ namespace CarRentalWPF.ViewModels
         {
             LoginViewModel loginVM = _container.GetInstance<LoginViewModel>();
             _windowManager.ShowDialog(loginVM);
-        }
-
-        public void RegisterButtonPopupBoxClick()
-        {
-            RegisterViewModel registerVM = _container.GetInstance<RegisterViewModel>();
-            _windowManager.ShowDialog(registerVM);
         }
 
         public void Handle(UserLoggedInEvent userLoggedIn)

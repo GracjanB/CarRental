@@ -70,7 +70,6 @@
                 <!-- Popup Menu -->
                 <materialDesign:PopupBox Margin="10" Foreground="White" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False">
                     <StackPanel Width="150">
-                        <Button Content="Rejestracja" cal:Message.Attach="[Event Click] = [Action RegisterButtonPopupBoxClick]"/>
                         <Button x:Name="AccountButtonOpen" Content="Konto" cal:Message.Attach="[Event Click] = [Action GetAccountInfo]"/>
                         <Button Content="Pomoc"/>
                         <Separator/>

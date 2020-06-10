@@ -6,7 +6,6 @@ namespace CarRentalWPF.ViewModels
     {
         private readonly SimpleContainer _container;
 
-
         public AgencyManageViewModel(SimpleContainer simpleContainer)
         {
             _container = simpleContainer;

@@ -26,7 +26,6 @@ namespace CarRentalWPF.ViewModels
         {
             _events = eventAggregator;
             _user = user;
-
             _agencyClient = agencyClient;
             _mapper = mapper;
         }
@@ -49,8 +48,6 @@ namespace CarRentalWPF.ViewModels
 
         public async Task SaveAgency()
         {
-            // TODO: Validation
-
             var agencyModel = new AgencyModel
             {
                 Street = Street,

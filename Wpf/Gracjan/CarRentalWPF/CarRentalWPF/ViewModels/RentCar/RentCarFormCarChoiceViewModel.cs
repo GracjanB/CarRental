@@ -18,8 +18,6 @@ namespace CarRentalWPF.ViewModels
 
         private readonly IMapper _mapper;
 
-        private List<CarModel> CarsCollection;
-
         public RentalModel rental { get; set; }
 
 
@@ -28,14 +26,10 @@ namespace CarRentalWPF.ViewModels
         {
             _container = simpleContainer;
             _user = authenticatedUser;
-
             _carClient = carClient;
             _mapper = mapper;
 
             rental = new RentalModel();
-
-            // For testing
-            //Cars = GenerateCars();
         }
 
         protected override async void OnViewLoaded(object view)
@@ -46,13 +40,6 @@ namespace CarRentalWPF.ViewModels
 
         private async Task LoadCars()
         {
-            //var carResource = await _carClient.GetCars(_user.TokenType, _user.AccessToken, "agencyId", _user.AgencyId.ToString());
-            //CarsCollection = _converter.CarResourceConverter(carResource);
-
-            //Cars = new BindableCollection<CarModel>();
-            //foreach (var car in CarsCollection)
-            //    Cars.Add(car);
-
             var carResource = await _carClient.GetCarsAsync(_user.TokenType, _user.AccessToken, "agencyId", _user.AgencyId.ToString());
             Cars = new BindableCollection<CarModel>();
 
@@ -62,7 +49,6 @@ namespace CarRentalWPF.ViewModels
 
         #region Car Card Operations
 
-        // Current displayed cars collection
         private BindableCollection<CarModel> _cars;
 
         public BindableCollection<CarModel> Cars
@@ -155,48 +141,5 @@ namespace CarRentalWPF.ViewModels
 
         #endregion
 
-        private BindableCollection<CarModel> GenerateCars()
-        {
-            BindableCollection<CarModel> cars = new BindableCollection<CarModel>
-            {
-                new CarModel
-                {
-                    Mark = "Toyota",
-                    Model = "Avensis",
-                    Type = "COMBI",
-                    Version = "III",
-                    Engine = 1997,
-                    Power = 234,
-                    Mileage = 384223,
-                    Plate = "KR 29383",
-                    VIN = "DS98FSD98FSD98",
-                    PricePerDay = 43
-                },
-                new CarModel
-                {
-                    Mark = "Nissan",
-                    Model = "Micra",
-                    Type = "Hatchback",
-                    Engine = 1368,
-                    Power = 78,
-                    Mileage = 5665,
-                    Plate = "KR 2433D",
-                    PricePerDay = 84
-                },
-                new CarModel
-                {
-                    Mark = "Mercedes-Benz",
-                    Model = "C200",
-                    Type = "SEDAN",
-                    Engine = 3000,
-                    Power = 234,
-                    Mileage = 384223,
-                    Plate = "KR 3242G",
-                    PricePerDay = 56
-                },
-            };
-
-            return cars;
-        }
     }
 }

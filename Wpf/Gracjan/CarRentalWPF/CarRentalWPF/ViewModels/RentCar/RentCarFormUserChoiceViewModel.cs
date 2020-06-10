@@ -25,7 +25,8 @@ namespace CarRentalWPF.ViewModels
         public RentalModel rental { get; set; }
 
         
-        public RentCarFormUserChoiceViewModel(SimpleContainer simpleContainer, IUserClient userClient, IMapper mapper, IAuthenticatedUser user)
+        public RentCarFormUserChoiceViewModel(SimpleContainer simpleContainer, IUserClient userClient, 
+            IMapper mapper, IAuthenticatedUser user)
         {
             _container = simpleContainer;
             _userClient = userClient;
@@ -168,14 +169,12 @@ namespace CarRentalWPF.ViewModels
         {
             var newUserDto = _mapper.Map<NewUserDto>(RegisterFormModel);
             newUserDto.country = "Polska";
-            Console.WriteLine();
+            string message = null;
 
             var result = await _userClient.CreateUserAsync(newUserDto, _user.TokenType, _user.AccessToken);
 
-            if (result)
-                MessageBox.Show("Everything good");
-            else
-                MessageBox.Show("Not good");
+            message = result ? "Zarejestrowano użytkownika" : "Wystąpił błąd podczas rejestracji, spróbuj ponownie";
+            MessageBox.Show(message);
         }
 
         #endregion

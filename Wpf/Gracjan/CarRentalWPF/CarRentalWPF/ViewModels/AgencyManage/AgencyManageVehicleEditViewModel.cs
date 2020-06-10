@@ -22,7 +22,6 @@ namespace CarRentalWPF.ViewModels
             }
         }
 
-
         #region Buttons
 
         public void MoveBack()

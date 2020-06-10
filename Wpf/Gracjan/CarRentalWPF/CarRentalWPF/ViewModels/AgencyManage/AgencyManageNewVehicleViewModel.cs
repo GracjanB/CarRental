@@ -21,24 +21,16 @@ namespace CarRentalWPF.ViewModels
         public AgencyManageNewVehicleViewModel(IAuthenticatedUser authenticatedUser, ICarClient carClient, IMapper mapper)
         {
             _user = authenticatedUser;
-
             _carClient = carClient;
             _mapper = mapper;
-
             Car = new CarModel();
             GenerateCarTypes();
         }
-
-
-        #region On Initialize
 
         private void GenerateCarTypes()
         {
             CarTypes = new BindableCollection<string>(Types);
         }
-
-        #endregion
-
 
         #region Top Menu Buttons
 
@@ -65,7 +57,6 @@ namespace CarRentalWPF.ViewModels
 
                 try
                 {
-                    //priceListId = _carClient.CreatePriceList(Convert.ToInt32(Car.PricePerDay), _user.TokenType, _user.AccessToken).Result;
                     priceListId = await _carClient.CreatePriceListAsync(Car.PricePerDay, _user.TokenType, _user.AccessToken);
                 }
                 catch(ArgumentException ex)
@@ -78,7 +69,6 @@ namespace CarRentalWPF.ViewModels
 
                 try
                 {
-                    //result = await _carClient.CreateCar(carRequestModel, _user.TokenType, _user.AccessToken);
                     result = await _carClient.CreateCarAsync(carRequestModel, _user.TokenType, _user.AccessToken);
                 }
                 catch(ArgumentException ex)
@@ -87,10 +77,8 @@ namespace CarRentalWPF.ViewModels
                     return;
                 }
 
-                if(result)
-                {
-                    MessageBox.Show("This worked.");
-                }
+                string message = result ? "Dodano pojazd" : "Wystąpił błąd podczas zapisu danych, \nspróbuj ponownie";
+                MessageBox.Show(message);
             }
             else
             {
@@ -98,19 +86,8 @@ namespace CarRentalWPF.ViewModels
             }
         }
 
-        public void ClearForm()
-        {
-            // TODO
-        }
-
         private NewCarDto prepareRequestData(CarModel car, string carType, int priceListId)
         {
-            //var agencyId = _user.AgencyId;
-            //car.Type = carType;
-            //var requestContent = _converter.CarConverter(car, agencyId, priceListId);
-
-            //return requestContent;
-
             var content = _mapper.Map<NewCarDto>(car);
             content.priceListId = priceListId;
             content.agencyId = _user.AgencyId;
@@ -119,7 +96,6 @@ namespace CarRentalWPF.ViewModels
         }
 
         #endregion
-
 
         #region Form Fields
 
