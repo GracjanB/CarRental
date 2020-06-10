@@ -53,7 +53,9 @@
     <Compile Include="ApiClient\Abstracts\ICarClient.cs" />
     <Compile Include="ApiClient\Abstracts\IAgencyClient.cs" />
     <Compile Include="ApiClient\Abstracts\IRentClient.cs" />
+    <Compile Include="ApiClient\Abstracts\IReportClient.cs" />
     <Compile Include="ApiClient\Implementations\RentClient.cs" />
+    <Compile Include="ApiClient\Implementations\ReportClient.cs" />
     <Compile Include="ApiClient\Implementations\UserClient.cs" />
     <Compile Include="FromServerDto\ActionsDto.cs" />
     <Compile Include="FromServerDto\AgenciesDto.cs" />

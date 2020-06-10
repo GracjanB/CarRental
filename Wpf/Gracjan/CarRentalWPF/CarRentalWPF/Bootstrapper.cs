@@ -15,6 +15,7 @@ using CarRentalWPF.Library2.ApiClient;
 using CarRentalWPF.Helpers.AutomapperProfiles;
 using CarRentalWPF.Library2.ToServerDto;
 using CarRentalWPF.Library.FromServerDto;
+using CarRentalWPF.Library.ApiClient.Implementations;
 
 namespace CarRentalWPF
 {
@@ -46,7 +47,8 @@ namespace CarRentalWPF
                 .Singleton<IUserClient, UserClient>()
                 .Singleton<ICarClient, CarClient>()
                 .Singleton<IAgencyClient, AgencyClient>()
-                .Singleton<IRentClient, RentClient>();
+                .Singleton<IRentClient, RentClient>()
+                .Singleton<IReportClient, ReportClient>();
 
             MapperConfiguration mapperConfig = new MapperConfiguration(config =>
             {
