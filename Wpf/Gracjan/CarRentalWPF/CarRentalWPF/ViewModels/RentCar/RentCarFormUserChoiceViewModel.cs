@@ -128,6 +128,11 @@ namespace CarRentalWPF.ViewModels
             // TODO: Function to filter users
         }
 
+        public async Task RefreshUsers()
+        {
+            await LoadUsers();
+        }
+
         public void UserChoose(UserModel user)
         {
             rental.User = user;

@@ -68,7 +68,7 @@
         <Separator Grid.Row="3" Grid.Column="1" Style="{StaticResource MaterialDesignDarkSeparator}" Margin="20 0 10 0" />
 
         <!-- Users List -->
-        <Grid x:Name="UsersListGrid" Grid.Row="4" Grid.Column="1" Margin="10 2 2 2" cal:Message.Attach="[Event Loaded] = [Action UserListGridLoaded($source)]">
+        <Grid x:Name="UsersListGrid" Grid.Row="4" Grid.Column="1" Margin="10 2 2 2" cal:Message.Attach="[Event Loaded] = [Action UserListGridLoaded($source)]" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="*" />
@@ -78,6 +78,7 @@
                 <TextBox x:Name="NameSearch" Width="150" Margin="20 10 10 10" materialDesign:HintAssist.Hint="Wyszukaj imię" FontSize="16" />
                 <TextBox x:Name="LastNameSearch" Width="200" Margin="20 10 10 10" materialDesign:HintAssist.Hint="Wyszukaj Nazwisko" FontSize="16" />
                 <Button x:Name="SearchUser" Content="Szukaj" Style="{StaticResource MaterialDesignFlatButton}" FontSize="18" Width="120" Margin="20 0 0 0"/>
+                <Button x:Name="RefreshUsers" Content="Odświerz" Style="{StaticResource MaterialDesignFlatButton}" FontSize="18" Width="110" Margin="20 0 0 0"/>
             </StackPanel>
 
             <ScrollViewer Grid.Row="1" ScrollViewer.VerticalScrollBarVisibility="Hidden">
