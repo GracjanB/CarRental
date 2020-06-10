@@ -18,8 +18,6 @@ namespace CarRentalWPF.ViewModels
 
         private readonly IMapper _mapper;
 
-        private List<CarModel> CarsCollection;
-
         public CarsViewModel(SimpleContainer simpleContainer, IAuthenticatedUser authenticatedUser, 
             ICarClient carClient, IMapper mapper)
         {
@@ -27,26 +25,16 @@ namespace CarRentalWPF.ViewModels
             _user = authenticatedUser;
             _carClient = carClient;
             _mapper = mapper;
-
-            // For testing
-            Cars = GenerateCars();
         }
 
-        protected override void OnViewLoaded(object view)
+        protected override async void OnViewLoaded(object view)
         {
             base.OnViewLoaded(view);
-            //await LoadCars();
+            await LoadCars();
         }
 
         private async Task LoadCars()
         {
-            //var carResource = await _carClient.GetCars(_user.TokenType, _user.AccessToken, "agencyId", _user.AgencyId.ToString());
-            //CarsCollection = _converter.CarResourceConverter(carResource);
-
-            //Cars = new BindableCollection<CarModel>();
-            //foreach (var car in CarsCollection)
-            //    Cars.Add(car);
-
             var carResource = await _carClient.GetCarsAsync(_user.TokenType, _user.AccessToken, "agencyId", _user.AgencyId.ToString());
             Cars = new BindableCollection<CarModel>();
 
@@ -71,17 +59,17 @@ namespace CarRentalWPF.ViewModels
 
         public void CarDetails(CarModel carModel)
         {
-            // TODO: Function to display car details view
-        }
-
-        public void CarEdit(CarModel carModel)
-        {
-            // TODO: Function to display car edit view
+            var carDetailsVM = _container.GetInstance<CarDetailsViewModel>();
+            carDetailsVM.LoadCar(carModel);
+            var conductorObject = (MainViewModel)this.Parent;
+            conductorObject.ActivateItem(carDetailsVM);
         }
 
         public void CarRent(CarModel carModel)
         {
-            // TODO: Function to display car rental view
+            var rentCarVM = _container.GetInstance<RentCarFormViewModel>();
+            var conductorObject = (MainViewModel)this.Parent;
+            conductorObject.ActivateItem(rentCarVM);
         }
 
         #endregion
@@ -145,47 +133,5 @@ namespace CarRentalWPF.ViewModels
         }
 
         #endregion
-
-        private BindableCollection<CarModel> GenerateCars()
-        {
-            BindableCollection<CarModel> cars = new BindableCollection<CarModel>
-            {
-                new CarModel
-                {
-                    Mark = "Toyota",
-                    Model = "Avensis",
-                    Type = "COMBI",
-                    Engine = 1997,
-                    Power = 234,
-                    Mileage = 384223,
-                    Plate = "KR 29383",
-                    PricePerDay = 43
-                },
-                new CarModel
-                {
-                    Mark = "Nissan",
-                    Model = "Micra",
-                    Type = "Hatchback",
-                    Engine = 1368,
-                    Power = 78,
-                    Mileage = 5665,
-                    Plate = "KR 2433D",
-                    PricePerDay = 84
-                },
-                new CarModel
-                {
-                    Mark = "Mercedes-Benz",
-                    Model = "C200",
-                    Type = "SEDAN",
-                    Engine = 3000,
-                    Power = 234,
-                    Mileage = 384223,
-                    Plate = "KR 3242G",
-                    PricePerDay = 56
-                },
-            };
-
-            return cars;
-        }
     }
 }

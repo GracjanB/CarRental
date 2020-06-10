@@ -134,6 +134,7 @@
     <Compile Include="ViewModels\AgencyManage\AgencyManageVehicleEditViewModel.cs" />
     <Compile Include="ViewModels\AgencyManage\AgencyManageVehiclesViewModel.cs" />
     <Compile Include="ViewModels\AgencyManage\AgencyManageViewModel.cs" />
+    <Compile Include="ViewModels\CarDetailsViewModel.cs" />
     <Compile Include="ViewModels\CarsViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
@@ -186,6 +187,9 @@
     </Compile>
     <Compile Include="Views\AgencyManage\AgencyManageView.xaml.cs">
       <DependentUpon>AgencyManageView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CarDetailsView.xaml.cs">
+      <DependentUpon>CarDetailsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\CarsView.xaml.cs">
       <DependentUpon>CarsView.xaml</DependentUpon>
@@ -307,6 +311,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\AgencyManage\AgencyManageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CarDetailsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
