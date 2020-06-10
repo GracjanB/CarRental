@@ -23,17 +23,6 @@
 
         <Separator Grid.Row="1" Style="{StaticResource MaterialDesignDarkSeparator}" Margin="5 0 5 0" />
 
-        <!-- Filter Menu -->
-        <StackPanel Grid.Row="2" Orientation="Horizontal" Height="70">
-            <ComboBox x:Name="Marks" Width="120" materialDesign:HintAssist.Hint="Marka" Margin="30 0 0 0" FontSize="16" SelectedItem="{Binding SelectedMark}"/>
-            <ComboBox x:Name="Models" Width="120" materialDesign:HintAssist.Hint="Model" Margin="30 0 0 0" FontSize="16" SelectedItem="{Binding SelectedModel}"/>
-            <ComboBox x:Name="Type" Width="120" materialDesign:HintAssist.Hint="Typ" Margin="30 0 0 0" FontSize="16" SelectedItem="{Binding SelectedType}"/>
-            <TextBlock Text="Cena:" Style="{StaticResource MaterialDesignBody1TextBlock}" FontSize="18" VerticalAlignment="Center" Margin="30 0 0 0" />
-            <Slider Width="350"  Style="{StaticResource MaterialDesignDiscreteSlider}" Margin="20 0 0 0" VerticalAlignment="Center" 
-                    Value="{Binding SelectedPrice, Mode=TwoWay}" Minimum="{Binding PriceMinValue}" Maximum="{Binding PriceMaxValue}" />
-            <Button x:Name="Filter" Content="Filtruj" Style="{StaticResource MaterialDesignFlatButton}" Width="150" Height="40" FontSize="20" Margin="20 0 0 0"/>
-        </StackPanel>
-
         <!-- Cars List -->
         <ScrollViewer Grid.Row="3" ScrollViewer.VerticalScrollBarVisibility="Hidden">
             <StackPanel Margin="5 5 5 0">

@@ -24,16 +24,6 @@ namespace CarRentalWPF.ViewModels
 
         #region Buttons
 
-        public void MoveBack()
-        {
-            // TODO: Make function to identify calling object (Vehicle Details or Vehicle View)
-        }
-
-        public void ClearForm()
-        {
-            // TODO: Make function to clear the form
-        }
-
         public void SaveCar()
         {
             // TODO: Make save car function

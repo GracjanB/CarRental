@@ -41,10 +41,8 @@ namespace CarRentalWPF.Library2.ApiClient.Implementations
                 var result = await response.Content.ReadAsStringAsync();
 
                 if (response.IsSuccessStatusCode)
-                {
                     return true;
-                }
-
+                
                 return false;
             }
         }
@@ -64,11 +62,10 @@ namespace CarRentalWPF.Library2.ApiClient.Implementations
 
             // Set search field
             if (!string.IsNullOrWhiteSpace(search_field) && !string.IsNullOrWhiteSpace(search_value))
-            {
                 query["search"] = search_field + "=" + search_value;
-            }
             else
                 query["search"] = "";
+
             uriBuilder.Query = query.ToString();
 
             // Set authorization

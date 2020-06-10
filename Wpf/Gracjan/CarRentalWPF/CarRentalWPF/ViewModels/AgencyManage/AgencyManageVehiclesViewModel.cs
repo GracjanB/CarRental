@@ -47,7 +47,6 @@ namespace CarRentalWPF.ViewModels
 
         #endregion
 
-
         #region Current Displayed Cars Collection
 
         private BindableCollection<CarModel> _cars;
@@ -64,48 +63,6 @@ namespace CarRentalWPF.ViewModels
 
         #endregion
 
-
-        #region Filter Options Menu
-
-        private BindableCollection<string> _marks;
-		private BindableCollection<string> _models;
-		private BindableCollection<string> _status;
-
-		public BindableCollection<string> Marks
-		{
-			get { return _marks; }
-			set 
-			{ 
-				_marks = value;
-				NotifyOfPropertyChange(() => Marks);
-			}
-		}
-
-		public BindableCollection<string> Models
-		{
-			get { return _models; }
-			set 
-			{ 
-				_models = value;
-				NotifyOfPropertyChange(() => Models);
-			}
-		}
-
-		public BindableCollection<string> Status
-		{
-			get { return _status; }
-			set 
-			{ 
-				_status = value;
-				NotifyOfPropertyChange(() => Status);
-			}
-		}
-
-		public void FilterCars()
-		{
-
-		}
-
 		public void NewCar()
 		{
 			var agencyManageNewVehicleVM = _container.GetInstance<AgencyManageNewVehicleViewModel>();
@@ -113,9 +70,6 @@ namespace CarRentalWPF.ViewModels
 
 			conductorObject.ActivateItem(agencyManageNewVehicleVM);
 		}
-
-		#endregion
-
 
 		#region Car Data Template
 
@@ -135,11 +89,6 @@ namespace CarRentalWPF.ViewModels
 
 			var conductorObject = (AgencyManageViewModel) this.Parent;
 			conductorObject.ActivateItem(agencyManageVehicleEditVM);
-		}
-
-		public void CarPriceList(CarModel carModel)
-		{
-			// TODO: Show Car Price List
 		}
 
 		#endregion

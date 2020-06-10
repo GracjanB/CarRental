@@ -17,17 +17,6 @@
 
         <DockPanel Grid.Row="0">
             <TextBlock Text="Pracownicy" Style="{StaticResource MaterialDesignHeadline2TextBlock}" Padding="10" FontSize="30"/>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button x:Name="NewEmployee" Content="Nowy pracownik" Width="150" Style="{StaticResource MaterialDesignFlatButton}" />
-                <materialDesign:PopupBox Margin="10" Foreground="Black" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False">
-                    <StackPanel Width="150">
-                        <Button Content="Edytuj" />
-                        <Button Content="Cennik"/>
-                        <Separator/>
-                        <Button Content="Powrót" />
-                    </StackPanel>
-                </materialDesign:PopupBox>
-            </StackPanel>
         </DockPanel>
 
         <Separator Grid.Row="1" Style="{StaticResource MaterialDesignDarkSeparator}" Margin="5 0 5 0" />

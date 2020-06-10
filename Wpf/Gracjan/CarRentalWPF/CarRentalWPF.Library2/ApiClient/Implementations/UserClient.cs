@@ -69,30 +69,6 @@ namespace CarRentalWPF.Library2.ApiClient.Implementations
             }
         }
 
-        public async Task<UserInfoDto> GetUserByIdAsync(string token_type, string access_token, int id)
-        {
-            string endPoint = "api/user/" + id.ToString();
-            UserInfoDto user = null;
-            _client.DefaultRequestHeaders.Clear();
-
-            // Set Authorization
-            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(token_type, access_token);
-
-            using (var response = _client.GetAsync(URI + endPoint).Result)
-            {
-                var result = await response.Content.ReadAsStringAsync();
-
-                if (response.IsSuccessStatusCode)
-                {
-                    user = JsonConvert.DeserializeObject<UserInfoDto>(result);
-
-                    return user;
-                }
-
-                throw new Exception("Something went wrong");
-            }
-        }
-
         public async Task<UsersDto> GetUsersAsync(string token_type, string access_token, string search_field = "", string search_value = "",
             bool isAscending = true, int pageNumber = 0, int pageSize = 25, string field = "id")
         {
@@ -109,9 +85,7 @@ namespace CarRentalWPF.Library2.ApiClient.Implementations
 
             // Set search field
             if (!string.IsNullOrWhiteSpace(search_field) && !string.IsNullOrWhiteSpace(search_value))
-            {
                 query["search"] = search_field + "=" + search_value;
-            }
             else
                 query["search"] = "";
             uriBuilder.Query = query.ToString();
@@ -126,7 +100,6 @@ namespace CarRentalWPF.Library2.ApiClient.Implementations
                 if (response.IsSuccessStatusCode)
                 {
                     usersDto = JsonConvert.DeserializeObject<UsersDto>(result);
-
                     return usersDto;
                 }
 

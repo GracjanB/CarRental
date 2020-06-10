@@ -18,12 +18,8 @@
         </Grid.RowDefinitions>
 
         <!-- Row 0 (Filter options) -->
-        <StackPanel Grid.Row="0" Height="50" Orientation="Horizontal">
-            <ComboBox x:Name="Marks" Width="100" materialDesign:HintAssist.Hint="Marka" Margin="10 0 0 0"/>
-            <ComboBox x:Name="Models" Width="100" materialDesign:HintAssist.Hint="Model" Margin="20 0 0 0"/>
-            <ComboBox x:Name="Status" Width="100" materialDesign:HintAssist.Hint="Status" Margin="20 0 0 0"/>
-            <Button x:Name="FilterCars" Content="Filtruj" Style="{StaticResource MaterialDesignFlatButton}" Margin="20 0 0 0"/>
-            <Button x:Name="NewCar" Content="Nowy pojazd" Style="{StaticResource MaterialDesignFlatButton}" Margin="80 0 0 0"/>
+        <StackPanel Grid.Row="0" Height="50" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0 10 0">
+            <Button x:Name="NewCar" Content="Nowy pojazd" Style="{StaticResource MaterialDesignFlatButton}" />
         </StackPanel>
 
         <!-- Row 1 -->

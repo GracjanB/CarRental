@@ -44,7 +44,6 @@ namespace CarRentalWPF.ViewModels
 
         #region Car Card Operations
 
-        // Current displayed cars collection
         private BindableCollection<CarModel> _cars;
 
         public BindableCollection<CarModel> Cars
@@ -74,64 +73,5 @@ namespace CarRentalWPF.ViewModels
 
         #endregion
 
-
-        #region Filter Menu 
-
-        private BindableCollection<string> _marks;
-        private BindableCollection<string> _models;
-        private BindableCollection<string> _types;
-        private int _selectedPrice;
-        private int _priceMinValue;
-        private int _priceMaxValue;
-
-        public string SelectedMark { get; set; }
-
-        public string SelectedModel { get; set; }
-
-        public string SelectedType { get; set; }
-
-
-        public BindableCollection<string> Marks
-        {
-            get { return _marks; }
-            set { _marks = value; }
-        }
-
-        public BindableCollection<string> Models
-        {
-            get { return _models; }
-            set { _models = value; }
-        }
-
-        public BindableCollection<string> Types
-        {
-            get { return _types; }
-            set { _types = value; }
-        }
-
-        public int PriceMinValue
-        {
-            get { return _priceMinValue; }
-            set { _priceMinValue = value; }
-        }
-
-        public int PriceMaxValue
-        {
-            get { return _priceMaxValue; }
-            set { _priceMaxValue = value; }
-        }
-
-        public int SelectedPrice
-        {
-            get { return _selectedPrice; }
-            set { _selectedPrice = value; }
-        }
-
-        public void Filter()
-        {
-            // TODO: Make filter function
-        }
-
-        #endregion
     }
 }

@@ -6,8 +6,6 @@ namespace CarRentalWPF.Library2.ApiClient.Implementations
 {
     public interface IUserClient
     {
-        Task<UserInfoDto> GetUserByIdAsync(string token_type, string access_token, int id);
-
         Task<UserInfoDto> GetUserDataAsync(string tokenType, string accessToken);
 
         Task<UserRoleDto> GetUserRoleAsync(string tokenType, string accessToken);

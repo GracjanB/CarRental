@@ -31,15 +31,8 @@
 
         <DockPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4">
             <TextBlock Text="Nowy pracownik" Style="{StaticResource MaterialDesignHeadline1TextBlock}" FontSize="30" Margin="5"/>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 0 10 0">
                 <Button x:Name="RegisterEmployee" Content="Zarejestruj" Width="120" Style="{StaticResource MaterialDesignFlatButton}" />
-                <materialDesign:PopupBox Margin="10" Foreground="Black" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False">
-                    <StackPanel Width="150">
-                        <Button Content="Wyczyść" cal:Message.Attach="[Event Click] = [Action ClearForm]"/>
-                        <Separator/>
-                        <Button Content="Powrót" cal:Message.Attach="[Event Click] = [Action MoveBack]" />
-                    </StackPanel>
-                </materialDesign:PopupBox>
             </StackPanel>
         </DockPanel>
 

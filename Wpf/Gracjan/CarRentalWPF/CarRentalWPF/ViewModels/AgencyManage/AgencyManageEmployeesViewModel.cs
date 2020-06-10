@@ -22,8 +22,8 @@ namespace CarRentalWPF.ViewModels
 
 		private readonly IMapper _mapper;
 
-		public AgencyManageEmployeesViewModel(SimpleContainer simpleContainer, IAuthenticatedUser authenticatedUser, IUserClient userClient,
-			IMapper mapper)
+		public AgencyManageEmployeesViewModel(SimpleContainer simpleContainer, IAuthenticatedUser authenticatedUser, 
+			IUserClient userClient, IMapper mapper)
 		{
 			_container = simpleContainer;
 			_user = authenticatedUser;

@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System;
+using System.Globalization;
 using System.Windows.Controls;
 
 namespace CarRentalWPF.Validators
@@ -10,15 +11,20 @@ namespace CarRentalWPF.Validators
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            if (string.IsNullOrWhiteSpace(value.ToString()))
+            if (value != null)
             {
-                return new ValidationResult(false, "Field is required.");
+                if (string.IsNullOrWhiteSpace(value.ToString()))
+                {
+                    return new ValidationResult(false, "Field is required.");
+                }
+                if (value.ToString().Length < 3 || value.ToString().Length > 30)
+                {
+                    return new ValidationResult(false, "Name between 3 and 30.");
+                }
+
+                return ValidationResult.ValidResult;
             }
-            if (value.ToString().Length < 3 || value.ToString().Length > 30)
-            {
-                return new ValidationResult(false, "Name between 3 and 30.");
-            }
-            return ValidationResult.ValidResult;
+            else return new ValidationResult(false, "");
         }
     }
 
@@ -29,15 +35,20 @@ namespace CarRentalWPF.Validators
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            if (string.IsNullOrWhiteSpace(value.ToString()))
+            if (value != null)
             {
-                return new ValidationResult(false, "Field is required.");
+                if (string.IsNullOrWhiteSpace(value.ToString()))
+                {
+                    return new ValidationResult(false, "Field is required.");
+                }
+                if (value.ToString().Length < 4 || value.ToString().Length > 30)
+                {
+                    return new ValidationResult(false, "Name between 5 and 30.");
+                }
+
+                return ValidationResult.ValidResult;
             }
-            if (value.ToString().Length < 4 || value.ToString().Length > 30)
-            {
-                return new ValidationResult(false, "Name between 5 and 30.");
-            }
-            return ValidationResult.ValidResult;
+            else return new ValidationResult(false, "");
         }
     }
 
@@ -48,11 +59,16 @@ namespace CarRentalWPF.Validators
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            if(string.IsNullOrWhiteSpace(value.ToString()))
+            if(value != null)
             {
-                return new ValidationResult(false, "Field is required");
+                if (string.IsNullOrWhiteSpace(value.ToString()))
+                {
+                    return new ValidationResult(false, "Field is required");
+                }
+
+                return ValidationResult.ValidResult;
             }
-            return ValidationResult.ValidResult;
+            else return new ValidationResult(false, "");
         }
     }
 
@@ -63,9 +79,21 @@ namespace CarRentalWPF.Validators
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            // TODO: Make PESEL Validator
+            if(value != null)
+            {
+                if (string.IsNullOrWhiteSpace(value.ToString()))
+                {
+                    return new ValidationResult(false, "Field is required");
+                }
+                if((value.ToString()).Length != 11)
+                {
+                    return new ValidationResult(false, "PESEL is not valid");
+                }
 
-            return ValidationResult.ValidResult;
+                return ValidationResult.ValidResult;
+            }
+            else return new ValidationResult(false, "");
+
         }
     }
 
@@ -76,9 +104,20 @@ namespace CarRentalWPF.Validators
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            // TODO: Make IdCardNumber Validator
+            if (value != null)
+            {
+                if (string.IsNullOrWhiteSpace(value.ToString()))
+                {
+                    return new ValidationResult(false, "Field is required");
+                }
+                if ((value.ToString()).Length != 8)
+                {
+                    return new ValidationResult(false, "Id Card Number is not valid");
+                }
 
-            return ValidationResult.ValidResult;
+                return ValidationResult.ValidResult;
+            }
+            else return new ValidationResult(false, "");
         }
     }
 
@@ -102,9 +141,20 @@ namespace CarRentalWPF.Validators
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            // TODO: Make City Validator
+            if (value != null)
+            {
+                if (string.IsNullOrWhiteSpace(value.ToString()))
+                {
+                    return new ValidationResult(false, "Field is required");
+                }
+                if((value.ToString()).Length > 30 || value.ToString().Length < 3)
+                {
+                    return new ValidationResult(false, "Field between 3 and 30 characters");
+                }
 
-            return ValidationResult.ValidResult;
+                return ValidationResult.ValidResult;
+            }
+            else return new ValidationResult(false, "");
         }
     }
 
@@ -115,9 +165,20 @@ namespace CarRentalWPF.Validators
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            // TODO: Make Country Validator
+            if (value != null)
+            {
+                if (string.IsNullOrWhiteSpace(value.ToString()))
+                {
+                    return new ValidationResult(false, "Field is required");
+                }
+                if ((value.ToString()).Length > 30 || value.ToString().Length < 3)
+                {
+                    return new ValidationResult(false, "Field between 3 and 30 characters");
+                }
 
-            return ValidationResult.ValidResult;
+                return ValidationResult.ValidResult;
+            }
+            else return new ValidationResult(false, "");
         }
     }
 
@@ -128,9 +189,20 @@ namespace CarRentalWPF.Validators
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            // TODO: Make Street Validator
+            if (value != null)
+            {
+                if (string.IsNullOrWhiteSpace(value.ToString()))
+                {
+                    return new ValidationResult(false, "Field is required");
+                }
+                if ((value.ToString()).Length > 30 || value.ToString().Length < 3)
+                {
+                    return new ValidationResult(false, "Field between 3 and 30 characters");
+                }
 
-            return ValidationResult.ValidResult;
+                return ValidationResult.ValidResult;
+            }
+            else return new ValidationResult(false, "");
         }
     }
 
@@ -141,9 +213,16 @@ namespace CarRentalWPF.Validators
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            // TODO: Make BuildingNo Validator
+            if (value != null)
+            {
+                if (string.IsNullOrWhiteSpace(value.ToString()))
+                {
+                    return new ValidationResult(false, "Field is required");
+                }
 
-            return ValidationResult.ValidResult;
+                return ValidationResult.ValidResult;
+            }
+            else return new ValidationResult(false, "");
         }
     }
 
@@ -154,9 +233,16 @@ namespace CarRentalWPF.Validators
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            // TODO: Make FlatNo Validator
+            if (value != null)
+            {
+                if (string.IsNullOrWhiteSpace(value.ToString()))
+                {
+                    return new ValidationResult(false, "Field is required");
+                }
 
-            return ValidationResult.ValidResult;
+                return ValidationResult.ValidResult;
+            }
+            else return new ValidationResult(false, "");
         }
     }
 
@@ -167,9 +253,16 @@ namespace CarRentalWPF.Validators
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            // TODO: Make PostalCode Validator
+            if (value != null)
+            {
+                if (string.IsNullOrWhiteSpace(value.ToString()))
+                {
+                    return new ValidationResult(false, "Field is required");
+                }
 
-            return ValidationResult.ValidResult;
+                return ValidationResult.ValidResult;
+            }
+            else return new ValidationResult(false, "");
         }
     }
 
@@ -180,9 +273,20 @@ namespace CarRentalWPF.Validators
     {
         public override ValidationResult Validate(object value, CultureInfo cultureInfo)
         {
-            // TODO: Make PhoneNumber Validator
+            if (value != null)
+            {
+                if (string.IsNullOrWhiteSpace(value.ToString()))
+                {
+                    return new ValidationResult(false, "Field is required");
+                }
+                if ((value.ToString()).Length > 12 || value.ToString().Length < 9)
+                {
+                    return new ValidationResult(false, "Field between 9 and 12 characters");
+                }
 
-            return ValidationResult.ValidResult;
+                return ValidationResult.ValidResult;
+            }
+            else return new ValidationResult(false, "");
         }
     }
 }

@@ -42,6 +42,5 @@
                 MessageQueue="{materialDesign:MessageQueue}" cal:Message.Attach="[Event Loaded] = [Action SnackbarLoaded($source)]" />
         </Grid>
 
-        
     </Grid>
 </UserControl>
