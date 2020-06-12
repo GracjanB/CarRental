@@ -85,8 +85,6 @@ public class RentService {
                 .status(RentStatus.CREATED)
                 .build();
         rentRepository.save(rent);
-
-        //TODO wysyłka maila z potwierdzeniem wynajmu???
     }
 
     private long zonedDateTimeDifference(ZonedDateTime d1, ZonedDateTime d2, ChronoUnit unit) {
@@ -135,24 +133,17 @@ public class RentService {
                     .comment(request.getTechnicalSupport().getComment())
                     .build());
             request.getTechnicalSupport().getTechnicalSupportActions()
-                    .forEach(tcha -> {
-                        technicalSupportHasActionRepository.save(TechnicalSupportHasAction
+                    .forEach(tcha -> technicalSupportHasActionRepository.save(TechnicalSupportHasAction
                                 .builder()
                                 .completed(false)
                                 .technicalSupport(technicalSupport)
                                 .technicalSupportAction(tcha)
-                                .build());
-                    });
+                                .build()));
             TechnicalSupportMessage technicalSupportMessage = new TechnicalSupportMessage();
             technicalSupportMessage.setEmails(userRepository.findAllByRole(Role.TECHNICAL_EMPLOYEE)
                     .stream().map(User::getEmail).collect(Collectors.toList()));
             technicalSupportMessage.setRegisterPlate(car.getRegisterPlate());
-            technicalSupportMessage.setAddress(String.format("%s, %s %s%s",
-                    agencyHasUser.getAgency().getAddress().getCity(),
-                    agencyHasUser.getAgency().getAddress().getStreet(),
-                    agencyHasUser.getAgency().getAddress().getHouseNo(),
-                    agencyHasUser.getAgency().getAddress().getFlatNo() != null ? "/" +
-                            agencyHasUser.getAgency().getAddress().getFlatNo() : ""));
+            technicalSupportMessage.setAddress(agencyHasUser.getAgency().getAddress().getAddressLine());
             applicationEventPublisher.publishEvent(new EmailEvent(technicalSupportMessage));
         }
     }

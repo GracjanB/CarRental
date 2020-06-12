@@ -37,4 +37,13 @@ public class Address extends AbstractBaseEntity implements Serializable {
     @Column(name = "flat_no")
     private String flatNo;
 
+
+    public String getAddressLine() {
+        return String.format("%s, %s %s%s",
+                this.getCity(),
+                this.getStreet(),
+                this.getHouseNo(),
+                this.getFlatNo() != null ? "/" +
+                        this.getFlatNo() : "");
+    }
 }

@@ -16,6 +16,7 @@
 
     <properties>
         <java.version>11</java.version>
+        <jacoco.version>0.8.5</jacoco.version>
         <liquibase-hibernate5.version>3.6</liquibase-hibernate5.version>
         <spring-boot.version>2.2.5.RELEASE</spring-boot.version>
         <javassist.version>3.25.0-GA</javassist.version>
@@ -206,6 +207,25 @@
                     </annotationProcessorPaths>
                 </configuration>
 
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>${jacoco.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
