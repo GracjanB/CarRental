@@ -22,16 +22,6 @@ namespace CarRentalWPF.ViewModels
             }
         }
 
-        #region Buttons
-
-        public void SaveCar()
-        {
-            // TODO: Make save car function
-        }
-
-        #endregion
-
-
         #region Validation Result
 
         private bool _markValidationResult;

@@ -21,10 +21,5 @@ namespace CarRentalWPF.ViewModels
         public DateTime SelectedDateFrom { get; set; } = DateTime.Today;
 
         public DateTime SelectedDateTo { get; set; } = DateTime.Today;
-
-        public void GenerateReport()
-        {
-            // TODO
-        }
     }
 }

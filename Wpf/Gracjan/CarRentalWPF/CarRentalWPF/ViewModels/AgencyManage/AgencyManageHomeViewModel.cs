@@ -5,32 +5,6 @@ namespace CarRentalWPF.ViewModels
 {
     public class AgencyManageHomeViewModel : Screen
     {
-
-        public AgencyManageHomeViewModel()
-        {
-            GenerateSampleData();
-        }
-
-        private void GenerateSampleData()
-        {
-            /*
-             *    For testing
-             */
-
-            FullStreetName = "Krakowska 76B";
-            City = "Wrocław";
-            Country = "Polska";
-
-            EmployeesAmount = 13;
-            CurrentActiveEmployees = 7;
-
-            VehiclesAmount = 34;
-            VehiclesAvailable = 29;
-            RentedVehicles = 3;
-            VehiclesInRepair = 1;
-        }
-
-
         #region Contact Information Card
 
         private string _fullStreetName;

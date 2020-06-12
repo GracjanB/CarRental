@@ -46,11 +46,6 @@ namespace CarRentalWPF.ViewModels
             }
         }
 
-        public void RegisterEmployee()
-        {
-            // TODO: Make function to register new employee
-        }
-
         public void MoveBack()
         {
             var agencyManageEmployeesVM = _container.GetInstance<AgencyManageEmployeesViewModel>();

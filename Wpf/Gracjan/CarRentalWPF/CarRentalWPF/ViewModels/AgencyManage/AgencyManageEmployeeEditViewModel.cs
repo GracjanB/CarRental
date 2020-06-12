@@ -1,5 +1,7 @@
 ﻿using Caliburn.Micro;
+using CarRentalWPF.Library2.ApiClient.Implementations;
 using CarRentalWPF.Models;
+using CarRentalWPF.User;
 
 namespace CarRentalWPF.ViewModels
 {
@@ -7,9 +9,16 @@ namespace CarRentalWPF.ViewModels
     {
         private readonly SimpleContainer _container;
 
-        public AgencyManageEmployeeEditViewModel(SimpleContainer simpleContainer)
+        private readonly IUserClient _userClient;
+
+        private readonly IAuthenticatedUser _user;
+
+        public AgencyManageEmployeeEditViewModel(SimpleContainer simpleContainer, IUserClient userClient, 
+            IAuthenticatedUser user)
         {
             _container = simpleContainer;
+            _userClient = userClient;
+            _user = user;
         }
 
         public void LoadModel(EmployeeModel employee)
@@ -19,15 +28,28 @@ namespace CarRentalWPF.ViewModels
 
         #region Top Menu
 
+        public bool CanSaveEmployee
+        {
+            get
+            {
+                return FirstNameValidationResult &&
+                       LastNameValidationResult &&
+                       PESELValidationResult &&
+                       IdCardNumberValidationResult &&
+                       StreetValidationResult &&
+                       BuildingNoValidationResult &&
+                       FlatNoValidationResult &&
+                       PostalCodeValidationResult &&
+                       CityValidationResult &&
+                       EmailValidationResult &&
+                       PhoneNumberValidationResult &&
+                       RoleValidationResult;
+            }
+        }
+
         public void SaveEmployee()
         {
 
-        }
-
-        public void MoveBack()
-        {
-            // Check if something changed on form
-            // If so, then set a flag and change output of CanClose function
         }
 
         #endregion
@@ -67,7 +89,7 @@ namespace CarRentalWPF.ViewModels
             set
             {
                 _firstNameValidationResult = value;
-                NotifyOfPropertyChange(() => OverallValidationResult);
+                NotifyOfPropertyChange(() => CanSaveEmployee);
             }
         }
 
@@ -77,7 +99,7 @@ namespace CarRentalWPF.ViewModels
             set 
             { 
                 _lastNameValidationResult = value;
-                NotifyOfPropertyChange(() => OverallValidationResult);
+                NotifyOfPropertyChange(() => CanSaveEmployee);
             }
         }
 
@@ -87,7 +109,7 @@ namespace CarRentalWPF.ViewModels
             set 
             { 
                 _peselValidationResult = value;
-                NotifyOfPropertyChange(() => OverallValidationResult);
+                NotifyOfPropertyChange(() => CanSaveEmployee);
             }
         }
 
@@ -97,7 +119,7 @@ namespace CarRentalWPF.ViewModels
             set 
             { 
                 _idCardNumberValidationResult = value;
-                NotifyOfPropertyChange(() => OverallValidationResult);
+                NotifyOfPropertyChange(() => CanSaveEmployee);
             }
         }
 
@@ -107,7 +129,7 @@ namespace CarRentalWPF.ViewModels
             set 
             {
                 _streetValidationResult = value;
-                NotifyOfPropertyChange(() => OverallValidationResult);
+                NotifyOfPropertyChange(() => CanSaveEmployee);
             }
         }
 
@@ -117,7 +139,7 @@ namespace CarRentalWPF.ViewModels
             set 
             { 
                 _buildingNoValidationResult = value;
-                NotifyOfPropertyChange(() => OverallValidationResult);
+                NotifyOfPropertyChange(() => CanSaveEmployee);
             }
         }
 
@@ -127,7 +149,7 @@ namespace CarRentalWPF.ViewModels
             set 
             { 
                 _flatNoValidationResult = value;
-                NotifyOfPropertyChange(() => OverallValidationResult);
+                NotifyOfPropertyChange(() => CanSaveEmployee);
             }
         }
 
@@ -137,7 +159,7 @@ namespace CarRentalWPF.ViewModels
             set 
             { 
                 _postalCodeValidationResult = value;
-                NotifyOfPropertyChange(() => OverallValidationResult);
+                NotifyOfPropertyChange(() => CanSaveEmployee);
             }
         }
 
@@ -147,7 +169,7 @@ namespace CarRentalWPF.ViewModels
             set 
             { 
                 _cityValidationResult = value;
-                NotifyOfPropertyChange(() => OverallValidationResult);
+                NotifyOfPropertyChange(() => CanSaveEmployee);
             }
         }
 
@@ -157,7 +179,7 @@ namespace CarRentalWPF.ViewModels
             set 
             { 
                 _emailValidationResult = value;
-                NotifyOfPropertyChange(() => OverallValidationResult);
+                NotifyOfPropertyChange(() => CanSaveEmployee);
             }
         }
 
@@ -167,7 +189,7 @@ namespace CarRentalWPF.ViewModels
             set 
             { 
                 _phoneNumberValidationResult = value;
-                NotifyOfPropertyChange(() => OverallValidationResult);
+                NotifyOfPropertyChange(() => CanSaveEmployee);
             }
         }
 
@@ -177,26 +199,7 @@ namespace CarRentalWPF.ViewModels
             set 
             { 
                 _roleValidationResult = value;
-                NotifyOfPropertyChange(() => OverallValidationResult);
-            }
-        }
-
-        public bool OverallValidationResult
-        {
-            get
-            {
-                return FirstNameValidationResult &&
-                       LastNameValidationResult &&
-                       PESELValidationResult &&
-                       IdCardNumberValidationResult &&
-                       StreetValidationResult &&
-                       BuildingNoValidationResult &&
-                       FlatNoValidationResult &&
-                       PostalCodeValidationResult &&
-                       CityValidationResult &&
-                       EmailValidationResult &&
-                       PhoneNumberValidationResult &&
-                       RoleValidationResult;
+                NotifyOfPropertyChange(() => CanSaveEmployee);
             }
         }
 

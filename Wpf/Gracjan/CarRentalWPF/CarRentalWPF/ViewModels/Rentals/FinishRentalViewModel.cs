@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace CarRentalWPF.ViewModels.Rentals
 {
@@ -95,7 +96,7 @@ namespace CarRentalWPF.ViewModels.Rentals
             }
         }
 
-        public void FinishRental()
+        public async void FinishRental()
         {
             var finishRentalDto = new FinishRentDto
             {
@@ -110,7 +111,9 @@ namespace CarRentalWPF.ViewModels.Rentals
                 }
             };
 
-            // TODO: finish rent function
+            var result = await _rentClient.FinishRentAsync(finishRentalDto, _user.TokenType, _user.AccessToken);
+            string message = result ? "Zakończono pomyślnie" : "Wystąpił błąd, spróbuj ponownie.";
+            MessageBox.Show(message);
         }
 
         #endregion
