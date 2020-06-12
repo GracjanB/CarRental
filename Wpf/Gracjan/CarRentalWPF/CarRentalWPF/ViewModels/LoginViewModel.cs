@@ -43,10 +43,6 @@ namespace CarRentalWPF.ViewModels
 
         public async void LoginButton()
         {
-            // For testing
-            loginModel.Login = "pawel121111@gmail.com";
-            loginModel.Password = "Zaq12345@!";
-
             _loginValidator = new LoginFormValidator();
             var result = _loginValidator.Validate(loginModel);
 

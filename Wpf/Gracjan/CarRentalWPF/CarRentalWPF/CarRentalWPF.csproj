@@ -120,7 +120,6 @@
     <Compile Include="Validators\CarValidator.cs" />
     <Compile Include="Validators\EmployeeValidators.cs" />
     <Compile Include="Validators\LoginFormValidator.cs" />
-    <Compile Include="Validators\RegisterFormValidator.cs" />
     <Compile Include="ViewModels\AgencyManage\AgencyManageAgenciesListViewModel.cs" />
     <Compile Include="ViewModels\AgencyManage\AgencyManageEmployeeDetailsViewModel.cs" />
     <Compile Include="ViewModels\AgencyManage\AgencyManageEmployeeEditViewModel.cs" />
@@ -138,7 +137,6 @@
     <Compile Include="ViewModels\CarsViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
-    <Compile Include="ViewModels\RegisterViewModel.cs" />
     <Compile Include="ViewModels\Rentals\FinishRentalViewModel.cs" />
     <Compile Include="ViewModels\Rentals\RentalDetailsViewModel.cs" />
     <Compile Include="ViewModels\Rentals\RentalsViewModel.cs" />
