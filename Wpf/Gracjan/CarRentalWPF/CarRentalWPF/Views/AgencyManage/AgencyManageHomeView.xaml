@@ -1,0 +1,85 @@
+﻿<UserControl x:Class="CarRentalWPF.Views.AgencyManageHomeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:CarRentalWPF.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="420" d:DesignWidth="650" Background="White">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Home Icon -->
+        <materialDesign:PackIcon Grid.Row="0" Grid.ColumnSpan="4" HorizontalAlignment="Center" Width="150" Height="150" Margin="5"
+                                 Kind="Home" VerticalAlignment="Center" Foreground="#FF30409A"/>
+
+        <!-- Contact Information Card -->
+        <materialDesign:Card Grid.Row="1" Grid.Column="0" Width="180" Height="220" Margin="35 10 10 10">
+            <StackPanel>
+                <TextBlock Text="Informacje kontaktowe" Style="{StaticResource MaterialDesignHeadline2TextBlock}" 
+                           FontSize="16" HorizontalAlignment="Center" Padding="5" />
+
+                <TextBlock x:Name="FullStreetName" Style="{StaticResource MaterialDesignBody1TextBlock}" 
+                           FontSize="12" Margin="10 10 0 0" TextWrapping="Wrap"/>
+
+                <TextBlock x:Name="City" Style="{StaticResource MaterialDesignBody1TextBlock}" 
+                           FontSize="12" Margin="10 0 0 0" TextWrapping="Wrap"/>
+
+                <TextBlock x:Name="Country" Style="{StaticResource MaterialDesignBody1TextBlock}" 
+                           FontSize="12" Margin="10 0 0 0" TextWrapping="Wrap"/>
+
+                <Button x:Name="EditAddress" Content="Edytuj" Style="{StaticResource MaterialDesignFlatButton}" 
+                        Foreground="#001F6B" VerticalAlignment="Bottom" Width="80" Margin="0 10 0 0"/>
+                
+            </StackPanel>
+        </materialDesign:Card>
+
+        <!-- Employees Information Card -->
+        <materialDesign:Card Grid.Row="1" Grid.Column="1" Width="180" Height="220" Margin="10">
+            <StackPanel>
+                <TextBlock Text="Pracownicy" Style="{StaticResource MaterialDesignHeadline2TextBlock}" 
+                           FontSize="16" HorizontalAlignment="Center" Padding="5"/>
+                
+                <TextBlock Text="{Binding Path=EmployeesAmount, StringFormat='Ilość pracowników: {0}'}" 
+                           Style="{StaticResource MaterialDesignBody1TextBlock}" FontSize="12" Margin="10 10 0 0" />
+                
+                <TextBlock Text="{Binding Path=CurrentActiveEmployees, StringFormat='Zalogowani: {0}'}" 
+                           Style="{StaticResource MaterialDesignBody1TextBlock}" FontSize="12" Margin="10 0 0 0" />
+                
+            </StackPanel>
+        </materialDesign:Card>
+
+        <!-- Vehicles Fleet Information Card -->
+        <materialDesign:Card Grid.Row="1" Grid.Column="2" Width="180" Height="220" Margin="10">
+            <StackPanel>
+                <TextBlock Text="Flota" Style="{StaticResource MaterialDesignHeadline2TextBlock}" FontSize="16" 
+                           HorizontalAlignment="Center" Padding="5"/>
+                
+                <TextBlock Text="{Binding Path=VehiclesAmount, StringFormat='Ilość ogólnie: {0}'}" 
+                           Style="{StaticResource MaterialDesignBody1TextBlock}" FontSize="12" Margin="10 10 0 0" />
+                
+                <TextBlock Text="{Binding Path=VehiclesAvailable, StringFormat='Dostępne: {0}'}" 
+                           Style="{StaticResource MaterialDesignBody1TextBlock}" FontSize="12" Margin="10 0 0 0" />
+                
+                <TextBlock Text="{Binding Path=RentedVehicles, StringFormat='Wypożyczone: {0}'}" 
+                           Style="{StaticResource MaterialDesignBody1TextBlock}" FontSize="12" Margin="10 0 0 0" />
+                
+                <TextBlock Text="{Binding Path=VehiclesInRepair, StringFormat='W naprawie: {0}'}" 
+                           Style="{StaticResource MaterialDesignBody1TextBlock}" FontSize="12" Margin="10 0 0 0" />
+
+            </StackPanel>
+        </materialDesign:Card>
+        
+    </Grid>
+</UserControl>

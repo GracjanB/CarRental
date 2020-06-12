@@ -1,0 +1,148 @@
+﻿<Window x:Class="CarRentalWPF.Views.MainView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CarRentalWPF.Views"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:cal="http://www.caliburnproject.org"
+        mc:Ignorable="d"
+        Title="MainView" Height="600" Width="1080" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None">
+    <Window.Resources>
+        
+        <Storyboard x:Key="OpenMenu">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)"
+                                           Storyboard.TargetName="GridMenu" >
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="250"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        
+        <Storyboard x:Key="CloseMenu">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)"
+                                           Storyboard.TargetName="GridMenu" >
+                <EasingDoubleKeyFrame KeyTime="0" Value="250"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Key="GridBackgroundShow">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)"
+                                           Storyboard.TargetName="GridBackground" >
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Key="GridBackgroundHide">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)"
+                                           Storyboard.TargetName="GridBackground" >
+                <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </Window.Resources>
+    
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="ButtonClose">
+            <BeginStoryboard Storyboard="{StaticResource CloseMenu}" />
+            <BeginStoryboard Storyboard="{StaticResource GridBackgroundHide}" />
+        </EventTrigger>
+        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="ButtonOpen">
+            <BeginStoryboard Storyboard="{StaticResource OpenMenu}" />
+            <BeginStoryboard Storyboard="{StaticResource GridBackgroundShow}" />
+        </EventTrigger>
+    </Window.Triggers>
+
+    <Grid>
+        <DockPanel Height="50" Background="#536DFE" VerticalAlignment="Top" >
+            <Button x:Name="ButtonOpen" VerticalAlignment="Center" HorizontalAlignment="Left" Background="{x:Null}" BorderBrush="{x:Null}" Width="50" Height="50" Padding="0" Click="ButtonOpen_Click">
+                <materialDesign:PackIcon Kind="Menu" Foreground="White" Width="25" Height="25"/>
+            </Button>
+
+            <TextBlock Text="Car Rental" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="450 0 0 0" Foreground="White" FontSize="24" FontFamily="Champagne &amp; Limousines"/>
+
+            <StackPanel VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Right">
+
+                <!-- Currently logged in username -->
+                <TextBlock Text="{Binding LoggedInUser.FullName}" VerticalAlignment="Center" Foreground="White" FontSize="16" FontFamily="Champagne &amp; Limousines"/>
+
+                <!-- Popup Menu -->
+                <materialDesign:PopupBox Margin="10" Foreground="White" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False">
+                    <StackPanel Width="150">
+                        <Button x:Name="AccountButtonOpen" Content="Konto" cal:Message.Attach="[Event Click] = [Action GetAccountInfo]"/>
+                        <Button Content="Pomoc"/>
+                        <Separator/>
+                        <Button Content="Zaloguj" cal:Message.Attach="[Event Click] = [Action LoginButtonPopupBoxClick]"/>
+                        <Button Content="Wyjdź"/>
+                    </StackPanel>
+                </materialDesign:PopupBox>
+            </StackPanel>
+        </DockPanel>
+
+        <Grid x:Name="MainGrid" Margin="1 55 1 1">
+            <ContentControl x:Name="ActiveItem"/>
+        </Grid>
+        
+        
+        <Grid x:Name="GridBackground" Background="#55313131" Opacity="0" Margin="0 50 0 0" Visibility="Collapsed"/>
+
+
+        <Grid x:Name="GridMenu" Width="250" HorizontalAlignment="Left" Margin="-250 0 0 0"  Background="#f5f5f5" RenderTransformOrigin="0.5,0.5" >
+            <Grid.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Grid.RenderTransform>
+            <StackPanel>
+                <Image Height="140"/>
+                <ListView Foreground="#FF313131" FontFamily="Champagne &amp; Limousines">
+                    <ListViewItem Height="45" Padding="0" 
+                                  cal:Message.Attach="[Event PreviewMouseLeftButtonDown] = [Action MainView_MouseLeftButtonDown]">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Width="20" Height="20" Margin="5" Kind="Home" VerticalAlignment="Center"/>
+                            <TextBlock Text="Ekran główny" Margin="10"/>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem Height="45" Padding="0"
+                                  cal:Message.Attach="[Event PreviewMouseLeftButtonDown] = [Action Cars_MouseLeftButtonDown]">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Width="20" Height="20" Margin="5" Kind="Car" VerticalAlignment="Center"/>
+                            <TextBlock Text="Flota" Margin="10"/>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem Height="45" Padding="0" cal:Message.Attach="[Event PreviewMouseLeftButtonDown] = [Action RentalListViewShow]">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Width="20" Height="20" Margin="5" Kind="ClipboardListOutline" Foreground="Gray" VerticalAlignment="Center"/>
+                            <TextBlock Text="Rezerwacje" Margin="10"/>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem Height="45" Padding="0" cal:Message.Attach="[Event PreviewMouseLeftButtonDown] = [Action RentalViewShow]">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Width="20" Height="20" Margin="5" Kind="FileDocumentOutline" VerticalAlignment="Center"/>
+                            <TextBlock Text="Wypożyczenia" Margin="10"/>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem Height="45" Padding="0" cal:Message.Attach="[Event PreviewMouseLeftButtonDown] = [Action AgencyManageWindowShow]">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Width="20" Height="20" Margin="5" Kind="CityVariantOutline" VerticalAlignment="Center"/>
+                            <TextBlock Text="Zarządzanie placówką" Margin="10"/>
+                        </StackPanel>
+                    </ListViewItem>
+                    <ListViewItem Height="45" Padding="0">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Width="20" Height="20" Margin="5" Kind="GithubBox" VerticalAlignment="Center"/>
+                            <TextBlock Text="GitHub" Margin="10"/>
+                        </StackPanel>
+                    </ListViewItem>
+                </ListView>
+            </StackPanel>
+            <Button x:Name="ButtonClose" VerticalAlignment="Top" HorizontalAlignment="Right" Background="{x:Null}" BorderBrush="{x:Null}" Width="30" Height="30" Padding="0" Click="ButtonClose_Click">
+                <materialDesign:PackIcon Kind="Close" Foreground="Black"/>
+            </Button>
+        </Grid>
+    </Grid>
+</Window>

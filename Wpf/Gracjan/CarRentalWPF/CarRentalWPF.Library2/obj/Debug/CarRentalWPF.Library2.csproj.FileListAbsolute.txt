@@ -1,0 +1,9 @@
+D:\Visual Studio Projects\University\Wpf\Gracjan\CarRentalWPF\CarRentalWPF.Library2\bin\Debug\CarRentalWPF.Library2.dll
+D:\Visual Studio Projects\University\Wpf\Gracjan\CarRentalWPF\CarRentalWPF.Library2\bin\Debug\CarRentalWPF.Library2.pdb
+D:\Visual Studio Projects\University\Wpf\Gracjan\CarRentalWPF\CarRentalWPF.Library2\bin\Debug\Newtonsoft.Json.dll
+D:\Visual Studio Projects\University\Wpf\Gracjan\CarRentalWPF\CarRentalWPF.Library2\bin\Debug\Newtonsoft.Json.xml
+D:\Visual Studio Projects\University\Wpf\Gracjan\CarRentalWPF\CarRentalWPF.Library2\obj\Debug\CarRentalWPF.Library2.csprojAssemblyReference.cache
+D:\Visual Studio Projects\University\Wpf\Gracjan\CarRentalWPF\CarRentalWPF.Library2\obj\Debug\CarRentalWPF.Library2.csproj.CoreCompileInputs.cache
+D:\Visual Studio Projects\University\Wpf\Gracjan\CarRentalWPF\CarRentalWPF.Library2\obj\Debug\CarRentalWPF.Library2.csproj.CopyComplete
+D:\Visual Studio Projects\University\Wpf\Gracjan\CarRentalWPF\CarRentalWPF.Library2\obj\Debug\CarRentalWPF.Library2.dll
+D:\Visual Studio Projects\University\Wpf\Gracjan\CarRentalWPF\CarRentalWPF.Library2\obj\Debug\CarRentalWPF.Library2.pdb
