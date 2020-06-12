@@ -1,12 +1,23 @@
 package pl.bucior.carrental.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+import pl.bucior.carrental.model.enums.Role;
 import pl.bucior.carrental.model.jpa.User;
+import pl.bucior.carrental.model.jpa.User_;
+import pl.bucior.carrental.util.pageable.PageableJpaRepository;
 
+import java.util.List;
 import java.util.Optional;
+
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface UserRepository extends PageableJpaRepository<User, Long> {
+
+    @Override
+    default String getKeyName() {
+        return User_.ID;
+    }
 
     Optional<User> findByEmail(String email);
+
+    List<User> findAllByRole(Role role);
 }

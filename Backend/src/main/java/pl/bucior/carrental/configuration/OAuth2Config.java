@@ -51,7 +51,7 @@ public class OAuth2Config extends AuthorizationServerConfigurerAdapter {
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
         endpoints
-                .pathMapping("/oauth/token", "/api/login")
+                .pathMapping("/oauth/token", "/login")
                 .tokenStore(tokenStore())
                 .authenticationManager(authenticationManager)
                 .userDetailsService(myUserDetails);
