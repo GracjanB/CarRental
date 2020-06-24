@@ -48,7 +48,7 @@
                 <TextBox.Text>
                     <Binding Path="Car.Mark" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                         <Binding.ValidationRules>
-                            <Validators:CarMarkValidator ValidatesOnTargetUpdated="True" />
+                            <Validators:CarMarkValidator ValidatesOnTargetUpdated="True"/>
                         </Binding.ValidationRules>
                     </Binding>
                 </TextBox.Text>

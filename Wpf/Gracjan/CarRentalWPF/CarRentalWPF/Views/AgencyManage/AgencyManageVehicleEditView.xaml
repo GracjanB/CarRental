@@ -155,7 +155,7 @@
             <TextBox.Text>
                 <Binding Path="Car.PricePerDay" Mode="TwoWay" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
-                        <!-- Add validator here -->
+                        <Validators:CarVINValidator ValidatesOnTargetUpdated="True"/>
                     </Binding.ValidationRules>
                 </Binding>
             </TextBox.Text>
